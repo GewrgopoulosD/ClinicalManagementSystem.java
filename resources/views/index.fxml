@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.IndexController"
+            stylesheets="@/css/indexCss.css">
+    <center>
+        <StackPane alignment="CENTER">
+<!--             Background Image-->
+            <ImageView fitWidth="800" fitHeight="600">
+                <Image url="@/photos/indexBack.jpg"/>
+            </ImageView>
+
+<!--             Overlay Buttons-->
+            <VBox alignment="CENTER" spacing="10">
+                <Button fx:id="loginBtn" text="Login" />
+                <Button fx:id="signUpBtn" text="Sign Up" />
+            </VBox>
+        </StackPane>
+    </center>
+</BorderPane>
