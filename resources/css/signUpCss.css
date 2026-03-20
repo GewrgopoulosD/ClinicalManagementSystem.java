@@ -1,5 +1,9 @@
-   #WelcomeLbl{
-    -fx-font-size: 25px;
+   #SignUpLbl{
+    -fx-font-size:25px;
+   }
+   Label, RadioButton{
+    -fx-font-size: 17px;
+    -fx-text-fill: #000000;
    }
 
    TextField, PasswordField{
@@ -11,7 +15,7 @@
      -fx-max-width:400px;
    }
 
-   #loginBtn {
+   #signUpBtn {
     -fx-font-size: 17px;
     -fx-background-color: #ffffffaa; /*white with a bit transparency */
     -fx-text-fill: #000000;
@@ -20,35 +24,32 @@
     -fx-pref-width: 250px;
    }
 
-   #loginBtn:hover {
-    -fx-background-color: #ffffff; /*on hover make the background white */
+   #signUpBtn:hover {
+     -fx-background-color: #ffffff; /*on hover make the background white */
    }
 
-   #loginBtn:pressed{ /*on click */
+   #signUpBtn:pressed { /*on click */
      -fx-scale-x: 0.95;  /*make  x, y 95% */
      -fx-scale-y: 0.95;
      -fx-translate-y: 2; /* and give a depth */
    }
 
-   #signupLbl{
+   #goBackBtn{
      -fx-font-size: 17px;
+     -fx-background-color: #ffffffaa; /*white with a bit transparency */
      -fx-text-fill: #000000;
+     -fx-background-radius: 15; /* give a radius to the buttons */
+     -fx-cursor: hand;
    }
 
-   #signUpBtn{
-      -fx-font-size: 17px;
-      -fx-background-color: #ffffffaa; /*white with a bit transparency */
-      -fx-text-fill: #000000;
-      -fx-background-radius: 15; /* give a radius to the buttons */
-      -fx-cursor: hand;
+   #goBackBtn:hover {
+     -fx-background-color: #ffffff; /*on hover make the background white */
    }
 
-   #signUpBtn:hover {
-      -fx-background-color: #ffffff; /*on hover make the background white */
+   #goBackBtn:pressed { /*on click */
+      -fx-scale-x: 0.95;  /*make  x, y 95% */
+      -fx-scale-y: 0.95;
+      -fx-translate-y: 2; /* and give a depth */
    }
 
-   #signUpBtn:pressed{ /*on click */
-        -fx-scale-x: 0.95;  /*make  x, y 95% */
-        -fx-scale-y: 0.95;
-        -fx-translate-y: 2; /* and give a depth */
-   }
+

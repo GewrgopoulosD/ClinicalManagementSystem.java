@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.SignUpController"
+            stylesheets="@/css/signUpCss.css">
+
+    <center>
+        <StackPane alignment="CENTER">
+
+            <ImageView fitWidth="800" fitHeight="600">
+                <Image url="@/photos/indexBack.jpg"/>
+            </ImageView>
+
+                <VBox alignment="CENTER" spacing="15">
+                        <Label fx:id="SignUpLbl" text="Sign Up"/>
+                        <TextField fx:id="nameTxt" promptText="Enter your name"/>
+                        <TextField fx:id="lastnameTxt" promptText="Enter your lastname"/>
+                        <TextField fx:id="telephoneTxt" promptText="Enter your telephone"/>
+                        <TextField fx:id="emailTxt" promptText="Enter your email"/>
+
+                        <PasswordField fx:id="passwordTxt" promptText="Password"/>
+                        <PasswordField fx:id="passwordCheckTxt" promptText="Verify your Password"/>
+
+                        <HBox alignment="CENTER" spacing="10">
+                            <Label text="I am a:"/>
+                            <RadioButton fx:id="patientRadio" text="Patient" />
+                            <RadioButton fx:id="doctorRadio" text="Doctor" />
+                        </HBox>
+
+                        <!-- Extra field for amka or verification code -->
+                        <TextField fx:id="extraTxt"/>
+
+                        <Button fx:id="signUpBtn" text="Sign Up"/>
+                    <HBox alignment="CENTER" spacing="10">
+                        <Label text="You have already acount?"/>
+                        <Button fx:id="goBackBtn" text="Go back"/>
+                    </HBox>
+                </VBox>
+        </StackPane>
+    </center>
+</BorderPane>
