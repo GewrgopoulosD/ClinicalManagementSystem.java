@@ -20,6 +20,7 @@ public class Patient extends User {
     @Override
     public String toString() {
         return super.toString() + "\n" +
+                "class: " + this.getClass().getSimpleName() + "\n" +
                 "amka: " + amka;
     }
 }

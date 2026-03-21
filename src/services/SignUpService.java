@@ -15,8 +15,7 @@ public class SignUpService {
     public void registerUser(User user) {
         try {
             //check if the email exist in database
-            if ((user instanceof models.Patient && userDAO.emailExists(user.getEmail(), models.Role.PATIENT))
-                    || (user instanceof models.Doctor && userDAO.emailExists(user.getEmail(), models.Role.DOCTOR))) {
+            if (userDAO.emailExists(user.getEmail())) {
                 throw new RuntimeException("Email already exists");
             }
             //check if the tel allready exist

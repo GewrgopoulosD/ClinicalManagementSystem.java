@@ -18,6 +18,10 @@ public class Doctor extends User {
         this.specializations = new ArrayList<>();
     }
 
+    public Doctor(String name, String lastname, String telephone, String email, String password) {
+        super(name, lastname, telephone, email, password);
+    }//second constructor for token
+
     public String getVerificationCode() {
         return verificationCode;
     }
@@ -50,9 +54,12 @@ public class Doctor extends User {
         this.idRole = idRole;
     }
 
+
+
     @Override
     public String toString() {
         return super.toString() + "\n" +
-                "verificationCode: " + verificationCode;
+                "class: " + this.getClass().getSimpleName() + "\n" +
+                this.specializations;
     }
 }
