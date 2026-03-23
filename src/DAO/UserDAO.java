@@ -1,10 +1,7 @@
 package DAO;
 
 import alert.AlertView;
-import models.Doctor;
-import models.Patient;
-import models.Role;
-import models.User;
+import models.*;
 import configDB.DatabaseConnection;
 
 import java.sql.Connection;
@@ -164,13 +161,31 @@ public class UserDAO {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                if (table.equals("employee")) {//if table is employee make doctor
-                    return new Doctor(
-                            rs.getString("name"),
-                            rs.getString("lastName"),
-                            rs.getString("tel"),
-                            rs.getString("email"),
-                            rs.getString("password"));
+                if (table.equals("employee")) {//if table is employee
+
+                    int roleId = rs.getInt("idRole");//take the role
+
+                    if (roleId == 2) {
+                        return new Admin(
+                                rs.getInt("idEmployee"),
+                                rs.getString("name"),
+                                rs.getString("lastName"),
+                                rs.getString("tel"),
+                                rs.getString("email"),
+                                rs.getString("password"),
+                                rs.getInt("idClinic")
+                        );
+                    } else {
+                        return new Doctor(
+                                rs.getInt("idEmployee"),
+                                rs.getString("name"),
+                                rs.getString("lastName"),
+                                rs.getString("tel"),
+                                rs.getString("email"),
+                                rs.getString("password"),
+                                rs.getInt("idClinic")
+                        );
+                    }
                 } else if (table.equals("customer")) {
                     return new Patient(
                             rs.getString("name"),

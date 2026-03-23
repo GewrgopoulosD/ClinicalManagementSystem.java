@@ -2,5 +2,6 @@ package models;
 
 public enum Role {
     PATIENT,
-    DOCTOR
+    DOCTOR,
+    ADMIN
 }

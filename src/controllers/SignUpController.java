@@ -73,12 +73,12 @@ public class SignUpController implements FormValidator {
 
     private void goBack() {
         try {
-            Parent signUpRoot = FXMLLoader.load(getClass().getResource("/views/index.fxml"));
+            Parent signUpRoot = FXMLLoader.load(getClass().getResource("/views/Index.fxml"));
 
             //take the stage
             Stage stage = (Stage) goBackBtn.getScene().getWindow();
 
-            //make stage the index.fxml
+            //make stage the Index.fxml
             stage.getScene().setRoot(signUpRoot);
 
         } catch (IOException ex) {

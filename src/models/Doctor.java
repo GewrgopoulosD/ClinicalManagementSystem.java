@@ -18,6 +18,14 @@ public class Doctor extends User {
         this.specializations = new ArrayList<>();
     }
 
+    public Doctor(int id, String name, String lastname, String telephone, String email, String password, int idClinic) {
+        super(name, lastname, telephone, email, password);
+        this.setId(id);
+        this.idClinic = idClinic;
+        this.setRole(Role.DOCTOR);
+        this.specializations = new ArrayList<>();
+    }//for the admin
+
     public Doctor(String name, String lastname, String telephone, String email, String password) {
         super(name, lastname, telephone, email, password);
     }//second constructor for token

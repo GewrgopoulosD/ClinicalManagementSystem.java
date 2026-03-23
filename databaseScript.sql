@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `clinic` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `clinic`;
 -- MySQL dump 10.13  Distrib 8.0.45, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: clinic
@@ -30,7 +28,8 @@ CREATE TABLE `appointment` (
   `idClinic` int NOT NULL,
   `idEmployee` int NOT NULL COMMENT 'Ο γιατρός που θα εξυπηρετήσει τον πελάτη',
   `appointmentDatetime` datetime NOT NULL,
-  `appointmentType` varchar(50) DEFAULT NULL COMMENT 'π.χ. check-up, vaccination',
+  `appointmentType` varchar(50) NOT NULL COMMENT 'π.χ. check-up, vaccination',
+  `appointmentDescription` varchar(210) DEFAULT NULL,
   PRIMARY KEY (`idAppointment`),
   KEY `idx_customer` (`idCustomer`),
   KEY `idx_clinic` (`idClinic`),
@@ -92,7 +91,8 @@ CREATE TABLE `customer` (
   `amka` varchar(11) NOT NULL,
   PRIMARY KEY (`idCustomer`),
   UNIQUE KEY `tel_UNIQUE` (`tel`),
-  UNIQUE KEY `amka` (`amka`)
+  UNIQUE KEY `amka` (`amka`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -130,6 +130,7 @@ CREATE TABLE `doctorspecialization` (
 
 LOCK TABLES `doctorspecialization` WRITE;
 /*!40000 ALTER TABLE `doctorspecialization` DISABLE KEYS */;
+INSERT INTO `doctorspecialization` VALUES (6,2);
 /*!40000 ALTER TABLE `doctorspecialization` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +157,7 @@ CREATE TABLE `employee` (
   KEY `idRole_idx` (`idRole`),
   CONSTRAINT `idClinic_fk` FOREIGN KEY (`idClinic`) REFERENCES `clinic` (`idClinic`) ON DELETE CASCADE,
   CONSTRAINT `idRole_fk` FOREIGN KEY (`idRole`) REFERENCES `role` (`idRole`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,7 +166,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (2,'Παναγιώτης','Μονόφθαλμος','12345678911','monofthalmos@test.gr','$2a$10$NMb0aohgsYqZUtSFw54IwOwUhus1SpFmJ327xAaqK4aZMGtzYna0S',1,1),(3,'Στέλλα','Κοιμίσογλου','7895123640','koimisiglou@test.gr','$2a$10$YowIPBMyF5PLMj.vVjnq6emWjaXCpYnIOWs3NvRuQ.qj1VLMHx6VW',1,1),(4,'Γιώργος','Μαχαίρας','4562579340','maxairas@test.gr','$2a$10$FvSbRlXP17Tchq9GDwN.4.iq1RS5.rXNzpRpGpuT0mfsi1oMkKAz.',1,1),(5,'Μάριος','Φτιαξοπόδης','4723948016','ftiaxopodis@test.gr','$2a$10$vi4jo5dNDNnGvPcSeCtCU.C44/18Ko2acGDrl7zr09SN.dBxkDZyK',1,1),(6,'Νίκος','Γύφτος','1002003001','giftos@test.gr','$2a$10$zRPHocJZ5sq14StNv/M/6.8dom24rpw8MuX4nnBozV7JbMGMaIDm6',1,1);
+INSERT INTO `employee` VALUES (2,'Παναγιώτης','Μονόφθαλμος','12345678911','monofthalmos@test.gr','$2a$10$NMb0aohgsYqZUtSFw54IwOwUhus1SpFmJ327xAaqK4aZMGtzYna0S',1,1),(3,'Στέλλα','Κοιμίσογλου','7895123640','koimisiglou@test.gr','$2a$10$YowIPBMyF5PLMj.vVjnq6emWjaXCpYnIOWs3NvRuQ.qj1VLMHx6VW',1,1),(4,'Γιώργος','Μαχαίρας','4562579340','maxairas@test.gr','$2a$10$FvSbRlXP17Tchq9GDwN.4.iq1RS5.rXNzpRpGpuT0mfsi1oMkKAz.',1,1),(5,'Μάριος','Φτιαξοπόδης','4723948016','ftiaxopodis@test.gr','$2a$10$vi4jo5dNDNnGvPcSeCtCU.C44/18Ko2acGDrl7zr09SN.dBxkDZyK',1,1),(6,'Νίκος','Γύφτος','1002003001','giftos@test.gr','$2a$10$zRPHocJZ5sq14StNv/M/6.8dom24rpw8MuX4nnBozV7JbMGMaIDm6',1,1),(10,'Άδωνις','Προϊσταμενίδης','6955555555','admin123@clinic.gr','$2a$10$hlOf0XmuT6M.U6.TIOiOqeqLAg/.MaBceja.nDZQyJnnlDeTl7g8G',1,2);
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -206,7 +207,7 @@ CREATE TABLE `role` (
   `idRole` int NOT NULL AUTO_INCREMENT,
   `role` varchar(255) NOT NULL,
   PRIMARY KEY (`idRole`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,7 +216,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,'Doctor');
+INSERT INTO `role` VALUES (1,'Doctor'),(2,'Admin');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -256,7 +257,7 @@ CREATE TABLE `specialization` (
   `idSpecialization` int NOT NULL AUTO_INCREMENT,
   `specialization` varchar(120) NOT NULL,
   PRIMARY KEY (`idSpecialization`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -265,6 +266,7 @@ CREATE TABLE `specialization` (
 
 LOCK TABLES `specialization` WRITE;
 /*!40000 ALTER TABLE `specialization` DISABLE KEYS */;
+INSERT INTO `specialization` VALUES (1,'Παθολόγος'),(2,'Καρδιολόγος'),(3,'Παιδίατρος'),(4,'Δερματολόγος'),(5,'Ορθοπεδικός'),(6,'Οφθαλμίατρος'),(7,'Ψυχίατρος'),(8,'Γυναικολόγος'),(9,'Νευρολόγος'),(10,'Γενικός Ιατρός'),(11,'Αναισθησιολόγος'),(12,'Ψυχολόγος');
 /*!40000 ALTER TABLE `specialization` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -290,6 +292,10 @@ LOCK TABLES `verificationcodes` WRITE;
 INSERT INTO `verificationcodes` VALUES ('12345678910');
 /*!40000 ALTER TABLE `verificationcodes` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'clinic'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -300,4 +306,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-03-20 17:19:29
+-- Dump completed on 2026-03-23 16:38:53

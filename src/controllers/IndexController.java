@@ -1,21 +1,22 @@
 package controllers;
 
+import UI.WindowManaged;
+import UI.WindowManager;
 import alert.AlertView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import models.User;
 import services.LoginService;
+import session.CurrentUser;
 
 import java.io.IOException;
 
-public class IndexController {
+public class IndexController implements WindowManaged {
 
     @FXML private TextField emailTxt;
     @FXML private TextField passwordTxt;
@@ -23,6 +24,11 @@ public class IndexController {
     @FXML private Button signUpBtn;
 
     private final LoginService loginService = new LoginService();
+    private WindowManager windowManager;
+
+    public void setWindowManager(WindowManager wm) {
+        this.windowManager = wm;
+    }
 
     @FXML
     public void initialize() {
@@ -38,37 +44,32 @@ public class IndexController {
 
     }
     private void openSignUp() {
-        try {
-            Parent signUpRoot = FXMLLoader.load(getClass().getResource("/views/signUp.fxml"));
 
-            //take the stage
-            Stage stage = (Stage) signUpBtn.getScene().getWindow();
-
-            // Αντικατέστησε το root του τρέχοντος scene
-            stage.getScene().setRoot(signUpRoot);
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        if (windowManager != null) {
+            windowManager.switchScene("/views/Signup.fxml", "Sign Up");
         }
+
     }
 
-    private User handleLogin() {
+    private void handleLogin() {
         String email = emailTxt.getText();
         String password = passwordTxt.getText();
 
         if (email.isEmpty() || password.isEmpty()) {
             AlertView.showError("Login error","Empty fields", "Please fill all the fields.");
-            return null;
+            return;
         }
 
         try {
             User user = loginService.login(email, password);
-            System.out.println(user.toString());
-            return user;
+            if(user != null) {
+                CurrentUser.setUser(user);
+                if (windowManager != null) {
+                    windowManager.showDashboard(user); // open dashboard in same primaryStage with other size
+                }
+            }
         } catch (Exception ex) {
             AlertView.showError("Login Error","Login failed", ex.getMessage());
         }
-        return null;
     }
-
 }

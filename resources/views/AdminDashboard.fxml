@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane fx:id="mainBorderPane"
+            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.AdminDashboardController"
+            stylesheets="@/css/doctorDashboardCss.css">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label fx:id="welcomeLbl" text="Welcome, Admin" />
+            <Button fx:id="logoutBtn" text="Logout"/>
+        </HBox>
+    </top>
+
+    <left>
+        <VBox spacing="10" alignment="CENTER">
+
+            <Button fx:id="generalBtn" text="General Overview"  alignment="CENTER"/>
+
+            <Button fx:id="doctorsBtn" text="Manage Doctors" alignment="CENTER"/>
+
+            <Button fx:id="patiensBtn" text="Patients" alignment="CENTER"/>
+
+        </VBox>
+    </left>
+
+    <center>
+        <StackPane>
+            <Label text="Loading content..."/>
+        </StackPane>
+    </center>
+
+</BorderPane>

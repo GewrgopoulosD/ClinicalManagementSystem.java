@@ -2,11 +2,13 @@ package models;
 
 public abstract class User {
 
+    private int id;
     private String name;
     private String lastname;
     private String telephone;
     private String email;
     private String password;
+    private Role role;
 
     public User(String name, String lastname, String telephone, String email, String password) {
         this.name = name;
@@ -56,6 +58,21 @@ public abstract class User {
         this.password = password;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {

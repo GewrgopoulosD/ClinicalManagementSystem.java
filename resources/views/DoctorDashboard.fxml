@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.DoctorDashboardController"
+            stylesheets="@/css/doctorDashboardCss.css">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10" >
+            <Label fx:id="welcomeLbl"/>
+            <Button fx:id="logoutBtn" text="Logout"/>
+        </HBox>
+    </top>
+    <left>
+        <VBox alignment="CENTER" spacing="10">
+            <Button fx:id="dashboardBtn" text="Dashboard"/>
+            <Button fx:id="appointmentsBtn" text="Appointments"/>
+            <Button fx:id="patientsBtn" text="Patients"/>
+            <Button fx:id="scheduleBtn" text="Schedule"/>
+            <Button fx:id="profileBtn" text="Profile"/>
+        </VBox>
+    </left>
+    <center>
+        <VBox spacing="20" alignment="TOP_CENTER" style="-fx-padding: 20;">
+
+            <HBox spacing="50" alignment="CENTER">
+                <VBox alignment="CENTER" styleClass="stat-box">
+                    <Label text="Total Appointments" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="totalAppointmentsLbl" text="0"/>
+                </VBox>
+
+                <VBox alignment="CENTER" styleClass="stat-box">
+                    <Label text="Next Appointment" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="nextAppointmentLbl" text="None"/>
+                </VBox>
+            </HBox>
+
+            <TableView fx:id="patientsTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="nameCol" text="Name" prefWidth="150"/>
+                    <TableColumn fx:id="lastnameCol" text="Lastname" prefWidth="150"/>
+                    <TableColumn fx:id="telephoneCol" text="Telephone" prefWidth="150"/>
+                    <TableColumn fx:id="emailCol" text="Email" prefWidth="200"/>
+                    <TableColumn fx:id="amkaCol" text="AMKA" prefWidth="150"/>
+                </columns>
+            </TableView>
+
+        </VBox>
+    </center>
+</BorderPane>

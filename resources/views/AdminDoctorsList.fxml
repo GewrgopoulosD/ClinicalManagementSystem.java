@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<HBox spacing="20" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controllers.AdminDoctorsListController">
+
+    <children>
+        <VBox spacing="15" HBox.hgrow="ALWAYS">
+            <children>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Αναζήτηση Επιθέτου:"/>
+                    <TextField fx:id="searchField" promptText="Πληκτρολογήστε..." HBox.hgrow="ALWAYS" />
+                    <CheckBox fx:id="pendingOnlyCheckBox" text="Μόνο χωρίς ειδικότητα"/>
+                </HBox>
+
+                <TableView fx:id="doctorTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="nameCol" text="Όνομα"/>
+                        <TableColumn fx:id="lastnameCol" text="Επώνυμο"/>
+                        <TableColumn fx:id="emailCol" text="Email"/>
+                        <TableColumn fx:id="phoneCol" text="Τηλέφωνο"/>
+                    </columns>
+                </TableView>
+            </children>
+        </VBox>
+
+        <VBox spacing="20" prefWidth="320" minWidth="300">
+            <children>
+                <Label text="Λεπτομέρειες Γιατρού" />
+
+                <VBox spacing="5">
+                    <Label text="Επιλεγμένος Γιατρός:"/>
+                    <Label fx:id="selectedDoctorLbl" text="Παρακαλώ επιλέξτε..." />
+                </VBox>
+
+                <Separator />
+
+                <VBox spacing="10">
+                    <Label text="Υπάρχουσες Ειδικότητες:"/>
+                    <ListView fx:id="currentSpecsList" prefHeight="180" />
+                </VBox>
+
+                <VBox spacing="10">
+                    <Label text="Προσθήκη Νέας Ειδικότητας:"/>
+                    <ComboBox fx:id="specializationCombo" promptText="Επιλογή ειδικότητας"/>
+                    <Button fx:id="assignBtn" text="Ανάθεση"/>
+                </VBox>
+
+                <Region VBox.vgrow="ALWAYS" />
+
+                <Button fx:id="refreshBtn" text="Ανανέωση Λίστας" />
+            </children>
+        </VBox>
+    </children>
+</HBox>
