@@ -1,11 +1,10 @@
-package DAO;
+package dao;
 
 import configDB.DatabaseConnection;
 import models.Appointment;
 import models.Patient;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 

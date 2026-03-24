@@ -1,10 +1,6 @@
-import UI.WindowManager;
-import controllers.IndexController;
+import ui.WindowManager;
 import javafx.application.*;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.image.Image;
 import javafx.stage.*;
-import javafx.scene.*;
 
 public class Main extends Application {
 

@@ -1,6 +1,6 @@
 package services;
 
-import DAO.AdminDAO;
+import dao.AdminDAO;
 import models.Doctor;
 import java.util.List;
 

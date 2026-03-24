@@ -1,6 +1,6 @@
 package services;
 
-import DAO.AppointmentDAO;
+import dao.AppointmentDAO;
 import models.Appointment;
 import models.Patient;
 

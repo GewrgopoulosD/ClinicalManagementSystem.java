@@ -1,7 +1,7 @@
 package controllers;
 
-import DAO.VerificationCodeDAO;
-import Interfaces.FormValidator;
+import dao.VerificationCodeDAO;
+import interfaces.FormValidator;
 import alert.AlertView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -123,6 +123,7 @@ public class SignUpController implements FormValidator {
         }
 
         User user;
+        String verificationCode = "";
 
         if (patientRadio.isSelected()) {
             user = new Patient(
@@ -135,34 +136,25 @@ public class SignUpController implements FormValidator {
             );
 
         } else if (doctorRadio.isSelected()) {
-            String code = extraTxt.getText();
-            if (!VerificationCodeDAO.isValidCode(code)) {
-                AlertView.showWarning("Error", "Invalid Verification Code",
-                        "The code you entered is not valid.");
-                return;
-            }
-
+            verificationCode = extraTxt.getText();
             user = new Doctor(
                     nameTxt.getText(),
                     lastnameTxt.getText(),
                     telephoneTxt.getText(),
                     emailTxt.getText(),
-                    passwordTxt.getText(),
-                    code // verification code
+                    passwordTxt.getText()
             );
-
         } else {
             AlertView.showWarning("Error", "Role not selected", "Please select Patient or Doctor.");
             return;
         }
 
         try {
-            service.registerUser(user);
+            service.registerUser(user, verificationCode);
             AlertView.showInfo("Success", "Sign Up Successful",
                     "Your account has been created successfully!" + "\n" +
                             "You can now log in with your email: " + user.getEmail());
             goBack();
-
         } catch (RuntimeException e) {
             AlertView.showWarning("Registration Error", "Cannot register user", e.getMessage());
         }

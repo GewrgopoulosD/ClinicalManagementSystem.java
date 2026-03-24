@@ -1,7 +1,7 @@
 package controllers;
 
-import UI.WindowManaged;
-import UI.WindowManager;
+import ui.WindowManaged;
+import ui.WindowManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import services.AdminService;

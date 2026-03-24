@@ -1,14 +1,27 @@
 package models;
 
+import com.google.gson.annotations.SerializedName;
+
 public abstract class User {
 
     private int id;
+
     private String name;
+
+    @SerializedName("lastName")
     private String lastname;
+
+    @SerializedName("tel")
     private String telephone;
+
     private String email;
     private String password;
-    private Role role;
+
+    @SerializedName("idRole")
+    private int roleId;
+
+    public User() {//empty constructor for json
+    }
 
     public User(String name, String lastname, String telephone, String email, String password) {
         this.name = name;
@@ -16,6 +29,28 @@ public abstract class User {
         this.telephone = telephone;
         this.email = email;
         this.password = password;
+    }
+
+    public Role getRole() {
+        return Role.fromInt(this.roleId);
+    }
+
+    //for register to give access
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -58,29 +93,14 @@ public abstract class User {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
-        return "User" + "\n" +
+        return "User " + getRole() + "\n" +
+                "id: " + id + "\n" +
                 "name: " + name + "\n" +
                 "lastname: " + lastname + "\n" +
                 "telephone: " + telephone + "\n" +
                 "email: " + email + "\n" +
-                "password: " + password;
+                "password: " + password + "\n";
     }
 }

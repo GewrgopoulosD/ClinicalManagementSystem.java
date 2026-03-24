@@ -1,20 +1,15 @@
 package controllers;
 
-import UI.WindowManaged;
-import UI.WindowManager;
+import ui.WindowManaged;
+import ui.WindowManager;
 import alert.AlertView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import models.User;
 import services.LoginService;
 import session.CurrentUser;
-
-import java.io.IOException;
 
 public class IndexController implements WindowManaged {
 

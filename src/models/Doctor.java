@@ -6,29 +6,42 @@ import java.util.List;
 public class Doctor extends User {
 
     private int idClinic;
-    private int idRole;
     private String verificationCode; //valid code that doctor took from admin
     private List<Specialization> specializations;//admin will put specializations for doctor
 
-    public Doctor(String name, String lastname, String telephone, String email, String password, String verificationCode) {
+
+    //signup
+    public Doctor(String name, String lastname, String telephone, String email, String password) {
         super(name, lastname, telephone, email, password);
-        idClinic = 1;
-        idRole = 1;
-        this.verificationCode = verificationCode;
+        this.idClinic = 1;
         this.specializations = new ArrayList<>();
+        this.setRoleId(Role.DOCTOR.getId());
     }
 
+    //login
     public Doctor(int id, String name, String lastname, String telephone, String email, String password, int idClinic) {
         super(name, lastname, telephone, email, password);
         this.setId(id);
         this.idClinic = idClinic;
-        this.setRole(Role.DOCTOR);
         this.specializations = new ArrayList<>();
-    }//for the admin
+        this.setRoleId(Role.DOCTOR.getId());
+    }
 
-    public Doctor(String name, String lastname, String telephone, String email, String password) {
-        super(name, lastname, telephone, email, password);
-    }//second constructor for token
+    //gson
+    public Doctor() {
+        super();
+        this.specializations = new ArrayList<>();
+        this.setRoleId(Role.DOCTOR.getId());
+    }
+
+
+    public int getIdClinic() {
+        return idClinic;
+    }
+
+    public void setIdClinic(int idClinic) {
+        this.idClinic = idClinic;
+    }
 
     public String getVerificationCode() {
         return verificationCode;
@@ -46,28 +59,8 @@ public class Doctor extends User {
         this.specializations = specializations;
     }
 
-    public int getIdClinic() {
-        return idClinic;
-    }
-
-    public void setIdClinic(int idClinic) {
-        this.idClinic = idClinic;
-    }
-
-    public int getIdRole() {
-        return idRole;
-    }
-
-    public void setIdRole(int idRole) {
-        this.idRole = idRole;
-    }
-
-
-
     @Override
     public String toString() {
-        return super.toString() + "\n" +
-                "class: " + this.getClass().getSimpleName() + "\n" +
-                this.specializations;
+        return super.toString()  + "Specializations: " + this.specializations;
     }
 }

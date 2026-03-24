@@ -1,43 +1,21 @@
 package services;
-import DAO.UserDAO;
-import models.Role;
+
+import dao.VerificationCodeDAO;
+import models.Doctor;
 import models.User;
-import org.mindrot.jbcrypt.BCrypt;
 
-
+//Handles business logic for user registration and coordinates data persistence through daos
 public class SignUpService {
-    private UserDAO userDAO;
 
-    public SignUpService() {
-        this.userDAO = new UserDAO();
-    }
+    public void registerUser(User user, String verificationCode) {
 
-    public void registerUser(User user) {
-        try {
-            //check if the email exist in database
-            if (userDAO.emailExists(user.getEmail())) {
-                throw new RuntimeException("Email already exists");
+        if (user instanceof Doctor) {
+
+            boolean isValid = VerificationCodeDAO.isValidCode(verificationCode);//call dao
+
+            if (!isValid) {
+                throw new IllegalArgumentException("Invalid verification code for Doctor registration.");
             }
-            //check if the tel allready exist
-            if ((user instanceof models.Patient && userDAO.telExists(user.getTelephone(), Role.PATIENT))
-                    || (user instanceof models.Doctor && userDAO.telExists(user.getTelephone(), Role.DOCTOR))) {
-                throw new RuntimeException("Telephone already exists");
-            }
-
-            //check if the amka exist
-            if (user instanceof models.Patient patient) {
-                if (userDAO.amkaExists(patient.getAmka(), Role.PATIENT)) {
-                    throw new RuntimeException("AMKA already exists");
-                }
-            }
-
-            // Hashing του password
-            String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-            user.setPassword(hashedPassword);
-
-            userDAO.save(user);
-        } catch (Exception e) {
-            throw new RuntimeException("Cannot register user: " + e.getMessage(), e);
         }
     }
 }

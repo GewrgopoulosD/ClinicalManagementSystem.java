@@ -1,24 +1,18 @@
 package controllers;
 
-import UI.WindowManaged;
-import UI.WindowManager;
+import ui.WindowManaged;
+import ui.WindowManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.StackPane;
 import models.Appointment;
 import models.Doctor;
 import models.Patient;
-import models.User;
 import services.AppointmentService;
 import session.CurrentUser;
-
-import java.util.List;
-
-import static session.CurrentUser.logout;
 
 public class DoctorDashboardController implements WindowManaged {
 

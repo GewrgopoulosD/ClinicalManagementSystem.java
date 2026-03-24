@@ -1,6 +1,6 @@
 package services;
 
-import DAO.UserDAO;
+import dao.UserDAO;
 import models.*;
 import org.mindrot.jbcrypt.BCrypt;
 

@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "idRole": 1,
+    "name": "Παναγιώτης",
+    "lastName": "Μονόφθαλμος",
+    "tel": "12345678911",
+    "email": "monofthalmos@test.gr",
+    "password": "$2a$10$NMb0aohgsYqZUtSFw54IwOwUhus1SpFmJ327xAaqK4aZMGtzYna0S",
+    "idClinic": 1,
+    "specialties": []
+  },
+  {
+    "id": 2,
+    "idRole": 1,
+    "name": "Στέλλα",
+    "lastName": "Κοιμίσογλου",
+    "tel": "7895123640",
+    "email": "koimisiglou@test.gr",
+    "password": "$2a$10$YowIPBMyF5PLMj.vVjnq6emWjaXCpYnIOWs3NvRuQ.qj1VLMHx6VW",
+    "idClinic": 1,
+    "specialties": []
+  },
+  {
+    "id": 3,
+    "idRole": 1,
+    "name": "Γιώργος",
+    "lastName": "Μαχαίρας",
+    "tel": "4562579340",
+    "email": "maxairas@test.gr",
+    "password": "$2a$10$FvSbRlXP17Tchq9GDwN.4.iq1RS5.rXNzpRpGpuT0mfsi1oMkKAz.",
+    "idClinic": 1,
+    "specialties": []
+  },
+  {
+    "id": 4,
+    "idRole": 1,
+    "name": "Μάριος",
+    "lastName": "Φτιαξοπόδης",
+    "tel": "4723948016",
+    "email": "ftiaxopodis@test.gr",
+    "password": "$2a$10$vi4jo5dNDNnGvPcSeCtCU.C44/18Ko2acGDrl7zr09SN.dBxkDZyK",
+    "idClinic": 1,
+    "specialties": []
+  },
+  {
+    "id": 5,
+    "idRole": 1,
+    "name": "Νίκος",
+    "lastName": "Γύφτος",
+    "tel": "1002003001",
+    "email": "giftos@test.gr",
+    "password": "$2a$10$zRPHocJZ5sq14StNv/M/6.8dom24rpw8MuX4nnBozV7JbMGMaIDm6",
+    "idClinic": 1,
+    "specialties": []
+  },
+  {
+    "id": 6,
+    "idRole": 2,
+    "name": "Άδωνις",
+    "lastName": "Προϊσταμενίδης",
+    "tel": "6955555555",
+    "email": "admin123@clinic.gr",
+    "password": "$2a$10$hlOf0XmuT6M.U6.TIOiOqeqLAg/.MaBceja.nDZQyJnnlDeTl7g8G",
+    "idClinic": 1
+  },
+  {
+    "id": 7,
+    "idRole": 3,
+    "name": "Dimitris",
+    "lastName": "Georgopoulos",
+    "tel": "6983274790",
+    "email": "dim.georgopoulos1@gmail.com",
+    "password": "$2a$10$5hDY20BksbWq55hc3.kPIOv7QMyfb9s8QqvjOoV04wwDvCV8RRbwq",
+    "amka": "02119801575"
+  },
+  {
+    "id": 8,
+    "idRole": 3,
+    "name": "Νίκος",
+    "lastName": "Κορόμπος",
+    "tel": "6912345678",
+    "email": "test@test.gr",
+    "password": "$2a$10$jYVCSmu7yq.UmQNs/HK2s.MCMHDiN4oqOLA2gVM3L2fuMcB1z1F3C",
+    "amka": "12345678910"
+  },
+  {
+    "id": 9,
+    "idRole": 3,
+    "name": "Κώστας",
+    "lastName": "Σπασοχέρης",
+    "tel": "6987654321",
+    "email": "spasoxeris@test.com",
+    "password": "$2a$10$Lr5FVDkheOw7FM2scIfLoOE/AuG5l1F4KyycfwT/o9CaMVgikGyGC",
+    "amka": "12345678911"
+  },
+  {
+    "id": 10,
+    "idRole": 3,
+    "name": "Ελένη",
+    "lastName": "Κακόκεφη",
+    "tel": "6987654320",
+    "email": "kakokefi@test.gr",
+    "password": "$2a$10$NALJhYncd81B3nAdUFuMYuA7veqCADrTfox5QBwhbjtnovkyHOIfO",
+    "amka": "12345678912"
+  }
+]

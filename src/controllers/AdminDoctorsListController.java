@@ -1,7 +1,7 @@
 package controllers;
 
-import UI.WindowManaged;
-import UI.WindowManager;
+import ui.WindowManaged;
+import ui.WindowManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
