@@ -83,8 +83,8 @@ public class WindowManager {// a class to control my stage,scenes
         }
     }
 
-    public void switchScene(String fxmlPath, String title) {
-        prepareScene(fxmlPath, title, 1200, 900, true);
+    public void switchScene(String fxmlPath, String title,int width, int height) {
+        prepareScene(fxmlPath, title, width, height, false);
     }
 
     public void close() {

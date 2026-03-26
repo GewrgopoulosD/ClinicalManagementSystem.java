@@ -1,232 +1,65 @@
 package dao;
 
-import configDB.DatabaseConnection;
+import jsondatamanager.JsonHandler;
 import models.Appointment;
-import models.Patient;
-
-import java.sql.*;
+import com.google.gson.reflect.TypeToken;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AppointmentDAO {
+    private static final String FILE_PATH = "data/appointments.json";
+
+    public List<Appointment> getAllAppointments() {
+        try {
+            Type listType = new TypeToken<List<Appointment>>(){}.getType();
+            List<Appointment> appointments = JsonHandler.readList(FILE_PATH, listType);
+            return (appointments != null) ? appointments : new ArrayList<>();
+        } catch (IOException e) {
+            return new ArrayList<>();
+        }
+    }
+
+    public List<Appointment> getAppointmentsByDoctor(int doctorId) {
+        return getAllAppointments().stream()
+                .filter(a -> a.getIdEmployee() == doctorId)
+                .collect(Collectors.toList());
+    }
 
     public List<Appointment> getTodayAppointments(int doctorId) {
-
-        List<Appointment> appointments = new ArrayList<>();
-
-        String sql = """
-                SELECT *
-                FROM appointment
-                WHERE idEmployee = ?
-                AND DATE(appointmentDatetime) = CURDATE()
-                ORDER BY appointmentDatetime
-                """;
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, doctorId);
-
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-
-                Appointment appointment = new Appointment(
-                        rs.getInt("idAppointment"),
-                        rs.getInt("idCustomer"),
-                        rs.getInt("idClinic"),
-                        rs.getInt("idEmployee"),
-                        rs.getTimestamp("appointmentDatetime").toLocalDateTime(),
-                        rs.getString("appointmentType"),
-                        rs.getString("appointmentDescription")
-                );
-
-                appointments.add(appointment);
-            }
-
-        } catch (Exception e) {
-            throw new RuntimeException("Cannot fetch appointments", e);
-        }
-
-        return appointments;
-
-    }public List<Appointment> getAllAppointments(int doctorId) {
-
-        List<Appointment> appointments = new ArrayList<>();
-
-        String sql = """
-                SELECT *
-                FROM appointment
-                WHERE idEmployee = ?
-                ORDER BY appointmentDatetime
-                """;
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, doctorId);
-
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-
-                Appointment appointment = new Appointment(
-                        rs.getInt("idAppointment"),
-                        rs.getInt("idCustomer"),
-                        rs.getInt("idClinic"),
-                        rs.getInt("idEmployee"),
-                        rs.getTimestamp("appointmentDatetime").toLocalDateTime(),
-                        rs.getString("appointmentType"),
-                        rs.getString("appointmentDescription")
-                );
-
-                appointments.add(appointment);
-            }
-
-        } catch (Exception e) {
-            throw new RuntimeException("Cannot fetch appointments", e);
-        }
-
-        return appointments;
-    }
-    public int getTotalAppointments(int doctorId) {
-
-        String sql = """
-            SELECT COUNT(*)
-            FROM appointment
-            WHERE idEmployee = ?
-            """;
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, doctorId);
-
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-
-        } catch (Exception e) {
-            throw new RuntimeException("Cannot count appointments", e);
-        }
-
-        return 0;
+        return getAppointmentsByDoctor(doctorId).stream()
+                .filter(Appointment::isToday)
+                .collect(Collectors.toList());
     }
 
     public Appointment getNextAppointment(int doctorId) {
+        List<Appointment> todayApps = getTodayAppointments(doctorId);
+        String now = java.time.LocalDateTime.now().toString();
 
-        String sql = """
-                SELECT *
-                FROM appointment
-                WHERE idEmployee = ?
-                AND appointmentDatetime > NOW()
-                ORDER BY appointmentDatetime
-                LIMIT 1
-                """;
+        Appointment nextApp = null;
 
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        for (Appointment a : todayApps) {
+            if (a.getAppointmentDatetime() == null) continue;
 
-            stmt.setInt(1, doctorId);
+            //is it today but later?
+            if (a.getAppointmentDatetime().compareTo(now) > 0) {
 
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-
-                return new Appointment(
-                        rs.getInt("idAppointment"),
-                        rs.getInt("idCustomer"),
-                        rs.getInt("idClinic"),
-                        rs.getInt("idEmployee"),
-                        rs.getTimestamp("appointmentDatetime").toLocalDateTime(),
-                        rs.getString("appointmentType"),
-                        rs.getString("appointmentDescription")
-                );
+                //find the next
+                if (nextApp == null || a.getAppointmentDatetime().compareTo(nextApp.getAppointmentDatetime()) < 0) {
+                    nextApp = a;
+                }
             }
-
-        } catch (Exception e) {
-            throw new RuntimeException("Cannot fetch next appointment", e);
         }
 
-        return null;
+        return nextApp;
     }
 
-    public List<Patient> getAllPatients() {
-
-        List<Patient> patients = new ArrayList<>();
-
-        String sql = """
-            SELECT *
-            FROM customer
-            ORDER BY lastname
-            """;
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-
-                Patient patient = new Patient(
-                        rs.getString("name"),
-                        rs.getString("lastname"),
-                        rs.getString("tel"),
-                        rs.getString("email"),
-                        "",
-                        rs.getString("amka")
-                );
-
-                patients.add(patient);
-            }
-
-        } catch (Exception e) {
-            throw new RuntimeException("Cannot fetch patients", e);
-        }
-
-        return patients;
+    public int getGlobalTodayAppointmentsCount() {
+        return (int) getAllAppointments().stream()
+                .filter(Appointment::isToday)
+                .count();
     }
-
-    public List<Patient> getDoctorPatients(int doctorId) {
-
-        List<Patient> patients = new ArrayList<>();
-
-        String sql = """
-                SELECT DISTINCT c.*
-                FROM customer c
-                JOIN appointment a ON c.idCustomer = a.idCustomer
-                WHERE a.idEmployee = ?
-                ORDER BY c.lastname
-                """;
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, doctorId);
-
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-
-                Patient patient = new Patient(
-                        rs.getString("name"),
-                        rs.getString("lastname"),
-                        rs.getString("tel"),
-                        rs.getString("email"),
-                        "",
-                        rs.getString("amka")
-                );
-
-                patients.add(patient);
-            }
-
-        } catch (Exception e) {
-            throw new RuntimeException("Cannot fetch patients", e);
-        }
-
-        return patients;
-    }
-
 }

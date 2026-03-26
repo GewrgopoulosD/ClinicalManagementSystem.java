@@ -1,12 +1,14 @@
 package services;
 
 import dao.AdminDAO;
+import dao.SpecializationDAO;
 import models.Doctor;
 import java.util.List;
 
 public class AdminService {
 
     private final AdminDAO adminDAO = new AdminDAO();
+    private final SpecializationDAO specializationDAO = new SpecializationDAO();
 
 
     public List<Doctor> getPendingDoctors() {
@@ -30,7 +32,7 @@ public class AdminService {
     }
 
     public List<String> getAllSpecializations() {
-        return adminDAO.getAllSpecializations();
+        return specializationDAO.getAllSpecializations();
     }
 
     public List<String> getDoctorSpecializations(int doctorId) {

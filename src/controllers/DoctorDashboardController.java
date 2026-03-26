@@ -59,7 +59,7 @@ public class DoctorDashboardController implements WindowManaged {
 
     private void loadStats(Doctor doctor) {
 
-        int totalAppointments = appointmentService.getTotalAppointments(doctor.getId());
+        int totalAppointments = appointmentService.getTotalAppointmentsCount(doctor.getId());
 
         Appointment nextAppointment = appointmentService.getNextAppointment(doctor.getId());
 
@@ -89,8 +89,5 @@ public class DoctorDashboardController implements WindowManaged {
         amkaCol.setCellValueFactory(data ->
                 new SimpleStringProperty(data.getValue().getAmka()));
 
-        patientsTable.getItems().setAll(
-                appointmentService.getAllPatients()
-        );
     }
 }

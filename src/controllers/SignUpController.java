@@ -11,11 +11,13 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.*;
 import services.SignUpService;
+import ui.WindowManaged;
+import ui.WindowManager;
 
 import java.io.IOException;
 import java.util.List;
 
-public class SignUpController implements FormValidator {
+public class SignUpController implements FormValidator, WindowManaged {
 
     @FXML
     private TextField nameTxt;
@@ -46,6 +48,12 @@ public class SignUpController implements FormValidator {
     @FXML
     public Button goBackBtn;
     private SignUpService service;
+    private WindowManager windowManager;
+
+    public void setWindowManager(WindowManager wm) {
+        this.windowManager = wm;
+    }
+
 
     public SignUpController() {
         extraLabel = new Label("Special Field");
@@ -72,17 +80,8 @@ public class SignUpController implements FormValidator {
     }
 
     private void goBack() {
-        try {
-            Parent signUpRoot = FXMLLoader.load(getClass().getResource("/views/Index.fxml"));
-
-            //take the stage
-            Stage stage = (Stage) goBackBtn.getScene().getWindow();
-
-            //make stage the Index.fxml
-            stage.getScene().setRoot(signUpRoot);
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        if (windowManager != null) {
+            windowManager.switchScene("/views/Index.fxml", "Login",800,600);
         }
     }
 
@@ -155,6 +154,10 @@ public class SignUpController implements FormValidator {
                     "Your account has been created successfully!" + "\n" +
                             "You can now log in with your email: " + user.getEmail());
             goBack();
+        } catch (IllegalArgumentException e) {
+            //throw about email already exists, invalid amka
+            AlertView.showWarning("Registration Error", "Problem with these: ", e.getMessage());
+
         } catch (RuntimeException e) {
             AlertView.showWarning("Registration Error", "Cannot register user", e.getMessage());
         }

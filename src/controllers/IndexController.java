@@ -39,15 +39,14 @@ public class IndexController implements WindowManaged {
 
     }
     private void openSignUp() {
-
         if (windowManager != null) {
-            windowManager.switchScene("/views/Signup.fxml", "Sign Up");
+            windowManager.switchScene("/views/Signup.fxml", "Sign Up",800,600);
         }
 
     }
 
     private void handleLogin() {
-        String email = emailTxt.getText();
+        String email = emailTxt.getText().trim();
         String password = passwordTxt.getText();
 
         if (email.isEmpty() || password.isEmpty()) {
@@ -59,12 +58,17 @@ public class IndexController implements WindowManaged {
             User user = loginService.login(email, password);
             if(user != null) {
                 CurrentUser.setUser(user);
+                System.out.println("Login Success: " + CurrentUser.getDisplayName());
                 if (windowManager != null) {
                     windowManager.showDashboard(user); // open dashboard in same primaryStage with other size
                 }
             }
+        } catch (IllegalArgumentException ex) {
+            //invalid email or password
+            AlertView.showError("Login Failed", "Authentication Error", ex.getMessage());
         } catch (Exception ex) {
-            AlertView.showError("Login Error","Login failed", ex.getMessage());
+            AlertView.showError("System Error", "A technical problem occurred", "Please contact support.");
+            ex.printStackTrace();
         }
     }
 }

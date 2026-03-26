@@ -1,6 +1,7 @@
 package models;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 
 public class Appointment {
 
@@ -8,11 +9,11 @@ public class Appointment {
     private int idCustomer;
     private int idClinic;
     private int idEmployee;
-    private LocalDateTime appointmentDatetime;
+    private String appointmentDatetime;
     private String appointmentType;
     private String appointmentDescription;
 
-    public Appointment(int idAppointment, int idCustomer, int idClinic, int idEmployee, LocalDateTime appointmentDatetime, String appointmentType, String appointmentDescription) {
+    public Appointment(int idAppointment, int idCustomer, int idClinic, int idEmployee, String appointmentDatetime, String appointmentType, String appointmentDescription) {
         this.idAppointment = idAppointment;
         this.idCustomer = idCustomer;
         this.idClinic = idClinic;
@@ -20,6 +21,12 @@ public class Appointment {
         this.appointmentDatetime = appointmentDatetime;
         this.appointmentType = appointmentType;
         this.appointmentDescription = appointmentDescription;
+    }
+
+    public boolean isToday() {
+        if (appointmentDatetime == null) return false;
+        String today = LocalDate.now().toString();
+        return appointmentDatetime.startsWith(today);
     }
 
     public int getIdAppointment() {
@@ -54,11 +61,11 @@ public class Appointment {
         this.idEmployee = idEmployee;
     }
 
-    public LocalDateTime getAppointmentDatetime() {
+    public String getAppointmentDatetime() {
         return appointmentDatetime;
     }
 
-    public void setAppointmentDatetime(LocalDateTime appointmentDatetime) {
+    public void setAppointmentDatetime(String appointmentDatetime) {
         this.appointmentDatetime = appointmentDatetime;
     }
 

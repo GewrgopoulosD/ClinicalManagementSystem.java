@@ -130,7 +130,7 @@ public class AdminDoctorsListController implements WindowManaged {
         }
 
 
-        boolean success = adminService.assignSpecialization(selectedDoctor.getId(), spec);//save it
+        boolean success = adminService.assignSpecialization(selectedDoctor.getId(), spec);//registerNewUser it
 
         if (success) {
             updateDetails(selectedDoctor);//refresh the ui list

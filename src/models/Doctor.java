@@ -52,6 +52,9 @@ public class Doctor extends User {
     }
 
     public List<Specialization> getSpecializations() {
+        if (specializations == null) {
+            specializations = new ArrayList<>();
+        }
         return specializations;
     }
 

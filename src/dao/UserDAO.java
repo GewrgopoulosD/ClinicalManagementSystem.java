@@ -9,23 +9,57 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class UserDAO {
 
     private static final String FILE_PATH = "data/users.json";
-    private static final Type USER_LIST_TYPE = new TypeToken<List<User>>(){}.getType();
 
     //read users from json and make it map for speed
-    private Map<String, User> getAllUsersMap() {
+    public Map<String, User> fetchAllUsersAsMap() {
         try {
-            List<User> usersList = JsonHandler.readList(FILE_PATH, USER_LIST_TYPE);
-            if (usersList == null) return new HashMap<>();
+            Type rawType = new TypeToken<List<Map<String, Object>>>(){}.getType();
+            List<Map<String, Object>> rawData = JsonHandler.readList(FILE_PATH, rawType);
 
-            // list to map key = email, value = user
             Map<String, User> userMap = new HashMap<>();
-            for (User u : usersList) {
-                userMap.put(u.getEmail().toLowerCase(), u);
+            if (rawData == null) return userMap;
+
+            for (Map<String, Object> data : rawData) {
+                int id = ((Double) data.get("id")).intValue();
+                int roleId = ((Double) data.get("idRole")).intValue();
+
+                String name = (String) data.get("name");
+                String lastName = (String) data.get("lastName");
+                String tel = (String) data.get("tel");
+                String email = (String) data.get("email");
+                String password = (String) data.get("password");
+
+                User u;
+
+                if (roleId == 1) { // DOCTOR
+                    int idClinic = (data.get("idClinic") != null) ? ((Double) data.get("idClinic")).intValue() : 1;
+                    Doctor d = new Doctor(id, name, lastName, tel, email, password, idClinic);
+
+                    if (data.get("specializations") != null) {
+                        List<String> specStrings = (List<String>) data.get("specializations");
+                        List<Specialization> specObjects = new ArrayList<>();
+
+                        for (String s : specStrings) {
+                            specObjects.add(new Specialization(s));
+                        }
+                        d.setSpecializations(specObjects);
+                    }
+                    u = d;
+                }
+                else if (roleId == 2) { // ADMIN
+                    int idClinic = (data.get("idClinic") != null) ? ((Double) data.get("idClinic")).intValue() : 1;
+                    u = new Admin(id, name, lastName, tel, email, password, idClinic);
+                }
+                else { // PATIENT
+                    String amka = (String) data.get("amka");
+                    u = new Patient(id, name, lastName, tel, email, password, amka);
+                }
+
+                userMap.put(email.toLowerCase(), u);
             }
             return userMap;
 
@@ -34,8 +68,13 @@ public class UserDAO {
         }
     }
 
-    //save the map to json as list
-    private void saveAllUsers(Map<String, User> userMap) {
+    //for table view or sth else
+    public List<User> fetchAllUsersAsList() {
+        return new ArrayList<>(fetchAllUsersAsMap().values());
+    }
+
+    //update users
+    public void updateAllUsersData(Map<String, User> userMap) {
         try {
             //the json accept only list
             List<User> usersList = new ArrayList<>(userMap.values());
@@ -45,10 +84,11 @@ public class UserDAO {
         }
     }
 
-    public void save(User user) {
+    //new user
+    public void registerNewUser(User user) {
         if (user == null) throw new IllegalArgumentException("User object is null");
 
-        Map<String, User> users = getAllUsersMap();
+        Map<String, User> users = fetchAllUsersAsMap();
 
         //logic for auto increment id
         int maxId = 0;
@@ -62,15 +102,15 @@ public class UserDAO {
 
 
         users.put(user.getEmail().toLowerCase(), user);
-        saveAllUsers(users);
+        updateAllUsersData(users);
     }
 
     public boolean emailExists(String email) {
-        return getAllUsersMap().containsKey(email.toLowerCase());
+        return fetchAllUsersAsMap().containsKey(email.toLowerCase());
     }
 
     public boolean telExists(String tel, Role role) {
-        Map<String, User> users = getAllUsersMap();
+        Map<String, User> users = fetchAllUsersAsMap();
 
         //check only values
         for (User u : users.values()) {
@@ -85,7 +125,7 @@ public class UserDAO {
     public boolean amkaExists(String amka, Role role) {
         if (role != Role.PATIENT) return false;
 
-        for (User u : getAllUsersMap().values()) {
+        for (User u : fetchAllUsersAsMap().values()) {
             if (u instanceof Patient p) {
                 if (p.getAmka().equals(amka)) return true;
             }
@@ -94,7 +134,7 @@ public class UserDAO {
     }
 
     public User userExists(String email) {
-        Map<String, User> users = getAllUsersMap();
+        Map<String, User> users = fetchAllUsersAsMap();
         User user = users.get(email.toLowerCase());
 
         if (user != null) {
