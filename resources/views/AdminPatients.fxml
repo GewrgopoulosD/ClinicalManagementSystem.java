@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="20" styleClass="main-container"
+      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controllers.AdminPatientsController">
+
+    <padding>
+        <Insets top="25" right="25" bottom="25" left="25"/>
+    </padding>
+
+    <HBox spacing="20" alignment="CENTER_LEFT">
+        <children>
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                <Label text="Patient Management" styleClass="view-title" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                <Label text="View and edit patient records" style="-fx-text-fill: #7f8c8d;"/>
+            </VBox>
+
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <TextField fx:id="searchField" promptText="Search AMKA or Lastname..." prefWidth="300" styleClass="search-field"/>
+                <Button fx:id="refreshBtn" text="Refresh List" onAction="#loadPatients" styleClass="btn-secondary"/>
+            </HBox>
+        </children>
+    </HBox>
+
+    <SplitPane dividerPositions="0.35" VBox.vgrow="ALWAYS" styleClass="custom-split-pane" style="-fx-background-color: transparent;">
+        <items>
+
+            <VBox spacing="10" styleClass="statCard">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+                <Label text="Patient List" styleClass="statLbl"/>
+                <TableView fx:id="patientTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="amkaCol" text="AMKA" prefWidth="100"/>
+                        <TableColumn fx:id="lastnameCol" text="Lastname" prefWidth="120"/>
+                        <TableColumn fx:id="nameCol" text="Firstname" prefWidth="100"/>
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    </columnResizePolicy>
+                </TableView>
+            </VBox>
+
+            <TabPane fx:id="detailsTabPane" tabClosingPolicy="UNAVAILABLE" styleClass="details-pane">
+                <tabs>
+                    <Tab text="Patient Profile">
+                        <VBox spacing="20" styleClass="statCard">
+                            <padding>
+                                <Insets top="20" right="20" bottom="20" left="20"/>
+                            </padding>
+
+                            <Label text="Edit Personal Information" styleClass="statLbl"/>
+
+                            <GridPane hgap="15" vgap="15">
+                                <columnConstraints>
+                                    <ColumnConstraints minWidth="100" prefWidth="120" />
+                                    <ColumnConstraints hgrow="ALWAYS" />
+                                </columnConstraints>
+                                <children>
+                                    <Label text="First Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="editNameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                                    <Label text="Last Name:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="editLastnameField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                                    <Label text="AMKA:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="editAmkaField" editable="false" styleClass="disabled-field" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                                    <Label text="Email:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="editEmailField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                                    <Label text="Phone:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                    <TextField fx:id="editPhoneField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                                </children>
+                            </GridPane>
+
+                            <HBox spacing="10" alignment="CENTER_RIGHT">
+                                <Button fx:id="saveBtn" text="Save Changes" onAction="#handleSave" styleClass="btn-save"/>
+                            </HBox>
+
+                            <Separator />
+
+                            <VBox spacing="10" alignment="BOTTOM_LEFT" VBox.vgrow="ALWAYS">
+                                <Label text="Account Actions" styleClass="statLbl" style="-fx-text-fill: #e74c3c;"/>
+                                <Button fx:id="deleteBtn" text="Delete Patient Account" onAction="#handleDelete" styleClass="btn-delete"/>
+                            </VBox>
+                        </VBox>
+                    </Tab>
+
+                    <Tab text="Appointment History">
+                        <VBox spacing="15" styleClass="statCard">
+                            <padding>
+                                <Insets top="15" right="15" bottom="15" left="15"/>
+                            </padding>
+                            <Label text="Past and Upcoming Visits" styleClass="statLbl"/>
+                            <TableView fx:id="historyTable" VBox.vgrow="ALWAYS">
+                                <columns>
+                                    <TableColumn fx:id="dateCol" text="Date" prefWidth="100"/>
+                                    <TableColumn fx:id="doctorCol" text="Doctor" prefWidth="150"/>
+                                    <TableColumn fx:id="statusCol" text="Status" prefWidth="100"/>
+                                </columns>
+                            </TableView>
+                        </VBox>
+                    </Tab>
+                </tabs>
+            </TabPane>
+        </items>
+    </SplitPane>
+
+    <HBox alignment="CENTER_LEFT" spacing="10" styleClass="statCard" prefHeight="40">
+        <padding>
+            <Insets left="15" right="15"/>
+        </padding>
+        <Label text="Total Registered Patients:" styleClass="statLbl" style="-fx-font-size: 12px;"/>
+        <Label fx:id="totalPatientsLbl" text="0" styleClass="statValue" style="-fx-font-size: 16px;"/>
+    </HBox>
+
+</VBox>

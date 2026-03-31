@@ -1,0 +1,11 @@
+[
+  {
+    "idAppointment": 1,
+    "idCustomer": 11,
+    "idClinic": 1,
+    "idEmployee": 5,
+    "appointmentDatetime": "2026-04-02 11:00",
+    "appointmentType": "Cancelled",
+    "appointmentDescription": "sth"
+  }
+]

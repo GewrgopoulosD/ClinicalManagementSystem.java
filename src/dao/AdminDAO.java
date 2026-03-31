@@ -21,6 +21,13 @@ public class AdminDAO {
                 .collect(Collectors.toList());
     }
 
+    public List<Patient> getAllPatients() {
+        return userDAO.fetchAllUsersAsList().stream()
+                .filter(u -> u instanceof Patient)
+                .map(u -> (Patient) u)
+                .collect(Collectors.toList());
+    }
+
     public int getTotalPatientsCount() {
         return (int) userDAO.fetchAllUsersAsList().stream()
                 .filter(u -> u instanceof Patient)
@@ -63,6 +70,23 @@ public class AdminDAO {
             userDAO.updateAllUsersData(userMap);
         }
 
+        return updated;
+    }
+
+    public boolean removeSpecialization(int doctorId, String specName) {
+        Map<String, User> userMap = userDAO.fetchAllUsersAsMap();
+        boolean updated = false;
+
+        for (User u : userMap.values()) {
+            if (u instanceof Doctor d && d.getId() == doctorId) {
+                updated = d.getSpecializations().removeIf(s -> s.getName().equalsIgnoreCase(specName));
+                break;
+            }
+        }
+
+        if (updated) {
+            userDAO.updateAllUsersData(userMap);
+        }
         return updated;
     }
 

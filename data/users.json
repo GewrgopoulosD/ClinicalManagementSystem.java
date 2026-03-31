@@ -11,7 +11,11 @@
   },
   {
     "idClinic": 1,
-    "specializations": [],
+    "specializations": [
+      {
+        "name": "Παιδίατρος"
+      }
+    ],
     "id": 5,
     "name": "Νίκος",
     "lastName": "Γύφτος",
@@ -32,11 +36,15 @@
   },
   {
     "idClinic": 1,
-    "specializations": [],
+    "specializations": [
+      {
+        "name": "Οφθαλμίατρος"
+      }
+    ],
     "id": 1,
     "name": "Παναγιώτης",
     "lastName": "Μονόφθαλμος",
-    "tel": "12345678911",
+    "tel": "1234567891",
     "email": "monofthalmos@test.gr",
     "password": "$2a$10$NMb0aohgsYqZUtSFw54IwOwUhus1SpFmJ327xAaqK4aZMGtzYna0S",
     "idRole": 1
@@ -53,7 +61,11 @@
   },
   {
     "idClinic": 1,
-    "specializations": [],
+    "specializations": [
+      {
+        "name": "Ορθοπεδικός"
+      }
+    ],
     "id": 4,
     "name": "Μάριος",
     "lastName": "Φτιαξοπόδης",
@@ -75,12 +87,12 @@
   },
   {
     "amka": "02119801575",
-    "id": 7,
-    "name": "Dimitris",
-    "lastName": "Georgopoulos",
+    "id": 11,
+    "name": "Δήμητρης",
+    "lastName": "Γεωργόπουλος",
     "tel": "6983274790",
     "email": "dim.georgopoulos1@gmail.com",
-    "password": "$2a$10$5hDY20BksbWq55hc3.kPIOv7QMyfb9s8QqvjOoV04wwDvCV8RRbwq",
+    "password": "$2a$10$mzIe246QXiNbpfVPdce2yeE9vLDGWioAoU88IlLQpw7ajx0vkHwN2",
     "idRole": 3
   },
   {

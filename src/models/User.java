@@ -103,4 +103,8 @@ public abstract class User {
                 "email: " + email + "\n" +
                 "password: " + password + "\n";
     }
+
+    public String getFullname(){
+        return this.getName() + " " +  this.getLastname();
+    }
 }

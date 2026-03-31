@@ -1,13 +1,19 @@
 package services;
 
 import dao.AdminDAO;
+import dao.AppointmentDAO;
 import dao.SpecializationDAO;
+import dao.UserDAO;
+import models.Appointment;
 import models.Doctor;
+import models.Patient;
+
 import java.util.List;
 
 public class AdminService {
 
     private final AdminDAO adminDAO = new AdminDAO();
+    private final UserDAO  userDAO = new UserDAO();
     private final SpecializationDAO specializationDAO = new SpecializationDAO();
 
 
@@ -41,5 +47,36 @@ public class AdminService {
 
     public boolean assignSpecialization(int doctorId, String specName) {
         return adminDAO.assignSpecialization(doctorId, specName);
+    }
+
+    public boolean removeSpecialization(int doctorId, String specName) {
+        return adminDAO.removeSpecialization(doctorId, specName);
+    }
+
+    public List<Patient> getAllPatients() {
+        return adminDAO.getAllPatients();
+    }
+
+    public boolean updatePatient(Patient patient, String oldEmail) {
+        try {
+            userDAO.updateSingleUser(patient, oldEmail);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public List<Appointment> getPatientHistory(int patientId) {
+        AppointmentDAO appointmentDAO = new AppointmentDAO();
+        return appointmentDAO.getAppointmentsByCustomer(patientId);
+    }
+
+    public boolean deletePatient(String email) {
+        try {
+            userDAO.deleteUser(email);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

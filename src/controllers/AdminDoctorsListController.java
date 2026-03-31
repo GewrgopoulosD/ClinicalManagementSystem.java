@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.event.ActionEvent;
 import ui.WindowManaged;
 import ui.WindowManager;
 import javafx.beans.property.SimpleStringProperty;
@@ -23,6 +24,7 @@ public class AdminDoctorsListController implements WindowManaged {
     @FXML private ComboBox<String> specializationCombo;
     @FXML private Button assignBtn;
     @FXML private Button refreshBtn;
+    @FXML private MenuItem deleteSpecItem;
 
     private WindowManager windowManager;
     private final AdminService adminService = new AdminService();
@@ -58,6 +60,16 @@ public class AdminDoctorsListController implements WindowManaged {
 
         refreshBtn.setOnAction(event -> {
             loadDoctors();
+            applyFilters();
+        });
+
+        if (currentSpecsList.getContextMenu() != null) {
+            this.deleteSpecItem = currentSpecsList.getContextMenu().getItems().get(0);
+        }
+        currentSpecsList.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            if (deleteSpecItem != null) {
+                deleteSpecItem.setDisable(newVal == null);
+            }
         });
     }
 
@@ -70,7 +82,9 @@ public class AdminDoctorsListController implements WindowManaged {
 
     @FXML
     private void loadDoctors() {
-        Data.setAll(adminService.getAllDoctors());
+        List<Doctor> doctors = adminService.getAllDoctors();
+        Data.setAll(doctors);
+
         specializationCombo.setItems(FXCollections.observableArrayList(adminService.getAllSpecializations()));
     }
 
@@ -83,16 +97,17 @@ public class AdminDoctorsListController implements WindowManaged {
     }
 
     private void applyFilters() {
-        String searchText = searchField.getText().toLowerCase();
+        String searchText = searchField.getText().toLowerCase().trim();
         boolean onlyPending = pendingOnlyCheckBox.isSelected();
 
 
-        List<Integer> pendingIds = adminService.getPendingDoctors().stream()
-                .map(Doctor::getId).toList();//bring the ids from the doctors and make them into a list
-
         filteredData.setPredicate(doctor -> {
-            boolean matchesSearch = doctor.getLastname().toLowerCase().contains(searchText);
-            boolean matchesPending = !onlyPending || pendingIds.contains(doctor.getId());
+            boolean matchesSearch = doctor.getLastname().toLowerCase().contains(searchText) ||
+                    doctor.getName().toLowerCase().contains(searchText);
+
+            boolean isPending = doctor.getSpecializations() == null || doctor.getSpecializations().isEmpty();
+            boolean matchesPending = !onlyPending || isPending;
+
             return matchesSearch && matchesPending;
         });
     }
@@ -133,10 +148,36 @@ public class AdminDoctorsListController implements WindowManaged {
         boolean success = adminService.assignSpecialization(selectedDoctor.getId(), spec);//registerNewUser it
 
         if (success) {
+            loadDoctors();
             updateDetails(selectedDoctor);//refresh the ui list
             alert.AlertView.showInfo("Success", "Specialization Assigned", "The specialization has been successfully added to the doctor's profile.");
         } else {
             alert.AlertView.showError("Database Error", "Assignment Failed", "An error occurred while saving to the database. Please try again.");
+        }
+    }
+
+    @FXML
+    private void handleRemoveContext(ActionEvent event) {
+        String selectedSpecName = currentSpecsList.getSelectionModel().getSelectedItem();
+
+        if (selectedSpecName == null || selectedDoctor == null) return;
+
+        boolean confirmed = alert.AlertView.showConfirmation(
+                "Confirm Deletion",
+                "Remove Specialization: " + selectedSpecName,
+                "Are you sure that you want to remove this?"
+        );
+
+        if (confirmed) {
+            boolean success = adminService.removeSpecialization(selectedDoctor.getId(), selectedSpecName);
+
+            if (success) {
+                loadDoctors();
+                updateDetails(selectedDoctor);
+                alert.AlertView.showInfo("Success", "Deleted", "Specialization removed successfully.");
+            } else {
+                alert.AlertView.showError("Error", "Action Failed", "Could not remove specialization.");
+            }
         }
     }
 }

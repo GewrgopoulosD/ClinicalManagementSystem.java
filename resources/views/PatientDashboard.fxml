@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane fx:id="mainBorderPane"
+            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.PatientDashboardController">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="top-bar">
+            <Label fx:id="welcomeLbl" text="Welcome, Patient" />
+            <Button fx:id="logoutBtn" text="Logout" />
+        </HBox>
+    </top>
+
+    <left>
+        <VBox spacing="10" alignment="TOP_CENTER" styleClass="sidebar">
+            <Button fx:id="homeBtn" text="Home" maxWidth="Infinity"/>
+            <Button fx:id="bookBtn" text="Book Appointment" maxWidth="Infinity"/>
+            <Button fx:id="historyBtn" text="My Appointments" maxWidth="Infinity"/>
+            <Button fx:id="profileBtn" text="My Profile" maxWidth="Infinity"/>
+        </VBox>
+    </left>
+
+    <center>
+        <StackPane fx:id="contentStackPane">
+            <Label text="Loading..." />
+        </StackPane>
+    </center>
+
+</BorderPane>

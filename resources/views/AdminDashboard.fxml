@@ -22,7 +22,7 @@
 
             <Button fx:id="doctorsBtn" text="Manage Doctors" alignment="CENTER"/>
 
-            <Button fx:id="patiensBtn" text="Patients" alignment="CENTER"/>
+            <Button fx:id="patientsBtn" text="Patients" alignment="CENTER"/>
 
         </VBox>
     </left>

@@ -3,6 +3,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
 
 <HBox spacing="20" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="controllers.AdminDoctorsListController">
@@ -40,7 +42,18 @@
 
                 <VBox spacing="10">
                     <Label text="Υπάρχουσες Ειδικότητες:"/>
-                    <ListView fx:id="currentSpecsList" prefHeight="180" />
+                    <ListView fx:id="currentSpecsList" prefHeight="180">
+                        <contextMenu>
+                            <ContextMenu>
+                                <items>
+                                    <MenuItem fx:id="deleteSpecItem"
+                                              text="Delete Specialization"
+                                              onAction="#handleRemoveContext"
+                                              style="-fx-text-fill: red;"/>
+                                </items>
+                            </ContextMenu>
+                        </contextMenu>
+                    </ListView>
                 </VBox>
 
                 <VBox spacing="10">

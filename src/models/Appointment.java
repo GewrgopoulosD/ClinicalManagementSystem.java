@@ -2,8 +2,12 @@ package models;
 
 import java.time.LocalDate;
 
-
 public class Appointment {
+
+    //status for appointmentType
+    public static final String STATUS_PENDING = "Pending";
+    public static final String STATUS_COMPLETED = "Completed";
+    public static final String STATUS_CANCELLED = "Cancelled";
 
     private int idAppointment;
     private int idCustomer;
@@ -12,6 +16,7 @@ public class Appointment {
     private String appointmentDatetime;
     private String appointmentType;
     private String appointmentDescription;
+    private String doctorFullName;
 
     public Appointment(int idAppointment, int idCustomer, int idClinic, int idEmployee, String appointmentDatetime, String appointmentType, String appointmentDescription) {
         this.idAppointment = idAppointment;
@@ -21,6 +26,9 @@ public class Appointment {
         this.appointmentDatetime = appointmentDatetime;
         this.appointmentType = appointmentType;
         this.appointmentDescription = appointmentDescription;
+    }
+
+    public Appointment() {
     }
 
     public boolean isToday() {
@@ -83,5 +91,13 @@ public class Appointment {
 
     public void setAppointmentDescription(String appointmentDescription) {
         this.appointmentDescription = appointmentDescription;
+    }
+
+    public String getDoctorFullName() {
+        return doctorFullName;
+    }
+
+    public void setDoctorFullName(String doctorFullName) {
+        this.doctorFullName = doctorFullName;
     }
 }

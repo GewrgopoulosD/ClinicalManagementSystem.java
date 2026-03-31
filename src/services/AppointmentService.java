@@ -30,5 +30,36 @@ public class AppointmentService {
         return appointmentDAO.getAppointmentsByDoctor(doctorId).size();
     }
 
+    public void createAppointment(Appointment newApp) {
+        appointmentDAO.addAppointment(newApp);
+    }
+
+    public void updateAppointment(Appointment updatedApp) {
+        appointmentDAO.updateAppointment(updatedApp);
+    }
+
+    public List<String> getBusySlots(int doctorId, String date) {
+        return appointmentDAO.getBusySlots(doctorId, date);
+    }
+
+    public List<Appointment> getAppointmentsForPatient(int patientId) {
+        List<Appointment> appointments = appointmentDAO.getAppointmentsByCustomer(patientId);
+
+        PatientService patientService = new PatientService();
+
+        for (Appointment app : appointments) {
+            //fullname by id
+            String fullName = patientService.getDoctorFullNameById(app.getIdEmployee());
+
+            app.setDoctorFullName(fullName);
+        }
+
+        return appointments;
+    }
+
+    public int getActiveAppointmentsCount(int patientId) {
+        return appointmentDAO.getActiveCountByCustomer(patientId);
+    }
+
 
 }

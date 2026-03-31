@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class UserDAO {
 
@@ -40,11 +41,12 @@ public class UserDAO {
                     Doctor d = new Doctor(id, name, lastName, tel, email, password, idClinic);
 
                     if (data.get("specializations") != null) {
-                        List<String> specStrings = (List<String>) data.get("specializations");
+                        List<Map<String, Object>> specDataList = (List<Map<String, Object>>) data.get("specializations");
                         List<Specialization> specObjects = new ArrayList<>();
 
-                        for (String s : specStrings) {
-                            specObjects.add(new Specialization(s));
+                        for (Map<String, Object> specData : specDataList) {
+                            String sName = (String) specData.get("name");
+                            specObjects.add(new Specialization(sName));
                         }
                         d.setSpecializations(specObjects);
                     }
@@ -142,5 +144,49 @@ public class UserDAO {
         }
 
         throw new IllegalArgumentException("Invalid email address.");
+    }
+
+    public void updateSingleUser(User updatedUser, String oldEmail) {
+        if (updatedUser == null || oldEmail == null) return;
+
+        Map<String, User> users = fetchAllUsersAsMap();
+
+        if (!updatedUser.getEmail().equalsIgnoreCase(oldEmail)) {
+            users.remove(oldEmail.toLowerCase());
+        }
+
+        users.put(updatedUser.getEmail().toLowerCase(), updatedUser);
+
+        updateAllUsersData(users);
+    }
+
+    public void deleteUser(String email) {
+        Map<String, User> users = fetchAllUsersAsMap();
+        if (users.remove(email.toLowerCase()) != null) {
+            updateAllUsersData(users);
+        }
+    }
+
+    public List<User> findDoctorsBySpecialty(String SpecialtyName) {
+        List<User> allUsers = fetchAllUsersAsList();
+
+        return allUsers.stream()
+                .filter(u -> u.getRoleId() == 1)
+                .filter(u -> u instanceof Doctor)
+                .filter(u -> {
+                    Doctor d = (Doctor) u;
+                    return d.getSpecializations().stream()
+                            .anyMatch(spec -> spec.getName().equalsIgnoreCase(SpecialtyName));
+                })
+                .collect(Collectors.toList());
+    }
+
+    public User findUserById(int id) {
+        List<User> users = fetchAllUsersAsList();
+
+        return users.stream()
+                .filter(u -> u.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 }

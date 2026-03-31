@@ -2,10 +2,13 @@ package dao;
 
 import jsondatamanager.JsonHandler;
 import com.google.gson.reflect.TypeToken;
+import models.Specialization;
+
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SpecializationDAO {
 
@@ -13,11 +16,17 @@ public class SpecializationDAO {
 
     public List<String> getAllSpecializations() {
         try {
-            Type listType = new TypeToken<List<String>>(){}.getType();
-            List<String> specs = JsonHandler.readList(FILE_PATH, listType);
+            Type listType = new TypeToken<List<Specialization>>(){}.getType();
+            List<Specialization> fullSpecs = JsonHandler.readList(FILE_PATH, listType);
 
-            return (specs != null) ? specs : new ArrayList<>();
+            if (fullSpecs == null) return new ArrayList<>();
+
+            return fullSpecs.stream()
+                    .map(Specialization::getName)
+                    .collect(Collectors.toList());
+
         } catch (IOException e) {
+            e.printStackTrace();
             return new ArrayList<>();
         }
     }
@@ -36,9 +45,13 @@ public class SpecializationDAO {
         }
     }
 
-    private void saveAll(List<String> specs) {
+    private void saveAll(List<String> specNames) {
         try {
-            JsonHandler.writeList(FILE_PATH, specs);
+            List<Specialization> listToSave = specNames.stream()
+                    .map(name -> new Specialization(name))
+                    .collect(Collectors.toList());
+
+            JsonHandler.writeList(FILE_PATH, listToSave);
         } catch (IOException e) {
             throw new RuntimeException("Error saving specializations: " + e.getMessage());
         }

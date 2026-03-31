@@ -66,4 +66,5 @@ public class Doctor extends User {
     public String toString() {
         return super.toString()  + "Specializations: " + this.specializations;
     }
+
 }

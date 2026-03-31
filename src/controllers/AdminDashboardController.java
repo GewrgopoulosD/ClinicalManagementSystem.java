@@ -46,9 +46,9 @@ public class AdminDashboardController implements WindowManaged {
         });
 
 
-//        patientsBtn.setOnAction(e -> {
-//            windowManager.loadInnerView(mainBorderPane, "/views/AdminPatients.fxml");
-//        });
+        patientsBtn.setOnAction(e -> {
+            windowManager.loadInnerView(mainBorderPane, "/views/AdminPatients.fxml");
+        });
 
         logoutBtn.setOnAction(e -> {
             CurrentUser.logout();
