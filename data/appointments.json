@@ -1,11 +1,20 @@
 [
   {
-    "idAppointment": 1,
+    "idAppointment": 2,
     "idCustomer": 11,
     "idClinic": 1,
     "idEmployee": 5,
-    "appointmentDatetime": "2026-04-02 11:00",
-    "appointmentType": "Cancelled",
-    "appointmentDescription": "sth"
+    "appointmentDatetime": "2026-04-14 01:00",
+    "appointmentType": "Pending",
+    "appointmentDescription": "Βηχαλάκι το μωρό"
+  },
+  {
+    "idAppointment": 3,
+    "idCustomer": 11,
+    "idClinic": 1,
+    "idEmployee": 5,
+    "appointmentDatetime": "2026-04-10 02:00",
+    "appointmentType": "Completed",
+    "appointmentDescription": "βηχαλάκι το μωρό 2"
   }
 ]

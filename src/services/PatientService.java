@@ -43,4 +43,14 @@ public class PatientService {
         return "Unknown Doctor";
     }
 
+    public String getPatientFullNameById(int patientId) {
+        User patient = userDAO.findUserById(patientId);
+
+        if (patient != null) {
+            return patient.getName() + " " + patient.getLastname();
+        }
+
+        return "Unknown Patient";
+    }
+
 }

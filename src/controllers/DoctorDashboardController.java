@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.scene.layout.BorderPane;
 import ui.WindowManaged;
 import ui.WindowManager;
 import javafx.beans.property.SimpleStringProperty;
@@ -16,6 +17,8 @@ import session.CurrentUser;
 
 public class DoctorDashboardController implements WindowManaged {
 
+    @FXML private BorderPane mainBorderPane;
+
     //first line
     @FXML private Label welcomeLbl;
     @FXML private Button logoutBtn;
@@ -24,13 +27,9 @@ public class DoctorDashboardController implements WindowManaged {
     @FXML private Label totalAppointmentsLbl;
     @FXML private Label nextAppointmentLbl;
 
-    //third line
-    @FXML private TableView<Patient> patientsTable;
-    @FXML private TableColumn<Patient, String> nameCol;
-    @FXML private TableColumn<Patient, String> lastnameCol;
-    @FXML private TableColumn<Patient, String> telephoneCol;
-    @FXML private TableColumn<Patient, String> emailCol;
-    @FXML private TableColumn<Patient, String> amkaCol;
+    //left
+    @FXML private Button shiftsBtn;
+    @FXML private Button AppointmentsBtn;
 
     private final AppointmentService appointmentService = new AppointmentService();
     WindowManager windowManager;
@@ -49,12 +48,16 @@ public class DoctorDashboardController implements WindowManaged {
 
         loadStats(doctor);
 
-        loadPatients();
-
         logoutBtn.setOnAction(e -> {
             CurrentUser.logout();
             windowManager.showLogin();
         });
+
+        shiftsBtn.setOnAction(e -> {
+            windowManager.loadInnerView(mainBorderPane, "/views/DoctorShifts.fxml");
+        });
+
+        AppointmentsBtn.setOnAction(e -> windowManager.loadInnerView(mainBorderPane, "/views/DoctorAppointments.fxml"));
     }
 
     private void loadStats(Doctor doctor) {
@@ -72,22 +75,4 @@ public class DoctorDashboardController implements WindowManaged {
         }
     }
 
-    private void loadPatients() {
-
-        nameCol.setCellValueFactory(data ->
-                new SimpleStringProperty(data.getValue().getName()));
-
-        lastnameCol.setCellValueFactory(data ->
-                new SimpleStringProperty(data.getValue().getLastname()));
-
-        telephoneCol.setCellValueFactory(data ->
-                new SimpleStringProperty(data.getValue().getTelephone()));
-
-        emailCol.setCellValueFactory(data ->
-                new SimpleStringProperty(data.getValue().getEmail()));
-
-        amkaCol.setCellValueFactory(data ->
-                new SimpleStringProperty(data.getValue().getAmka()));
-
-    }
 }

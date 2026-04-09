@@ -1,0 +1,32 @@
+[
+  {
+    "doctorId": 5,
+    "days": {
+      "Monday": {
+        "active": false
+      },
+      "Thursday": {
+        "active": false
+      },
+      "Friday": {
+        "active": true,
+        "start": "00:00",
+        "end": "04:00"
+      },
+      "Sunday": {
+        "active": false
+      },
+      "Wednesday": {
+        "active": false
+      },
+      "Tuesday": {
+        "active": true,
+        "start": "00:00",
+        "end": "08:00"
+      },
+      "Saturday": {
+        "active": false
+      }
+    }
+  }
+]

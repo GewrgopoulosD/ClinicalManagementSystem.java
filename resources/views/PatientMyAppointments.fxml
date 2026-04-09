@@ -18,7 +18,7 @@
     <TableView fx:id="appointmentsTable" VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn fx:id="dateColumn" prefWidth="150.0" text="Date &amp; Time" />
-            <TableColumn fx:id="doctorNameColumn" prefWidth="80.0" text="Doctor ID" />
+            <TableColumn fx:id="doctorNameColumn" prefWidth="80.0" text="Doctor" />
             <TableColumn fx:id="statusColumn" prefWidth="100.0" text="Status" />
             <TableColumn fx:id="descColumn" prefWidth="250.0" text="Description" />
         </columns>

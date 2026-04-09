@@ -143,7 +143,7 @@ public class AdminPatientsController implements WindowManaged {
             patientTable.refresh();
             alert.AlertView.showInfo("Success", "Patient Updated", "The patient information has been saved successfully.");
         } else {
-            alert.AlertView.showError("Error", "Update Failed", "Could not save patient data. Please try again.");
+            alert.AlertView.showError("Error", "Update Failed", "Could not saveSchedule patient data. Please try again.");
         }
     }
 

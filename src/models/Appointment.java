@@ -17,6 +17,7 @@ public class Appointment {
     private String appointmentType;
     private String appointmentDescription;
     private String doctorFullName;
+    private String customerFullName;
 
     public Appointment(int idAppointment, int idCustomer, int idClinic, int idEmployee, String appointmentDatetime, String appointmentType, String appointmentDescription) {
         this.idAppointment = idAppointment;
@@ -100,4 +101,13 @@ public class Appointment {
     public void setDoctorFullName(String doctorFullName) {
         this.doctorFullName = doctorFullName;
     }
+
+    public String getCustomerFullName() {
+        return customerFullName;
+    }
+
+    public void setCustomerFullName(String customerFullName) {
+        this.customerFullName = customerFullName;
+    }
+
 }

@@ -13,6 +13,7 @@ public class AppointmentService {
 
     private final AppointmentDAO appointmentDAO = new AppointmentDAO();
     private final UserDAO userDAO = new UserDAO();
+    private final PatientService patientService = new PatientService();
 
     public List<Appointment> getTodayAppointments(int doctorId) {
         return appointmentDAO.getTodayAppointments(doctorId);
@@ -42,6 +43,7 @@ public class AppointmentService {
         return appointmentDAO.getBusySlots(doctorId, date);
     }
 
+    //for patient, to watch his appointment
     public List<Appointment> getAppointmentsForPatient(int patientId) {
         List<Appointment> appointments = appointmentDAO.getAppointmentsByCustomer(patientId);
 
@@ -61,5 +63,41 @@ public class AppointmentService {
         return appointmentDAO.getActiveCountByCustomer(patientId);
     }
 
+    //doctor appointment dashboard
+    //all appointmets (pending, completed, cancelled etc etc) for tableview
+    public List<Appointment> getTodayFullSchedule(int doctorId) {
+        List<Appointment> apps = appointmentDAO.getTodayAppointmentsFull(doctorId);
+
+        for (Appointment a : apps) {
+            String patientName = patientService.getPatientFullNameById(a.getIdCustomer());
+            a.setCustomerFullName(patientName);
+        }
+
+        return apps;
+    }
+
+    //count appointmets (pendings, completted)
+    public long getTodayTotalCount(int doctorId) {
+        return appointmentDAO.countTodayTotal(doctorId);
+    }
+
+    //completed app
+    public long getTodayCompletedCount(int doctorId) {
+        return appointmentDAO.countTodayCompleted(doctorId);
+    }
+
+    //next app today
+    public Appointment getNextAppointmentToday(int doctorId) {
+        Appointment next = appointmentDAO.nextAppointmentToday(doctorId);
+        if (next != null) {
+            next.setCustomerFullName(patientService.getPatientFullNameById(next.getIdCustomer()));
+        }
+        return next;
+    }
+
+    //status changer
+    public void updateAppointmentStatus(int appointmentId, String newStatus) {
+        appointmentDAO.updateStatus(appointmentId, newStatus);
+    }
 
 }
