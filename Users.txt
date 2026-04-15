@@ -1,7 +1,7 @@
 όλοι οι κωδικοί είναι -> Test1!
 
 ---------- Xρήστες ----------
-Admin
+Admin:
 mail:admin123@clinic.gr
 password:Admin123!
 

@@ -41,6 +41,7 @@ public class AppointmentDAO {
                 .collect(Collectors.toList());
     }
 
+    //method for patient's next upcoming appointment
     public Appointment getNextAppointment(int doctorId) {
         List<Appointment> todayApps = getTodayAppointments(doctorId);
         String now = java.time.LocalDateTime.now().format(FORMATTER);
@@ -59,30 +60,6 @@ public class AppointmentDAO {
             }
         }
 
-        return nextApp;
-    }
-
-    //method for patient's next upcoming appointment
-    public Appointment getNextPendingForCustomer(int customerId) {
-        List<Appointment> all = getAllAppointments();
-        String now = java.time.LocalDateTime.now().format(FORMATTER);
-        Appointment nextApp = null;
-
-        for (Appointment a : all) {
-            if (a.getIdCustomer() == customerId &&
-                    a.getAppointmentType().equalsIgnoreCase(Appointment.STATUS_PENDING)) {
-
-                if (a.getAppointmentDatetime() == null) continue;
-
-                //future appointment
-                if (a.getAppointmentDatetime().compareTo(now) > 0) {
-                    //find the earliest one
-                    if (nextApp == null || a.getAppointmentDatetime().compareTo(nextApp.getAppointmentDatetime()) < 0) {
-                        nextApp = a;
-                    }
-                }
-            }
-        }
         return nextApp;
     }
 

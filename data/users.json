@@ -76,7 +76,11 @@
   },
   {
     "idClinic": 1,
-    "specializations": [],
+    "specializations": [
+      {
+        "name": "Αναισθησιολόγος"
+      }
+    ],
     "id": 2,
     "name": "Στέλλα",
     "lastName": "Κοιμίσογλου",

@@ -53,4 +53,17 @@ public class PatientService {
         return "Unknown Patient";
     }
 
+    public List<Patient> getAllPatients() {
+        List<User> allUsers = userDAO.fetchAllUsersAsList();
+        List<Patient> patientsOnly = new java.util.ArrayList<>();
+
+        for (User u : allUsers) {
+            if (u instanceof Patient) {
+                patientsOnly.add((Patient) u);
+            }
+        }
+
+        return patientsOnly;
+    }
+
 }

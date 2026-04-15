@@ -28,6 +28,7 @@
             </padding>
             <Button fx:id="AppointmentsBtn" text="Appointments"/>
             <Button fx:id="shiftsBtn" text="shifts"/>
+            <Button fx:id="medicalRecordsBtn" text="Medical Records"/>
 
         </VBox>
     </left>

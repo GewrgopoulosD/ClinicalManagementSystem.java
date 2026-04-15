@@ -1,0 +1,16 @@
+[
+  {
+    "appointmentId": 3,
+    "idCustomer": 11,
+    "diagnosis": "",
+    "treatment": "sth",
+    "internalNotes": "sth"
+  },
+  {
+    "appointmentId": 2,
+    "idCustomer": 11,
+    "diagnosis": "Κούραση",
+    "treatment": "1 ζαναξ πρωι βραδυ ",
+    "internalNotes": "να χασει κιλα"
+  }
+]

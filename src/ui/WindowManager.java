@@ -60,7 +60,7 @@ public class WindowManager {// a class to control my stage,scenes
         };
 
         if (fxml != null) {
-            prepareScene(fxml, "Clinic - Dashboard", 1200, 900, false);
+            prepareScene(fxml, "Clinic - Dashboard", 1200, 900, true);
         } else {
             AlertView.showError("Error", "Unknown Role", "Cannot determine dashboard");
         }
