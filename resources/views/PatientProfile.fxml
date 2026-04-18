@@ -4,59 +4,49 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<VBox spacing="20" styleClass="main-container"
+<VBox styleClass="mainContainer"
       xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="controllers.PatientProfileController">
 
-    <padding>
-        <Insets top="25" right="25" bottom="25" left="25"/>
-    </padding>
 
-    <VBox spacing="5">
-        <Label text="My Personal Profile" styleClass="view-title" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
-        <Label text="Manage your contact information and security" style="-fx-text-fill: #7f8c8d;"/>
+    <VBox alignment="CENTER">
+        <Label text="My Personal Profile" styleClass="header"/>
+        <Label text="Manage your contact information and security" styleClass="greyLblProfile"/>
     </VBox>
 
     <Separator />
 
-    <VBox spacing="20" styleClass="statCard" maxWidth="600">
-        <padding>
-            <Insets top="20" right="20" bottom="20" left="20"/>
-        </padding>
+    <VBox styleClass="statCard">
 
         <Label text="Personal Information" styleClass="statLbl"/>
 
-        <GridPane hgap="15" vgap="15">
+        <GridPane styleClass="gridProfile">
             <columnConstraints>
-                <ColumnConstraints minWidth="100" prefWidth="120" />
+                <ColumnConstraints minWidth="60" prefWidth="80" />
                 <ColumnConstraints hgrow="ALWAYS" />
             </columnConstraints>
-            <children>
-                <Label text="First Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+
+                <Label text="First Name:" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="patFormLabel"/>
                 <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-                <Label text="Last Name:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <Label text="Last Name:" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="patFormLabel"/>
                 <TextField fx:id="lastnameField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-                <Label text="AMKA:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                <TextField fx:id="amkaField" editable="false" styleClass="disabled-field"
-                           style="-fx-opacity: 0.7; -fx-background-color: #f4f4f4;"
-                           GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                <Label text="AMKA:" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="patFormLabel"/>
+                <TextField fx:id="amkaField" disable="true" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="disabledField" />
 
-                <Label text="Email:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <Label text="Email:" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="patFormLabel" />
                 <TextField fx:id="emailField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
-                <Label text="Phone:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <Label text="Phone:" GridPane.rowIndex="4" GridPane.columnIndex="0" styleClass="patFormLabel" />
                 <TextField fx:id="phoneField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
 
-                <Label text="Password:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <Label text="Password:" GridPane.rowIndex="5" GridPane.columnIndex="0" styleClass="patFormLabel" />
                 <PasswordField fx:id="passwordField" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
-            </children>
         </GridPane>
 
-        <HBox spacing="10" alignment="CENTER_RIGHT">
-            <Button fx:id="saveBtn" text="Update My Profile"
-                    style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20;"/>
+        <HBox alignment="CENTER">
+            <Button fx:id="saveBtn" text="Update My Profile" styleClass="greenBtnSymptoms"/>
         </HBox>
     </VBox>
 

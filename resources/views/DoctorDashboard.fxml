@@ -7,58 +7,37 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
 
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <BorderPane fx:id="mainBorderPane"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controllers.DoctorDashboardController">
+            fx:controller="controllers.DoctorDashboardController"
+            stylesheets="@../css/DoctorDashboardCss.css">
 
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="10">
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
+        <HBox styleClass="top">
             <Label fx:id="welcomeLbl"/>
+            <Region HBox.hgrow="ALWAYS" />
             <Button fx:id="logoutBtn" text="Logout"/>
         </HBox>
     </top>
 
     <left>
-        <VBox alignment="CENTER" spacing="10">
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
-            <Button fx:id="AppointmentsBtn" text="Appointments"/>
-            <Button fx:id="shiftsBtn" text="shifts"/>
-            <Button fx:id="medicalRecordsBtn" text="Medical Records"/>
+        <VBox styleClass="left" alignment="CENTER">
+
+            <Button fx:id="AppointmentsBtn" text="Appointments" alignment="CENTER"/>
+
+            <Button fx:id="shiftsBtn" text="shifts" alignment="CENTER"/>
+
+            <Button fx:id="medicalRecordsBtn" text="Medical Records" alignment="CENTER"/>
 
         </VBox>
     </left>
 
     <center>
-        <VBox spacing="30" alignment="TOP_CENTER">
-            <padding>
-                <Insets top="40" right="40" bottom="40" left="40"/>
-            </padding>
-
-            <HBox spacing="40" alignment="CENTER">
-                <VBox alignment="CENTER" spacing="10" prefWidth="200">
-                    <padding>
-                        <Insets top="20" right="20" bottom="20" left="20"/>
-                    </padding>
-                    <Label text="Total Appointments"/>
-                    <Label fx:id="totalAppointmentsLbl" text="0"/>
-                </VBox>
-
-                <VBox alignment="CENTER" spacing="10" prefWidth="350">
-                    <padding>
-                        <Insets top="20" right="20" bottom="20" left="20"/>
-                    </padding>
-                    <Label text="Next Appointment"/>
-                    <Label fx:id="nextAppointmentLbl" text="None"/>
-                </VBox>
-            </HBox>
-
-            <Label text="Select an option from the sidebar to manage your clinic."/>
-        </VBox>
+        <StackPane fx:id="contentArea" styleClass="center" >
+            <Label text="Loading content..."/>
+        </StackPane>
     </center>
 
 </BorderPane>

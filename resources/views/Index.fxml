@@ -6,7 +6,7 @@
 <?import javafx.scene.image.*?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.IndexController"
-            stylesheets="@/css/indexCss.css">
+            stylesheets="@/css/IndexCss.css">
     <center>
         <StackPane alignment="CENTER">
             <!-- background image -->

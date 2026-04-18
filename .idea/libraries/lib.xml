@@ -2,12 +2,14 @@
   <library name="lib">
     <CLASSES>
       <root url="file://$USER_HOME$/JavaFx_Psounis/javafx-sdk-25.0.2/lib" />
+      <root url="file://$PROJECT_DIR$/../../../../javaFxSdk/openjfx-25.0.2_windows-x64_bin-sdk/javafx-sdk-25.0.2/lib" />
     </CLASSES>
     <JAVADOC />
     <NATIVE>
       <root url="file://$USER_HOME$/JavaFx_Psounis/javafx-sdk-25.0.2/lib" />
     </NATIVE>
     <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../../../../javaFxSdk/openjfx-25.0.2_windows-x64_bin-sdk/javafx-sdk-25.0.2/lib" recursive="false" />
     <jarDirectory url="file://$USER_HOME$/JavaFx_Psounis/javafx-sdk-25.0.2/lib" recursive="false" />
   </library>
 </component>

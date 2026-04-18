@@ -38,6 +38,7 @@ public class DoctorDashboardController implements WindowManaged {
     @Override
     public void setWindowManager(WindowManager vw) {
         this.windowManager = vw;
+        loadDefaultView();
     }
 
     @FXML
@@ -46,8 +47,6 @@ public class DoctorDashboardController implements WindowManaged {
         Doctor doctor = (Doctor) CurrentUser.getUser();
 
         welcomeLbl.setText("Welcome Dr. " + CurrentUser.getDisplayName());
-
-        loadStats(doctor);
 
         logoutBtn.setOnAction(e -> {
             CurrentUser.logout();
@@ -63,19 +62,8 @@ public class DoctorDashboardController implements WindowManaged {
         medicalRecordsBtn.setOnAction(e -> windowManager.loadInnerView(mainBorderPane, "/views/DoctorMedicalRecord.fxml"));
     }
 
-    private void loadStats(Doctor doctor) {
-
-        int totalAppointments = appointmentService.getTotalAppointmentsCount(doctor.getId());
-
-        Appointment nextAppointment = appointmentService.getNextAppointment(doctor.getId());
-
-        totalAppointmentsLbl.setText(String.valueOf(totalAppointments));
-
-        if (nextAppointment != null) {
-            nextAppointmentLbl.setText(nextAppointment.getAppointmentDatetime().toString());
-        } else {
-            nextAppointmentLbl.setText("No upcoming appointment");
-        }
+    private void loadDefaultView() {
+        windowManager.loadInnerView(mainBorderPane, "/views/DoctorAppointments.fxml");
     }
 
 }

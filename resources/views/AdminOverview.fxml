@@ -4,49 +4,39 @@
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
 
-<VBox spacing="30" alignment="TOP_CENTER" fx:controller="controllers.AdminOverviewController"
+<VBox styleClass="overviewContainer"
+      stylesheets="@../css/AdminDashboardCss.css"
+      fx:controller="controllers.AdminOverviewController"
       xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1">
 
-    <children>
-        <VBox spacing="5" alignment="CENTER">
-            <Label text="Clinic Overview"/>
+        <VBox styleClass="titleContainer">
+            <Label text="Clinic Overview" styleClass="mainTitle"/>
         </VBox>
 
 
-        <HBox spacing="25" alignment="CENTER">
-            <children>
+        <HBox styleClass="cards">
 
-                <VBox fx:id="doctorsCard" spacing="10" alignment="CENTER" prefWidth="250" prefHeight="150" styleClass="statCard">
-                    <children>
+                <VBox fx:id="doctorsCard" styleClass="statCard">
                         <Label text="Σύνολο Γιατρών" styleClass="statLbl"/>
                         <Label fx:id="totalDoctorsLbl" text="0" styleClass="statValue"/>
-                    </children>
                 </VBox>
 
-                <VBox fx:id="patientsCard" spacing="10" alignment="CENTER" prefWidth="250" prefHeight="150" styleClass="statCard">
-                    <children>
+                <VBox fx:id="patientsCard" styleClass="statCard">
                         <Label text="Σύνολο Ασθενών" styleClass="statLbl"/>
                         <Label fx:id="totalPatientsLbl" text="0" styleClass="statValue"/>
-                    </children>
                 </VBox>
 
-                <VBox fx:id="todaysCard" spacing="10" alignment="CENTER" prefWidth="250" prefHeight="150" styleClass="statCard">
-                    <children>
+                <VBox fx:id="todaysCard" styleClass="statCard">
                         <Label text="Σύνολο Ραντεβού ημέρας" styleClass="statLbl"/>
                         <Label fx:id="todayAppointmentsLbl" text="0" styleClass="statValue"/>
-                    </children>
                 </VBox>
 
-                <VBox fx:id="pendingCard" spacing="10" alignment="CENTER" prefWidth="250" prefHeight="150" styleClass="statCard">
-                    <children>
+                <VBox fx:id="pendingCard" styleClass="statCard">
                         <Label text="Γιατροί για ειδικότητα" styleClass="statLbl"/>
                         <Label fx:id="pendingActionsLbl" styleClass="statValue"/>
-                    </children>
                 </VBox>
 
-            </children>
         </HBox>
 
-    </children>
 </VBox>

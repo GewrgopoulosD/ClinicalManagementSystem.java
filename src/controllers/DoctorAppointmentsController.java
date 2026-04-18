@@ -11,7 +11,9 @@ import session.CurrentUser;
 import ui.WindowManaged;
 import ui.WindowManager;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 public class DoctorAppointmentsController implements WindowManaged {
 
@@ -54,7 +56,10 @@ public class DoctorAppointmentsController implements WindowManaged {
             return;
         }
 
-        currentDateLabel.setText(LocalDate.now().toString());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd/MM/yyyy");
+
+        String formattedDate = LocalDate.now().format(formatter);
+        currentDateLabel.setText(formattedDate);
         setupTable();
         loadDashboardData();
 

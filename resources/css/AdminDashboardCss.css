@@ -1,0 +1,364 @@
+/*general*/
+.left {
+    -fx-background-color: #acdad8;
+    -fx-pref-width: 200px;
+    -fx-padding: 15px;
+    -fx-spacing: 15px;
+}
+
+.left .button {
+    -fx-background-color: #4f90a4;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-pref-width: 200px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+.left .button:hover {
+    -fx-background-color: #105262;
+}
+
+.top {
+    -fx-background-color: #acdad8;
+    -fx-padding: 15px;
+    -fx-spacing: 15px;
+}
+
+#welcomeLbl {
+    -fx-text-fill: #105262;
+    -fx-font-weight: bold;
+    -fx-font-size: 17px;
+}
+
+#logoutBtn {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-pref-width: 100px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#logoutBtn:hover{
+-fx-background-color: #8b0000;
+}
+
+/*overview*/
+overviewContainer{
+    -fx-alignment: CENTER;
+}
+
+.titleContainer {
+    -fx-padding: 20px;
+    -fx-alignment: CENTER;
+}
+
+.mainTitle {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #105262;
+}
+
+/*cards*/
+.cards{
+    -fx-alignment: CENTER;
+    -fx-spacing: 15px;
+}
+
+.statCard {
+    -fx-background-color: white;
+    -fx-border-color: #acdad8;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-border-width: 1px;
+    -fx-pref-width: 180px;
+    -fx-pref-height: 90px;
+    -fx-spacing: 5px;
+    -fx-alignment: CENTER;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);
+    }
+
+.statCard:hover {
+    -fx-background-color: #f8fdfd;
+    -fx-border-color: #4f90a4;
+}
+
+.statLbl {
+    -fx-font-size: 14px;
+    -fx-text-fill: #7f8c8d;
+    -fx-font-weight: normal;
+}
+
+/*value in the cards*/
+.statValue {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4f90a4;
+}
+
+/*value for pending specification*/
+#pendingCard .statValue {
+    -fx-text-fill: #e74c3c;
+}
+
+/*doctorsList*/
+.doctorsList{
+-fx-spacing: 10px;
+}
+
+.searchBar {
+    -fx-spacing: 10px;
+    -fx-alignment: CENTER;
+    -fx-padding: 10px;
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-min-width: 400px;
+}
+
+.docSearchInput{
+    -fx-background-radius: 10px;
+    -fx-border-color: #acdad8;
+    -fx-border-radius: 10px;
+    -fx-padding: 8px 15px;
+    -fx-pref-width: 150px;
+}
+
+.docTable{
+ -fx-border-color: #acdad8;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.docTable .column-header {
+    -fx-background-color: #acdad8;
+}
+
+.DoctorDetails {
+    -fx-pref-width: 320px;
+    -fx-min-width: 300px;
+    -fx-spacing: 20px;
+    -fx-padding: 20px;
+    -fx-background-color: white;
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
+}
+
+/* Labels*/
+.boldLabel {
+    -fx-font-weight: bold;
+    -fx-text-fill: #105262;
+}
+
+.titleLabel {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #105262;
+}
+
+.greyLabel {
+    -fx-text-fill: #7f8c8d;
+    -fx-font-size: 15px;
+}
+
+.highlighDoctor {
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4f90a4;
+}
+
+.SelectedDoctor, .listGroup, .formGroup {
+    -fx-spacing: 8px;
+    -fx-font-size: 15px;
+
+}
+
+.listGroup .list-view {
+    -fx-pref-height: 180px;
+}
+
+/*buttons */
+.primaryButton {
+    -fx-background-color: #4f90a4;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-pref-width: 200px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+.primaryButton:hover {
+    -fx-background-color: #105262;
+}
+
+.secondaryButton {
+    -fx-background-color: #4f90a4;
+        -fx-text-fill: white;
+        -fx-font-size: 15px;
+        -fx-font-weight: bold;
+        -fx-pref-width: 200px;
+        -fx-background-radius: 10px;
+        -fx-cursor: hand;
+}
+.secondaryButton:hover{
+-fx-background-color: #105262;
+}
+
+.context-menu {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-border-color: #acdad8;
+    -fx-border-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
+}
+
+.menu-item {
+    -fx-padding: 5 15 5 15;
+    -fx-background-radius: 5px;
+}
+
+.RemoveSpec .label {
+    -fx-text-fill: #e74c3c;
+    -fx-font-size: 15px;
+}
+
+
+.RemoveSpec:focused {
+    -fx-background-color: #e74c3c;
+}
+
+.RemoveSpec:focused .label {
+    -fx-text-fill: white;
+}
+
+/*admin patient*/
+
+.patMainTitle {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #105262;
+}
+
+.patSubtitle {
+    -fx-font-size: 16px;
+    -fx-text-fill: #7f8c8d;
+}
+
+.patCard {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-padding: 15px;
+    -fx-spacing: 15px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 15, 0, 0, 5);
+}
+
+.patCardTitle {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #105262;
+}
+
+.patTable {
+    -fx-border-color: #acdad8;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.patTable .column-header {
+    -fx-background-color: #acdad8;
+}
+
+.patTabPane .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.patTabPane .tab {
+    -fx-background-color: #acdad8;
+    -fx-background-radius: 12 12 0 0;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+}
+
+.patTabPane .tab:selected {
+    -fx-background-color: #105262;
+}
+.patTabPane .tab:selected .tab-label {
+    -fx-text-fill: white !important;
+}
+
+.patTabPane .tab .tab-label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.patTabPane .tab:selected .tab-label {
+    -fx-text-fill: #105262;
+}
+
+/*inputs search*/
+.patSearchInput {
+    -fx-background-radius: 10px;
+    -fx-border-color: #acdad8;
+    -fx-border-radius: 10px;
+    -fx-padding: 8px 15px;
+    -fx-pref-width: 250px;
+}
+
+.patFormLabel {
+    -fx-font-weight: bold;
+    -fx-text-fill: #105262;
+}
+
+/*btns*/
+.patBtnRefresh {
+    -fx-background-color: #4f90a4;
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+    -fx-font-size: 15px;
+    -fx-pref-width: 100px;
+}
+
+.patBtnSave {
+    -fx-background-color: #105262;
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-padding: 10 25;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.patBtnDelete {
+    -fx-background-color: transparent;
+    -fx-border-color: #e74c3c;
+    -fx-border-radius: 10px;
+    -fx-text-fill: #e74c3c;
+    -fx-cursor: hand;
+}
+
+.patBtnDelete:hover {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+}
+
+/*footer*/
+.patStatLbl {
+    -fx-font-size: 18px;
+    -fx-text-fill: #7f8c8d;
+}
+
+.patStatValue {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #105262;
+}
+
+/*splitPane*/
+.patSplitPane {
+    -fx-background-color: transparent;
+}
+.patSplitPane .split-pane-divider {
+    -fx-background-color: transparent;
+}

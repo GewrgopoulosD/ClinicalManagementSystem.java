@@ -10,52 +10,57 @@
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="controllers.DoctorShiftsController"
       alignment="TOP_CENTER"
-      spacing="25">
+      spacing="25"
+      stylesheets="@../css/DoctorDashboardCss.css">
 
-    <Label text="Manage Your Weekly Schedule" />
+    <VBox styleClass="titleContainer">
+        <Label text="Manage Your Weekly Schedule" styleClass="mainTitle"/>
+    </VBox>
 
-    <GridPane hgap="20" vgap="15" alignment="CENTER">
-        <Label text="Day" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <Label text="Working" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <Label text="Start Time" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-        <Label text="End Time" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+    <VBox styleClass="card">
+    <GridPane alignment="CENTER" styleClass="shiftsGrid">
+        <Label text="Day" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="boldLabel"/>
+        <Label text="Working" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="boldLabel"/>
+        <Label text="Start Time" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="boldLabel"/>
+        <Label text="End Time" GridPane.columnIndex="3" GridPane.rowIndex="0" styleClass="boldLabel"/>
 
-        <Label text="Monday" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-        <CheckBox fx:id="monCheck" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-        <ComboBox fx:id="monStart" prefWidth="100" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-        <ComboBox fx:id="monEnd" prefWidth="100" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+        <Label text="Monday" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="greyLabel"/>
+        <CheckBox fx:id="monCheck" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="shiftCheck"/>
+        <ComboBox fx:id="monStart" prefWidth="110" GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="shiftCombo"/>
+        <ComboBox fx:id="monEnd" prefWidth="110" GridPane.columnIndex="3" GridPane.rowIndex="1" styleClass="shiftCombo"/>
 
-        <Label text="Tuesday" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-        <CheckBox fx:id="tueCheck" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-        <ComboBox fx:id="tueStart" prefWidth="100" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
-        <ComboBox fx:id="tueEnd" prefWidth="100" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+        <Label text="Tuesday" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="greyLabel"/>
+        <CheckBox fx:id="tueCheck" GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="shiftCheck"/>
+        <ComboBox fx:id="tueStart" prefWidth="110" GridPane.columnIndex="2" GridPane.rowIndex="2" styleClass="shiftCombo"/>
+        <ComboBox fx:id="tueEnd" prefWidth="110" GridPane.columnIndex="3" GridPane.rowIndex="2" styleClass="shiftCombo"/>
 
-        <Label text="Wednesday" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-        <CheckBox fx:id="wedCheck" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-        <ComboBox fx:id="wedStart" prefWidth="100" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
-        <ComboBox fx:id="wedEnd" prefWidth="100" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+        <Label text="Wednesday" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="greyLabel"/>
+        <CheckBox fx:id="wedCheck" GridPane.columnIndex="1" GridPane.rowIndex="3" styleClass="shiftCheck"/>
+        <ComboBox fx:id="wedStart" prefWidth="110" GridPane.columnIndex="2" GridPane.rowIndex="3" styleClass="shiftCombo"/>
+        <ComboBox fx:id="wedEnd" prefWidth="110" GridPane.columnIndex="3" GridPane.rowIndex="3" styleClass="shiftCombo"/>
 
-        <Label text="Thursday" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-        <CheckBox fx:id="thuCheck" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-        <ComboBox fx:id="thuStart" prefWidth="100" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
-        <ComboBox fx:id="thuEnd" prefWidth="100" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+        <Label text="Thursday" GridPane.columnIndex="0" GridPane.rowIndex="4" styleClass="greyLabel"/>
+        <CheckBox fx:id="thuCheck" GridPane.columnIndex="1" GridPane.rowIndex="4" styleClass="shiftCheck"/>
+        <ComboBox fx:id="thuStart" prefWidth="110" GridPane.columnIndex="2" GridPane.rowIndex="4" styleClass="shiftCombo"/>
+        <ComboBox fx:id="thuEnd" prefWidth="110" GridPane.columnIndex="3" GridPane.rowIndex="4" styleClass="shiftCombo"/>
 
-        <Label text="Friday" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-        <CheckBox fx:id="friCheck" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-        <ComboBox fx:id="friStart" prefWidth="100" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
-        <ComboBox fx:id="friEnd" prefWidth="100" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
+        <Label text="Friday" GridPane.columnIndex="0" GridPane.rowIndex="5" styleClass="greyLabel"/>
+        <CheckBox fx:id="friCheck" GridPane.columnIndex="1" GridPane.rowIndex="5" styleClass="shiftCheck"/>
+        <ComboBox fx:id="friStart" prefWidth="110" GridPane.columnIndex="2" GridPane.rowIndex="5" styleClass="shiftCombo"/>
+        <ComboBox fx:id="friEnd" prefWidth="110" GridPane.columnIndex="3" GridPane.rowIndex="5" styleClass="shiftCombo"/>
 
-        <Label text="Saturday" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-        <CheckBox fx:id="satCheck" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-        <ComboBox fx:id="satStart" prefWidth="100" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
-        <ComboBox fx:id="satEnd" prefWidth="100" GridPane.columnIndex="3" GridPane.rowIndex="6"/>
+        <Label text="Saturday" GridPane.columnIndex="0" GridPane.rowIndex="6" styleClass="greyLabel"/>
+        <CheckBox fx:id="satCheck" GridPane.columnIndex="1" GridPane.rowIndex="6" styleClass="shiftCheck"/>
+        <ComboBox fx:id="satStart" prefWidth="110" GridPane.columnIndex="2" GridPane.rowIndex="6" styleClass="shiftCombo"/>
+        <ComboBox fx:id="satEnd" prefWidth="110" GridPane.columnIndex="3" GridPane.rowIndex="6" styleClass="shiftCombo"/>
 
-        <Label text="Sunday" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
-        <CheckBox fx:id="sunCheck" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
-        <ComboBox fx:id="sunStart" prefWidth="100" GridPane.columnIndex="2" GridPane.rowIndex="7"/>
-        <ComboBox fx:id="sunEnd" prefWidth="100" GridPane.columnIndex="3" GridPane.rowIndex="7"/>
+        <Label text="Sunday" GridPane.columnIndex="0" GridPane.rowIndex="7" styleClass="greyLabel"/>
+        <CheckBox fx:id="sunCheck" GridPane.columnIndex="1" GridPane.rowIndex="7" styleClass="shiftCheck"/>
+        <ComboBox fx:id="sunStart" prefWidth="110" GridPane.columnIndex="2" GridPane.rowIndex="7" styleClass="shiftCombo"/>
+        <ComboBox fx:id="sunEnd" prefWidth="110" GridPane.columnIndex="3" GridPane.rowIndex="7" styleClass="shiftCombo"/>
     </GridPane>
+    </VBox>
 
-    <Button fx:id="saveShiftsBtn" text="Save Changes" />
+    <Button fx:id="saveShiftsBtn" text="Save Changes" styleClass="greenBtn" />
 
 </VBox>

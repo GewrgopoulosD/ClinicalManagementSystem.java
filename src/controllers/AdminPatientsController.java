@@ -73,7 +73,7 @@ public class AdminPatientsController implements WindowManaged {
         allPatientsList.addAll(patientsFromDB);
 
         patientTable.setItems(allPatientsList);
-        totalPatientsLbl.setText("Total Patients: " + allPatientsList.size());
+        totalPatientsLbl.setText("" + allPatientsList.size());
     }
 
     private void filterTable(String searchText) {

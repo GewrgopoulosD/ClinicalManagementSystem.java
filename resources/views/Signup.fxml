@@ -15,7 +15,7 @@
 
 <?import javafx.geometry.Insets?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.SignUpController"
-            stylesheets="@/css/signUpCss.css">
+            stylesheets="@/css/SignUpCss.css">
 
     <center>
         <StackPane alignment="CENTER">

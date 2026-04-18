@@ -2,70 +2,70 @@
 
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ContextMenu?>
-<?import javafx.scene.control.MenuItem?>
 
-<HBox spacing="20" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+<HBox fx:id="doctorsList" styleClass="doctorsList"
+      xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      stylesheets="@../css/AdminDashboardCss.css"
       fx:controller="controllers.AdminDoctorsListController">
 
-    <children>
-        <VBox spacing="15" HBox.hgrow="ALWAYS">
-            <children>
-                <HBox spacing="10" alignment="CENTER_LEFT">
-                    <Label text="Surname search:"/>
-                    <TextField fx:id="searchField" promptText="typing..." HBox.hgrow="ALWAYS" />
-                    <CheckBox fx:id="pendingOnlyCheckBox" text="Without specialization"/>
-                </HBox>
+    <VBox styleClass="tableContainer" HBox.hgrow="ALWAYS">
 
-                <TableView fx:id="doctorTable" VBox.vgrow="ALWAYS">
-                    <columns>
-                        <TableColumn fx:id="nameCol" text="Name"/>
-                        <TableColumn fx:id="lastnameCol" text="Lastname"/>
-                        <TableColumn fx:id="emailCol" text="Email"/>
-                        <TableColumn fx:id="phoneCol" text="phone"/>
-                    </columns>
-                </TableView>
-            </children>
+        <HBox styleClass="searchBar">
+            <Label text="Search by Surname:" styleClass="boldLabel"/>
+            <TextField fx:id="searchField" promptText="Enter surname..." HBox.hgrow="ALWAYS" styleClass="docSearchInput"/>
+            <CheckBox fx:id="pendingOnlyCheckBox" text="Pending Specialization" styleClass="boldLabel" />
+        </HBox>
+
+        <TableView fx:id="doctorTable" VBox.vgrow="ALWAYS" styleClass="docTable">
+            <columns>
+                <TableColumn fx:id="nameCol" text="Name"/>
+                <TableColumn fx:id="lastnameCol" text="Lastname"/>
+                <TableColumn fx:id="emailCol" text="Email"/>
+                <TableColumn fx:id="phoneCol" text="Phone"/>
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+
+    </VBox>
+
+    <VBox styleClass="DoctorDetails">
+        <Label text="Doctor Details" styleClass="titleLabel" />
+
+        <VBox styleClass="SelectedDoctor">
+            <Label text="Selected Doctor:" styleClass="greyLabel"/>
+            <Label fx:id="selectedDoctorLbl" text="Please select a doctor..." styleClass="highlighDoctor" />
         </VBox>
 
-        <VBox spacing="20" prefWidth="320" minWidth="300">
-            <children>
-                <Label text="Λεπτομέρειες Γιατρού" />
+        <Separator />
 
-                <VBox spacing="5">
-                    <Label text="Chosen doctor:"/>
-                    <Label fx:id="selectedDoctorLbl" text="Please select a doctor..." />
-                </VBox>
-
-                <Separator />
-
-                <VBox spacing="10">
-                    <Label text="Specialization:"/>
-                    <ListView fx:id="currentSpecsList" prefHeight="180">
-                        <contextMenu>
-                            <ContextMenu>
-                                <items>
-                                    <MenuItem fx:id="deleteSpecItem"
-                                              text="Delete Specialization"
-                                              onAction="#handleRemoveContext"
-                                              style="-fx-text-fill: red;"/>
-                                </items>
-                            </ContextMenu>
-                        </contextMenu>
-                    </ListView>
-                </VBox>
-
-                <VBox spacing="10">
-                    <Label text="Add new specialization"/>
-                    <ComboBox fx:id="specializationCombo" promptText="Specialization"/>
-                    <Button fx:id="assignBtn" text="Ανάθεση"/>
-                </VBox>
-
-                <Region VBox.vgrow="ALWAYS" />
-
-                <Button fx:id="refreshBtn" text="Refresh list" />
-            </children>
+        <VBox styleClass="listGroup">
+            <Label text="Current Specializations:" styleClass="boldLabel"/>
+            <ListView fx:id="currentSpecsList">
+                <contextMenu>
+                    <ContextMenu>
+                        <items>
+                            <MenuItem fx:id="deleteSpecItem"
+                                      text="Remove Specialization"
+                                      onAction="#handleRemoveContext"
+                                      styleClass="RemoveSpec"/>
+                        </items>
+                    </ContextMenu>
+                </contextMenu>
+            </ListView>
         </VBox>
-    </children>
+
+        <VBox styleClass="formGroup">
+            <Label text="Assign New Specialization" styleClass="boldLabel"/>
+            <ComboBox fx:id="specializationCombo" promptText="Select Specialization" maxWidth="Infinity"/>
+            <Button fx:id="assignBtn" text="Assign" styleClass="primaryButton" maxWidth="Infinity"/>
+        </VBox>
+
+        <Region VBox.vgrow="ALWAYS" />
+
+        <Button fx:id="refreshBtn" text="Refresh list" styleClass="secondaryButton" maxWidth="Infinity"/>
+    </VBox>
+
 </HBox>

@@ -1,6 +1,9 @@
+import javafx.scene.Scene;
 import ui.WindowManager;
 import javafx.application.*;
 import javafx.stage.*;
+
+import java.io.File;
 
 public class Main extends Application {
 

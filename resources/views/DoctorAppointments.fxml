@@ -12,36 +12,38 @@
 <VBox spacing="20.0"
       xmlns="http://javafx.com/javafx/8"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="controllers.DoctorAppointmentsController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
+      fx:controller="controllers.DoctorAppointmentsController"
+      stylesheets="@../css/DoctorDashboardCss.css">
 
-    <HBox spacing="30.0" alignment="CENTER_LEFT">
-        <VBox spacing="5.0" styleClass="stat-card">
-            <Label text="Total appointments" styleClass="stat-header"/>
-            <Label fx:id="totalAppsLabel" text="0" styleClass="stat-value" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+    <VBox styleClass="titleContainer">
+        <Label text="Today's Appointments" styleClass="mainTitle"/>
+    </VBox>
+
+    <HBox styleClass="cards">
+
+        <VBox fx:id="doctorsCard" styleClass="statCard">
+            <Label text="Total appointments" styleClass="statLbl"/>
+            <Label fx:id="totalAppsLabel" text="0" styleClass="statValue"/>
         </VBox>
 
-        <VBox spacing="5.0" styleClass="stat-card">
-            <Label text="Completed" styleClass="stat-header"/>
-            <Label fx:id="completedAppsLabel" text="0" styleClass="stat-value" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+        <VBox styleClass="statCard">
+            <Label text="Completed" styleClass="statLbl"/>
+            <Label fx:id="completedAppsLabel" text="0" styleClass="statValue"/>
         </VBox>
 
-        <VBox spacing="5.0" styleClass="stat-card">
-            <Label text="Next appointment" styleClass="stat-header"/>
-            <Label fx:id="nextAppLabel" text="--:--" styleClass="stat-value" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+        <VBox styleClass="statCardLong">
+            <Label text="Next appointment" styleClass="statLbl"/>
+            <Label fx:id="nextAppLabel" text="--:--" styleClass="statValueLong"/>
         </VBox>
 
         <Region HBox.hgrow="ALWAYS" />
 
-        <VBox alignment="CENTER_RIGHT">
-            <Label text="Day" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
-            <Label fx:id="currentDateLabel"/>
+        <VBox styleClass="statCardTime">
+            <Label fx:id="currentDateLabel" styleClass="dateTime"/>
         </VBox>
     </HBox>
 
-    <TableView fx:id="appointmentsTable" VBox.vgrow="ALWAYS">
+    <TableView fx:id="appointmentsTable" VBox.vgrow="ALWAYS" styleClass="docTable">
         <columns>
             <TableColumn fx:id="timeColumn" prefWidth="100.0" text="Date and time " />
             <TableColumn fx:id="patientNameColumn" prefWidth="200.0" text="Patient" />
@@ -54,11 +56,11 @@
     </TableView>
 
     <HBox spacing="15.0" alignment="CENTER_RIGHT">
-        <Button fx:id="refreshBtn" text="Refresh" />
+        <Button fx:id="refreshBtn" text="Refresh" styleClass="refreshBtn"/>
 
         <Region HBox.hgrow="ALWAYS" />
 
-        <Button fx:id="cancelBtn" text="Cancel" styleClass="btn-danger" />
-        <Button fx:id="completeBtn" text="Complete" styleClass="btn-success" />
+        <Button fx:id="cancelBtn" text="Cancel" styleClass="redBtn" />
+        <Button fx:id="completeBtn" text="Complete" styleClass="greenBtn"/>
     </HBox>
 </VBox>

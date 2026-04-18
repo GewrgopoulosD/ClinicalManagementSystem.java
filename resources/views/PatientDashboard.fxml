@@ -7,24 +7,29 @@
             fx:controller="controllers.PatientDashboardController">
 
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="top-bar">
+        <HBox styleClass="top">
             <Label fx:id="welcomeLbl" text="Welcome, Patient" />
+            <Region HBox.hgrow="ALWAYS" />
             <Button fx:id="logoutBtn" text="Logout" />
         </HBox>
     </top>
 
     <left>
-        <VBox spacing="10" alignment="TOP_CENTER" styleClass="sidebar">
-            <Button fx:id="homeBtn" text="Home" maxWidth="Infinity"/>
-            <Button fx:id="bookBtn" text="Book Appointment" maxWidth="Infinity"/>
-            <Button fx:id="historyBtn" text="My Appointments" maxWidth="Infinity"/>
-            <Button fx:id="profileBtn" text="My Profile" maxWidth="Infinity"/>
+        <VBox styleClass="left" alignment="CENTER">
+
+            <Button fx:id="homeBtn" text="Home" alignment="CENTER"/>
+
+            <Button fx:id="bookBtn" text="Book Appointment" alignment="CENTER"/>
+
+            <Button fx:id="historyBtn" text="My Appointments" alignment="CENTER"/>
+
+            <Button fx:id="profileBtn" text="My Profile" alignment="CENTER"/>
         </VBox>
     </left>
 
     <center>
-        <StackPane fx:id="contentStackPane">
-            <Label text="Loading..." />
+        <StackPane fx:id="contentArea" styleClass="center" >
+            <Label text="Loading content..."/>
         </StackPane>
     </center>
 

@@ -1,0 +1,475 @@
+/*general*/
+.left {
+    -fx-background-color: #acdad8;
+    -fx-pref-width: 200px;
+    -fx-padding: 15px;
+    -fx-spacing: 15px;
+}
+
+.left .button {
+    -fx-background-color: #4f90a4;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-pref-width: 200px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+.left .button:hover {
+    -fx-background-color: #105262;
+}
+
+.top {
+    -fx-background-color: #acdad8;
+    -fx-padding: 15px;
+    -fx-spacing: 15px;
+}
+
+#welcomeLbl {
+    -fx-text-fill: #105262;
+    -fx-font-weight: bold;
+    -fx-font-size: 17px;
+}
+
+#logoutBtn {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-pref-width: 100px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#logoutBtn:hover{
+-fx-background-color: #8b0000;
+}
+
+/*----------------------------------------------appointments TODAY----------------------------------------------------*/
+.titleContainer {
+    -fx-padding: 10px;
+    -fx-alignment: CENTER;
+}
+
+.mainTitle {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #105262;
+}
+
+/*cards*/
+.cards{
+    -fx-alignment: CENTER;
+    -fx-spacing: 15px;
+}
+
+.statCard {
+    -fx-background-color: white;
+    -fx-border-color: #acdad8;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-border-width: 1px;
+    -fx-pref-width: 140px;
+    -fx-pref-height: 70px;
+    -fx-spacing: 5px;
+    -fx-alignment: CENTER;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);
+    }
+
+.statCard:hover {
+    -fx-background-color: #f8fdfd;
+    -fx-border-color: #4f90a4;
+}
+
+.statLbl {
+    -fx-font-size: 14px;
+    -fx-text-fill: #7f8c8d;
+    -fx-font-weight: normal;
+}
+
+/*value in the cards*/
+.statValue {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4f90a4;
+}
+
+.statCardLong{
+    -fx-background-color: white;
+    -fx-border-color: #acdad8;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-border-width: 1px;
+    -fx-pref-width: 330px;
+    -fx-pref-height: 70px;
+    -fx-spacing: 5px;
+    -fx-alignment: CENTER;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);
+}
+
+.statCardLong:hover {
+    -fx-background-color: #f8fdfd;
+    -fx-border-color: #4f90a4;
+}
+
+.statValueLong{
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4f90a4;
+}
+
+.statCardTime{
+    -fx-background-color: white;
+    -fx-border-color: #acdad8;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-border-width: 1px;
+    -fx-pref-width: 220px;
+    -fx-pref-height: 70px;
+    -fx-spacing: 5px;
+    -fx-alignment: CENTER;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);
+}
+
+.statCardTime:hover {
+    -fx-background-color: #f8fdfd;
+    -fx-border-color: #4f90a4;
+}
+
+.dateTime{
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4f90a4;
+}
+
+/*tableview*/
+.docTable{
+    -fx-border-color: #acdad8;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-pref-height: 400px;
+    -fx-min-height: 400px;
+    -fx-max-height: 400px;
+}
+
+.docTable .column-header {
+    -fx-background-color: #acdad8;
+}
+
+/*buttons */
+.refreshBtn {
+    -fx-background-color: #4f90a4;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-pref-width: 180px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+.refreshBtn:hover{
+-fx-background-color: #105262;
+}
+
+.redBtn {
+    -fx-background-color: #d9534f;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-pref-width: 120px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+.redBtn:hover{
+    -fx-background-color: #c9302c;
+}
+
+.greenBtn {
+    -fx-background-color: #2d6a4f;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-pref-width: 120px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+.greenBtn:hover{
+    -fx-background-color: #1b4332;
+}
+
+
+/*----------------------------------------------shifts----------------------------------------------------------------*/
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 15px;
+    -fx-padding: 30px;
+    -fx-spacing: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
+    -fx-max-width: 850px;
+}
+
+.shiftsGrid {
+    -fx-hgap: 20px;
+    -fx-vgap: 15px;
+}
+
+.shiftCombo {
+    -fx-background-color: white;
+    -fx-border-color: #acdad8;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 5px;
+    -fx-cursor: hand;
+}
+
+.shiftCombo:hover {
+    -fx-border-color: #4f90a4;
+    -fx-background-color: #fdfdfd;
+}
+
+.shiftCombo .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.shiftCombo .arrow {
+    -fx-background-color: #4f90a4;
+}
+
+.shiftCombo:hover .arrow {
+    -fx-background-color: #105262;
+}
+
+/*checkBox*/
+.shiftCheck {
+    -fx-cursor: hand;
+}
+
+.shiftCheck .box {
+    -fx-background-color: white;
+    -fx-border-color: #acdad8;
+    -fx-background-radius: 7px;
+    -fx-border-radius: 7px;
+    -fx-padding: 3px;
+}
+
+.shiftCheck:selected .mark {
+    -fx-background-color: white; /*tik color white*/
+}
+
+.shiftCheck:selected .box {
+    -fx-background-color: #105262;
+    -fx-border-color: #105262;
+    -fx-background-radius: 7px;
+    -fx-border-radius: 7px;
+}
+
+/*lbls*/
+
+/*day, working, starts, end*/
+.shiftsGrid .boldLabel {
+    -fx-font-size: 16px;
+    -fx-text-fill: #105262;
+    -fx-font-weight: bold;
+}
+
+
+/*days*/
+.shiftsGrid .greyLabel {
+    -fx-font-size: 15px;
+    -fx-text-fill: #7f8c8d;
+    -fx-min-width: 80px;
+}
+
+/*------------------------------------------MEDICAL RECORDS-----------------------------------------------------------*/
+.greyLabelMedical {
+    -fx-font-weight: Bold;
+    -fx-font-size: 15px;
+    -fx-text-fill: #7f8c8d;
+    -fx-min-width: 80px;
+}
+
+.boldLabelMedical {
+    -fx-font-size: 15px;
+    -fx-text-fill: #105262;
+    -fx-font-weight: bold;
+}
+
+/*search bar hbox*/
+.searchBarHistory {
+    -fx-spacing: 8px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 10px 0 0 0;
+    -fx-font-weight: Bold;
+    -fx-font-size: 14px;
+}
+
+/*inputs search*/
+.patSearchInput {
+    -fx-background-radius: 10px;
+    -fx-border-color: #acdad8;
+    -fx-border-radius: 10px;
+    -fx-padding: 8px 15px;
+    -fx-pref-width: 300px;
+}
+
+/* SplitPane Styling */
+.splitPaneMedicalRecords {
+    -fx-background-color: transparent;
+    -fx-padding: 5px;
+}
+
+.docTableMedical{
+    -fx-border-color: #acdad8;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-pref-height: 520px;
+}
+
+.docTableMedical .column-header {
+    -fx-background-color: #acdad8;
+}
+
+.splitPaneMedicalRecords .split-pane-divider {
+    -fx-background-color: #acdad8;
+    -fx-padding: 0 1px;
+}
+
+/*container within splitpane and tabs*/
+.vboxSplitPanes, .vboxTabpanes, .vboxScrollPaneForAnyVisit {
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+}
+
+/*listView history*/
+.docListViewMedical {
+    -fx-max-height: 410px;
+    -fx-background-color: white;
+    -fx-border-color: #acdad8;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.docListViewMedical .list-cell {
+    -fx-padding: 10px;
+    -fx-text-fill: #105262;
+}
+
+.docListViewMedical .list-cell:selected {
+    -fx-background-color: #acdad8;
+    -fx-text-fill: #105262;
+    -fx-font-weight: bold;
+}
+
+/*tabPane's tabs*/
+.tabPaneForPatients {
+    -fx-tab-min-width: 150px;
+}
+
+.tabPaneForPatients .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.tabPaneForPatients .tab {
+    -fx-background-color: #acdad8;
+    -fx-background-radius: 10 10 0 0;
+    -fx-padding: 8 20;
+}
+
+.tabPaneForPatients .tab:selected {
+    -fx-background-color: #105262;
+}
+
+.tabPaneForPatients .tab .tab-label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/*scrollpane and consultation area*/
+.scrollPaneForAnyVisit {
+    -fx-background-color: transparent;
+    -fx-viewport-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.gridConsultation {
+    -fx-hgap: 10px;
+    -fx-vgap: 10px;
+    -fx-padding: 10px 0;
+}
+
+/*grid's textareas*/
+.gridsTxt {
+    -fx-background-color: white;
+    -fx-border-color: #acdad8;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-pref-height: 80px;
+    -fx-text-fill: #2c3e50;
+    -fx-font-size: 14px;
+}
+
+.gridsTxt:focused {
+    -fx-border-color: #4f90a4;
+}
+
+/* Save Button Container */
+.hboxSaveBtn {
+    -fx-alignment: CENTER;
+    -fx-padding: 10px 0 0 0;
+}
+
+.greenBtnMedical{
+    -fx-background-color: #2d6a4f;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-pref-width: 200px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+.greenBtnMedical:hover{
+    -fx-background-color: #1b4332;
+}
+
+/* Separator styling */
+.vboxScrollPaneForAnyVisit .separator {
+    -fx-background-color: #acdad8;
+}
+
+/*cards*/
+.cardMedical{
+    -fx-alignment: CENTER;
+    -fx-padding:20px 0 0 0;
+}
+
+.statCardMedical {
+    -fx-background-color: white;
+    -fx-border-color: #acdad8;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-border-width: 1px;
+    -fx-pref-width: 400px;
+    -fx-pref-height: 70px;
+    -fx-spacing: 5px;
+    -fx-alignment: CENTER;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);
+    }
+
+.statCardMedical:hover {
+    -fx-background-color: #f8fdfd;
+    -fx-border-color: #4f90a4;
+}
+
+.statLblMedical {
+    -fx-font-size: 17px;
+    -fx-text-fill: #7f8c8d;
+    -fx-font-weight: normal;
+}
+
+.statValueMedical {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4f90a4;
+}
+
