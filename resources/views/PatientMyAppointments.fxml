@@ -1,36 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 
-<VBox spacing="15.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PatientMyAppointmentsController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controllers.PatientMyAppointmentsController">
 
-    <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="My Appointments" />
+    <VBox styleClass="titleContainer">
+        <VBox styleClass="header">
+            <Label text="My Appointment History" styleClass="mainTitle"/>
+            <Label text="View your previous visits and medical reports" styleClass="greyLblSymptoms"/>
+        </VBox>
 
-    <TableView fx:id="appointmentsTable" VBox.vgrow="ALWAYS">
-        <columns>
-            <TableColumn fx:id="dateColumn" prefWidth="150.0" text="Date &amp; Time" />
-            <TableColumn fx:id="doctorNameColumn" prefWidth="80.0" text="Doctor" />
-            <TableColumn fx:id="statusColumn" prefWidth="100.0" text="Status" />
-            <TableColumn fx:id="descColumn" prefWidth="250.0" text="Description" />
-        </columns>
-        <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-        </columnResizePolicy>
-    </TableView>
+    </VBox>
 
-    <HBox spacing="10.0" alignment="CENTER_RIGHT">
-        <Button fx:id="refreshBtn" text="Refresh List" />
+    <SplitPane dividerPositions="0.35" styleClass="splitPaneMedicalRecords" VBox.vgrow="ALWAYS">
+        <items>
+            <VBox spacing="10" styleClass="vboxSplitPanes">
+                <Label text="Appointments List" styleClass="blackLbl"/>
+                <ListView fx:id="appointmentsListView" VBox.vgrow="ALWAYS" styleClass="docListViewMedical"/>
 
-        <Button fx:id="cancelBtn"
-                style="-fx-background-color: #ff4444; -fx-text-fill: white;" text="Cancel Selected" />
-    </HBox>
+                <HBox spacing="10" alignment="CENTER" styleClass="hboxActionBtns">
+                    <Button fx:id="refreshBtn" text="Refresh" styleClass="refreshBtn"/>
+                    <Button fx:id="cancelBtn" text="Cancel Appointment" styleClass="redBtnMedical"/>
+                </HBox>
+            </VBox>
+
+            <TabPane fx:id="detailsTabPane" tabClosingPolicy="UNAVAILABLE" styleClass="tabPaneForPatients">
+                <tabs>
+                    <Tab text="Medical Report">
+                        <ScrollPane fitToWidth="true" styleClass="scrollPaneForAnyVisit">
+                            <VBox styleClass="vboxScrollPaneForAnyVisit" spacing="15">
+                                <padding>
+                                    <Insets top="20" right="20" bottom="20" left="20"/>
+                                </padding>
+
+                                <VBox spacing="5">
+                                    <HBox spacing="10" alignment="CENTER_LEFT">
+                                        <Label text="Doctor:" styleClass="statLbl"/>
+                                        <Label fx:id="lblDoctorName" text="-" styleClass="statDate"/>
+                                    </HBox>
+
+                                    <HBox spacing="10" alignment="CENTER_LEFT">
+                                        <Label text="Visit Date:" styleClass="statLbl"/>
+                                        <Label fx:id="lblAppointmentDate" text="-" styleClass="statDate"/>
+                                    </HBox>
+                                </VBox>
+
+                                <Separator />
+
+                                <GridPane hgap="15" vgap="15">
+                                    <columnConstraints>
+                                        <ColumnConstraints minWidth="120" prefWidth="150" />
+                                        <ColumnConstraints hgrow="ALWAYS" />
+                                    </columnConstraints>
+
+                                    <Label text="Reason for Visit:" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="blackLbl"/>
+                                    <TextArea fx:id="txtSymptoms" editable="false" wrapText="true" GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="txtAreas"/>
+
+                                    <Label text="Diagnosis:" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="blackLbl"/>
+                                    <TextArea fx:id="txtDiagnosis" editable="false" wrapText="true" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="txtAreas"/>
+
+                                    <Label text="Treatment Plan:" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="blackLbl"/>
+                                    <TextArea fx:id="txtTreatment" editable="false" wrapText="true" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="txtAreas"/>
+                                </GridPane>
+                            </VBox>
+                        </ScrollPane>
+                    </Tab>
+                </tabs>
+            </TabPane>
+        </items>
+    </SplitPane>
 </VBox>

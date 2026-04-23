@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import models.Appointment;
 import models.Patient;
+import services.AppointmentService;
 import services.PatientService;
 import session.CurrentUser;
 import ui.WindowManaged;
@@ -18,6 +19,7 @@ public class PatientHomeController implements WindowManaged {
     @FXML private Label totalVisitsLbl;
 
     private final PatientService patientService = new PatientService();
+    private final AppointmentService appointmentService = new AppointmentService();
     private WindowManager windowManager;
 
     @Override
@@ -42,11 +44,8 @@ public class PatientHomeController implements WindowManaged {
 
         totalVisitsLbl.setText(String.valueOf(activeCount));
 
-        //next appointment
-        Appointment next = apps.stream()
-                .filter(a -> a.getAppointmentType().equals(Appointment.STATUS_PENDING))
-                .findFirst()
-                .orElse(null);
+
+        Appointment next = appointmentService.getNextAppointment(patientId);
 
         if (next != null) {
             nextDateLbl.setText(next.getAppointmentDatetime());

@@ -8,10 +8,11 @@
       xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="controllers.PatientProfileController">
 
-
-    <VBox alignment="CENTER">
-        <Label text="My Personal Profile" styleClass="header"/>
-        <Label text="Manage your contact information and security" styleClass="greyLblProfile"/>
+    <VBox styleClass="titleContainer">
+        <VBox styleClass="header">
+            <Label text="My Personal Profile" styleClass="mainTitle"/>
+            <Label text="Manage your contact information and security" styleClass="greyLblSymptoms"/>
+        </VBox>
     </VBox>
 
     <Separator />

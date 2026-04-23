@@ -4,5 +4,6 @@
   {"idSpecialization": 5, "name": "Ορθοπεδικός"}, {"idSpecialization": 6, "name": "Οφθαλμίατρος"},
   {"idSpecialization": 7, "name": "Ψυχίατρος"}, {"idSpecialization": 8, "name": "Γυναικολόγος"},
   {"idSpecialization": 9, "name": "Νευρολόγος"}, {"idSpecialization": 10, "name": "Γενικός Ιατρός"},
-  {"idSpecialization": 11, "name": "Αναισθησιολόγος"}, {"idSpecialization": 12, "name": "Ψυχολόγος"}
+  {"idSpecialization": 11, "name": "Αναισθησιολόγος"}, {"idSpecialization": 12, "name": "Ψυχολόγος"},
+  {"idSpecialization": 13, "name": "Χειρούργος"}
 ]

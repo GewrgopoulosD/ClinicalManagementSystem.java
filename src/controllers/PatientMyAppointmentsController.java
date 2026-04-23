@@ -3,37 +3,54 @@ package controllers;
 import alert.AlertView;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.*;
 import models.Appointment;
+import models.MedicalRecord;
 import services.AppointmentService;
+import services.MedicalRecordService;
 import session.CurrentUser;
 import java.util.List;
 
 public class PatientMyAppointmentsController {
 
-    @FXML private TableView<Appointment> appointmentsTable;
-    @FXML private TableColumn<Appointment, String> dateColumn;
-    @FXML private TableColumn<Appointment, String> doctorNameColumn;
-    @FXML private TableColumn<Appointment, String> statusColumn;
-    @FXML private TableColumn<Appointment, String> descColumn;
+    @FXML private ListView<Appointment> appointmentsListView;
+
+    @FXML private Label lblDoctorName;
+    @FXML private Label lblAppointmentDate;
+    @FXML private TextArea txtSymptoms;
+    @FXML private TextArea txtDiagnosis;
+    @FXML private TextArea txtTreatment;
 
     @FXML private Button refreshBtn;
     @FXML private Button cancelBtn;
 
     private final AppointmentService appointmentService = new AppointmentService();
+    private final MedicalRecordService medicalRecordService = new MedicalRecordService();
 
     @FXML
     public void initialize() {
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentDatetime"));
-        doctorNameColumn.setCellValueFactory(new PropertyValueFactory<>("doctorFullName"));
-        statusColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
-        descColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
+        //listener for visit
+        appointmentsListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal != null) {
+                displayAppointmentDetails(newVal);
+            }
+        });
+
+        //listiview
+        appointmentsListView.setCellFactory(lv -> new ListCell<Appointment>() {
+            @Override
+            protected void updateItem(Appointment item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    //date - doctor
+                    setText(item.getAppointmentDatetime() + " - " + item.getDoctorFullName() + " (" + item.getAppointmentType() + ")");
+                }
+            }
+        });
 
         refreshBtn.setOnAction(event -> loadData());
-
         cancelBtn.setOnAction(event -> handleCancel());
 
         loadData();
@@ -42,40 +59,72 @@ public class PatientMyAppointmentsController {
     private void loadData() {
         if (CurrentUser.getUser() != null) {
             int patientId = CurrentUser.getUser().getId();
+            //all the appointments
             List<Appointment> myAppointments = appointmentService.getAppointmentsForPatient(patientId);
-            appointmentsTable.setItems(FXCollections.observableArrayList(myAppointments));
+            appointmentsListView.setItems(FXCollections.observableArrayList(myAppointments));
+
+            //clear medical report
+            clearDetails();
         }
     }
 
-    private void handleCancel() {
-        //took the selected appointment
-        Appointment selectedApp = appointmentsTable.getSelectionModel().getSelectedItem();
+    private void displayAppointmentDetails(Appointment app) {
+        lblDoctorName.setText(app.getDoctorFullName());
+        lblAppointmentDate.setText(app.getAppointmentDatetime());
+        txtSymptoms.setText(app.getAppointmentDescription());
 
-        if (selectedApp == null) {
-            AlertView.showWarning("No Selection", "Please select an appointment",
-                    "You need to click on a row to cancel it.");
-            return;
+        //medical records
+        MedicalRecord record = medicalRecordService.getDetailsForAppointment(app.getIdAppointment());
+
+        if (record != null) {
+            txtDiagnosis.setText(record.getDiagnosis());
+            txtTreatment.setText(record.getTreatment());
+        } else {
+            //if there isn't appointment
+            if (app.getAppointmentType().equalsIgnoreCase(Appointment.STATUS_COMPLETED)) {
+                txtDiagnosis.setText("The doctor has not uploaded the diagnosis yet.");
+                txtTreatment.setText("-");
+            } else if (app.getAppointmentType().equalsIgnoreCase(Appointment.STATUS_CANCELLED)) {
+                txtDiagnosis.setText("Appointment was cancelled. No record available.");
+                txtTreatment.setText("-");
+            } else {
+                txtDiagnosis.setText("Pending...");
+                txtTreatment.setText("Pending...");
+            }
         }
 
-        if (selectedApp.getAppointmentType().equals(Appointment.STATUS_CANCELLED)) {
-            AlertView.showInfo("Already Cancelled", "Notice", "This appointment is already cancelled.");
+        //cancel btn only if the app is pending
+        cancelBtn.setDisable(!app.getAppointmentType().equalsIgnoreCase(Appointment.STATUS_PENDING));
+    }
+
+    private void clearDetails() {
+        lblDoctorName.setText("-");
+        lblAppointmentDate.setText("-");
+        txtSymptoms.clear();
+        txtDiagnosis.clear();
+        txtTreatment.clear();
+        cancelBtn.setDisable(true);
+    }
+
+    private void handleCancel() {
+        Appointment selectedApp = appointmentsListView.getSelectionModel().getSelectedItem();
+
+        if (selectedApp == null) {
+            AlertView.showWarning("No Selection", "Please select an appointment", "Click on an appointment from the list first.");
             return;
         }
 
         boolean confirm = AlertView.showConfirmation("Cancel Appointment", "Are you sure?",
-                "Do you really want to cancel this appointment?");
+                "Do you really want to cancel this appointment? This action cannot be undone.");
 
         if (confirm) {
             try {
-                selectedApp.setAppointmentType(Appointment.STATUS_CANCELLED);
-
-                appointmentService.updateAppointment(selectedApp);
-
-                AlertView.showInfo("Success", "Appointment Cancelled", "Your record has been updated.");
-
-                loadData();
+                //refresh status
+                appointmentService.updateAppointmentStatus(selectedApp.getIdAppointment(), Appointment.STATUS_CANCELLED);
+                AlertView.showInfo("Success", "Appointment Cancelled", "Your appointment has been successfully cancelled.");
+                loadData(); //refresh
             } catch (Exception e) {
-                AlertView.showError("Error", "Update Failed", e.getMessage());
+                AlertView.showError("Error", "Update Failed", "A technical error occurred: " + e.getMessage());
             }
         }
     }

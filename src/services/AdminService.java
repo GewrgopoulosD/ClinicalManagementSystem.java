@@ -7,6 +7,7 @@ import dao.UserDAO;
 import models.Appointment;
 import models.Doctor;
 import models.Patient;
+import models.User;
 
 import java.util.List;
 
@@ -68,7 +69,19 @@ public class AdminService {
 
     public List<Appointment> getPatientHistory(int patientId) {
         AppointmentDAO appointmentDAO = new AppointmentDAO();
-        return appointmentDAO.getAppointmentsByCustomer(patientId);
+        List<Appointment> history = appointmentDAO.getAppointmentsByCustomer(patientId);
+
+        for (Appointment app : history) {
+            User doc = userDAO.findUserById(app.getIdEmployee());
+
+            if (doc != null) {
+                app.setDoctorFullName(doc.getName() + " " + doc.getLastname());
+            } else {
+                app.setDoctorFullName("Unknown Doctor");
+            }
+        }
+
+        return history;
     }
 
     public boolean deletePatient(String email) {

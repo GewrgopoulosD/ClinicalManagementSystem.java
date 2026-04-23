@@ -23,8 +23,8 @@ public class AppointmentService {
         return appointmentDAO.getAppointmentsByDoctor(doctorId);
     }
 
-    public Appointment getNextAppointment(int doctorId) {
-        return appointmentDAO.getNextAppointment(doctorId);
+    public Appointment getNextAppointment(int customerId) {
+        return appointmentDAO.getPatientNextUpcoming(customerId);
     }
 
     public int getTotalAppointmentsCount(int doctorId) {
@@ -46,8 +46,6 @@ public class AppointmentService {
     //for patient, to watch his appointment
     public List<Appointment> getAppointmentsForPatient(int patientId) {
         List<Appointment> appointments = appointmentDAO.getAppointmentsByCustomer(patientId);
-
-        PatientService patientService = new PatientService();
 
         for (Appointment app : appointments) {
             //fullname by id

@@ -32,6 +32,7 @@ public class AdminPatientsController implements WindowManaged {
 
     @FXML private TableView<Appointment> historyTable;
     @FXML private TableColumn<Appointment, String> dateCol;
+    @FXML private TableColumn<Appointment, String> doctorCol;
     @FXML private TableColumn<Appointment, String> statusCol;
 
     private final AdminService adminService = new AdminService();
@@ -50,6 +51,7 @@ public class AdminPatientsController implements WindowManaged {
         amkaCol.setCellValueFactory(new PropertyValueFactory<>("amka"));
 
         dateCol.setCellValueFactory(new PropertyValueFactory<>("appointmentDatetime"));
+        doctorCol.setCellValueFactory(new PropertyValueFactory<>("doctorFullName"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
 
         loadPatients();

@@ -18,12 +18,12 @@
     "appointmentDescription": "βηχαλάκι το μωρό 2"
   },
   {
-    "idAppointment": 4,
+    "idAppointment": 6,
     "idCustomer": 11,
     "idClinic": 1,
     "idEmployee": 5,
-    "appointmentDatetime": "2026-04-16 17:00",
+    "appointmentDatetime": "2026-04-22 10:00",
     "appointmentType": "Pending",
-    "appointmentDescription": "Ο μπεμπης κλαιει "
+    "appointmentDescription": "ο μπεμπης εχει διαροια "
   }
 ]

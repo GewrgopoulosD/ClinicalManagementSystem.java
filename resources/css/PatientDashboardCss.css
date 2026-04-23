@@ -48,11 +48,11 @@
 
 /*------------------------------------------PATIENT HOME--------------------------------------------------------------*/
 .titleContainer {
+    -fx-padding: 10px;
     -fx-alignment: CENTER;
 }
 
 .header{
-    -fx-padding: 10px 0;
     -fx-alignment: CENTER;
     }
 
@@ -174,7 +174,7 @@
 }
 
 .combosApp .arrow {
-    -fx-background-color: #4f90a4; /* Το μεσαίο τιρκουάζ */
+    -fx-background-color: #4f90a4;
     }
 
 .combosApp:hover .arrow {
@@ -225,6 +225,109 @@
 .greenBtnSymptoms:hover {
     -fx-background-color: #1b4332;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 2);
+}
+
+/*------------------------------------------MY APPOINTMENTS-----------------------------------------------------------*/
+
+/* splitpane*/
+.splitPaneMedicalRecords {
+    -fx-background-color: transparent;
+    -fx-padding: 5px;
+}
+
+.splitPaneMedicalRecords .split-pane-divider {
+    -fx-background-color: #acdad8;
+    -fx-padding: 0 1px;
+}
+
+/*splitpane's vbox*/
+.vboxSplitPanes, .vboxScrollPaneForAnyVisit {
+    -fx-padding: 15px;
+    -fx-spacing: 15px;
+}
+
+.docListViewMedical {
+    -fx-background-color: white;
+    -fx-border-color: #acdad8;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.docListViewMedical .list-cell {
+    -fx-padding: 10px;
+    -fx-text-fill: #105262;
+    -fx-border-color: transparent transparent #f0f0f0 transparent;
+}
+
+.docListViewMedical .list-cell:selected {
+    -fx-background-color: #acdad8;
+    -fx-text-fill: #105262;
+    -fx-font-weight: bold;
+}
+
+/*tabpane style*/
+.tabPaneForPatients {
+    -fx-tab-min-width: 150px;
+}
+
+.tabPaneForPatients .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.tabPaneForPatients .tab {
+    -fx-background-color: #acdad8;
+    -fx-background-radius: 10 10 0 0;
+    -fx-padding: 8 20;
+}
+
+.tabPaneForPatients .tab:selected {
+    -fx-background-color: #105262;
+}
+
+.tabPaneForPatients .tab .tab-label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/*scrollpane style*/
+.scrollPaneForAnyVisit {
+    -fx-background-color: transparent;
+    -fx-viewport-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.gridConsultation {
+    -fx-hgap: 15px;
+    -fx-vgap: 15px;
+    -fx-padding: 10px 0;
+}
+
+.refreshBtn {
+    -fx-background-color: #4f90a4;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-padding: 8 15;
+    -fx-cursor: hand;
+}
+
+.refreshBtn:hover {
+    -fx-background-color: #105262;
+}
+
+.redBtnMedical {
+    -fx-background-color: #d9534f;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-pref-width: 170px;
+    -fx-background-radius: 10px;
+    -fx-padding: 8 15;
+    -fx-cursor: hand;
+}
+.redBtnMedical:hover{
+    -fx-background-color: #c9302c;
 }
 
 /*------------------------------------------PATIENT PROFILE-----------------------------------------------------------*/

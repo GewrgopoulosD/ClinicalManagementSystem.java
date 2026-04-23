@@ -42,25 +42,16 @@ public class AppointmentDAO {
     }
 
     //method for patient's next upcoming appointment
-    public Appointment getNextAppointment(int doctorId) {
-        List<Appointment> todayApps = getTodayAppointments(doctorId);
-        String now = java.time.LocalDateTime.now().format(FORMATTER);
+    public Appointment getPatientNextUpcoming(int customerId) {
+            String now = java.time.LocalDateTime.now().format(FORMATTER);
 
-        Appointment nextApp = null;
-
-        for (Appointment a : todayApps) {
-            if (a.getAppointmentDatetime() == null) continue;
-
-            //is it today but later? (and still pending)
-            if (a.getAppointmentDatetime().compareTo(now) > 0) {
-                //find the closest next appointment
-                if (nextApp == null || a.getAppointmentDatetime().compareTo(nextApp.getAppointmentDatetime()) < 0) {
-                    nextApp = a;
-                }
-            }
-        }
-
-        return nextApp;
+            return getAllAppointments().stream()
+                    .filter(a -> a.getIdCustomer() == customerId)
+                    .filter(a -> a.getAppointmentType().equalsIgnoreCase(Appointment.STATUS_PENDING))
+                    .filter(a -> a.getAppointmentDatetime() != null)
+                    .filter(a -> a.getAppointmentDatetime().compareTo(now) > 0)
+                    .min(Comparator.comparing(Appointment::getAppointmentDatetime))
+                    .orElse(null);
     }
 
     public int getGlobalTodayAppointmentsCount() {
@@ -79,10 +70,11 @@ public class AppointmentDAO {
     }
 
     public int getActiveCountByCustomer(int customerId) {
+        String now = java.time.LocalDateTime.now().format(FORMATTER);
         return (int) getAllAppointments().stream()
                 .filter(a -> a.getIdCustomer() == customerId)
-                //only count "pending" as active and upcoming visits
                 .filter(a -> a.getAppointmentType().equalsIgnoreCase(Appointment.STATUS_PENDING))
+                .filter(a -> a.getAppointmentDatetime() != null && a.getAppointmentDatetime().compareTo(now) >= 0)
                 .count();
     }
 

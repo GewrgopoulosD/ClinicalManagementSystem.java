@@ -1,15 +1,5 @@
 [
   {
-    "amka": "12345678912",
-    "id": 10,
-    "name": "Ελένη",
-    "lastName": "Κακόκεφη",
-    "tel": "6987654320",
-    "email": "kakokefi@test.gr",
-    "password": "$2a$10$NALJhYncd81B3nAdUFuMYuA7veqCADrTfox5QBwhbjtnovkyHOIfO",
-    "idRole": 3
-  },
-  {
     "idClinic": 1,
     "specializations": [
       {
