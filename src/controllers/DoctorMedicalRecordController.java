@@ -188,7 +188,7 @@ public class DoctorMedicalRecordController {
                 if (empty || item == null) {
                     setText(null);
                 } else {
-                    setText(item.getAppointmentDatetime() + " (" + item.getAppointmentType() + ")");
+                    setText(item.getAppointmentDatetime() + " | " + item.getDoctorFullName() + " (" + item.getAppointmentType() + ")");
                 }
             }
         });

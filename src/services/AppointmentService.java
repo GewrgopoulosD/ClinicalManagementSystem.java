@@ -31,7 +31,18 @@ public class AppointmentService {
         return appointmentDAO.getAppointmentsByDoctor(doctorId).size();
     }
 
-    public void createAppointment(Appointment newApp) {
+    public void createAppointment(Appointment newApp) throws Exception {
+        String[] parts = newApp.getAppointmentDatetime().split(" ");
+        String date = parts[0];
+        String time = parts[1];
+
+        //check if the time is available
+        List<String> busySlots = appointmentDAO.getBusySlots(newApp.getIdEmployee(), date);
+
+        if (busySlots.contains(time)) {
+            throw new Exception("This slot was just booked by someone else!");
+        }
+
         appointmentDAO.addAppointment(newApp);
     }
 

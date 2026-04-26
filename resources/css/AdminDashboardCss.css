@@ -362,3 +362,60 @@ overviewContainer{
 .patSplitPane .split-pane-divider {
     -fx-background-color: transparent;
 }
+
+/*------------------------------------------------------medical record tab-------------------------------------------*/
+
+/*scrollpane*/
+.scrollPaneForAnyVisit {
+    -fx-background-color: transparent;
+    -fx-background: white;
+    -fx-border-color: #acdad8;
+    -fx-border-radius: 10px;
+    -fx-padding: 10px;
+}
+
+/*scrollpane's vbox */
+.vboxScrollPaneForAnyVisit {
+    -fx-padding: 20px;
+    -fx-spacing: 15px;
+    -fx-background-color: white;
+}
+
+/*gridpane*/
+.gridConsultation {
+    -fx-vgap: 15px;
+    -fx-hgap: 10px;
+    -fx-padding: 10px 0;
+}
+
+.boldLabelMedical {
+    -fx-font-weight: bold;
+    -fx-text-fill: #105262;
+    -fx-font-size: 14px;
+}
+
+.greyLabelMedical {
+    -fx-text-fill: #7f8c8d;
+    -fx-font-size: 14px;
+}
+
+/*txt areas*/
+.gridsTxt {
+    -fx-background-color: #f9fdfd;
+    -fx-border-color: #acdad8;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #2c3e50;
+    -fx-pref-height: 80px;
+}
+
+.gridsTxt:readonly .content {
+    -fx-background-color: #f9fdfd;
+}
+
+.vboxScrollPaneForAnyVisit .separator {
+    -fx-background-color: #acdad8;
+}
+}

@@ -86,7 +86,7 @@ public class AppointmentDAO {
         }
     }
 
-    public void addAppointment(Appointment newApp) {
+    public synchronized void addAppointment(Appointment newApp) {
         try {
             List<Appointment> all = getAllAppointments();
 
@@ -106,7 +106,7 @@ public class AppointmentDAO {
         }
     }
 
-    public void updateAppointment(Appointment updatedApp) {
+    public synchronized void updateAppointment(Appointment updatedApp) {
         try {
             List<Appointment> all = getAllAppointments();
             boolean found = false;

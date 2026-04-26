@@ -48,7 +48,7 @@
             <TableColumn fx:id="timeColumn" prefWidth="100.0" text="Date and time " />
             <TableColumn fx:id="patientNameColumn" prefWidth="200.0" text="Patient" />
             <TableColumn fx:id="statusColumn" prefWidth="120.0" text="Status" />
-            <TableColumn fx:id="descColumn" prefWidth="300.0" text="Describe" />
+            <TableColumn fx:id="descColumn" prefWidth="300.0" text="Description" />
         </columns>
         <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

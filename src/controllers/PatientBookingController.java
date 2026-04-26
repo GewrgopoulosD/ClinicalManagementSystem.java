@@ -5,6 +5,7 @@ import dao.AppointmentDAO;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.util.Callback;
 import javafx.util.StringConverter;
 import models.Appointment;
 import models.User;
@@ -37,23 +38,74 @@ public class PatientBookingController {
 
         specialtyCombo.setItems(FXCollections.observableArrayList(specializationService.getAll()));
 
-        doctorCombo.valueProperty().addListener((o, old, newVal) -> updateAvailableSlots());
+        setupDatePickerColoring();
 
+        //listener for doctor changing
+        doctorCombo.valueProperty().addListener((obs, oldVal, newVal) -> {
+            updateAvailableSlots();
+
+            //if the doctor change make the calendar again
+            if (newVal != null) {
+                Callback<DatePicker, DateCell> factory = appointmentDatePicker.getDayCellFactory();
+                appointmentDatePicker.setDayCellFactory(null);
+                appointmentDatePicker.setDayCellFactory(factory);
+            }
+        });
+
+        //specialty listener
+        specialtyCombo.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal != null) loadDoctors(newVal);
+        });
+
+        //date listener
         appointmentDatePicker.valueProperty().addListener((o, old, newVal) -> updateAvailableSlots());
+    }
 
-        appointmentDatePicker.setDayCellFactory(picker -> new DateCell() {//dont let user choose past dates
+    //color the calendar
+    private void setupDatePickerColoring() {
+        appointmentDatePicker.setDayCellFactory(picker -> new DateCell() {
+            @Override
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
-                setDisable(empty || date.isBefore(LocalDate.now()));
+
+                //if the date is in past
+                if (empty || date.isBefore(LocalDate.now())) {
+                    setDisable(true);
+                    setStyle("-fx-background-color: #f4f4f4;");
+                    return;
+                }
+
+                User doc = doctorCombo.getValue();
+                if (doc == null) return; //if there isn't a doc return
+
+                //check schedule
+                WeeklySchedule schedule = shiftService.getDoctorSchedule(doc.getId());
+                String dayName = date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.FULL, java.util.Locale.ENGLISH);
+                WeeklySchedule.Shift shift = schedule.getDays().get(dayName);
+
+                if (shift == null || !shift.isActive()) {
+                    setDisable(true);
+                    setStyle("-fx-background-color: #e0e0e0;");//grey: doc doesn't work
+                } else {
+                    //busy slots
+                    List<String> allSlots = generateSlots(shift.getStart(), shift.getEnd());
+                    List<String> busySlots = appointmentService.getBusySlots(doc.getId(), date.toString());
+                    allSlots.removeAll(busySlots);
+
+                    int available = allSlots.size();
+
+                    if (available == 0) {
+                        setStyle("-fx-background-color: #ffcccc;"); //red: full
+                        setTooltip(new Tooltip("Fully Booked"));
+                    } else if (available <= 3) {
+                        setStyle("-fx-background-color: #ffd280;"); //orange: <=3
+                        setTooltip(new Tooltip("Only " + available + " slots left!"));
+                    } else {
+                        setStyle("-fx-background-color: #ccffcc;"); //green more than 3
+                        setTooltip(new Tooltip(available + " slots available"));}
+                }
             }
         });
-
-        specialtyCombo.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal != null) {
-                loadDoctors(newVal);
-            }
-        });
-
     }
 
     private void setupDoctorComboDisplay() {
@@ -152,13 +204,29 @@ public class PatientBookingController {
 
     private List<String> generateSlots(String startStr, String endStr) {
         List<String> slots = new java.util.ArrayList<>();
+
+        if (startStr == null || endStr == null || startStr.isEmpty() || endStr.isEmpty()) {
+            return slots;
+        }
+
         try {
             LocalTime start = LocalTime.parse(startStr);
             LocalTime end = LocalTime.parse(endStr);
 
-            while (start.isBefore(end)) {
-                slots.add(start.toString());
-                start = start.plusHours(1); //every appointment keep an hour
+            if (!start.isBefore(end)) {
+                return slots;
+            }
+
+            LocalTime current = start;
+            while (current.isBefore(end)) {
+                slots.add(current.toString());
+                LocalTime next = current.plusHours(1);
+
+                //if next slot is after midnight
+                if (next.isBefore(current)) break;
+
+                current = next;
+                if (slots.size() >= 24) break;
             }
         } catch (Exception e) {
             alert.AlertView.showError(

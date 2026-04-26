@@ -7,9 +7,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.Appointment;
+import models.MedicalRecord;
 import models.Patient;
 import models.User;
 import services.AdminService;
+import services.MedicalRecordService;
 import ui.WindowManaged;
 import ui.WindowManager;
 import java.util.List;
@@ -35,10 +37,20 @@ public class AdminPatientsController implements WindowManaged {
     @FXML private TableColumn<Appointment, String> doctorCol;
     @FXML private TableColumn<Appointment, String> statusCol;
 
+    @FXML private Tab consultationDetailsTab;
+    @FXML private TabPane detailsTabPane;
+    @FXML private Label doctorNameLbl;
+    @FXML private Label detDateLbl;
+    @FXML private TextArea detSymptomsArea;
+    @FXML private TextArea detDiagnosisArea;
+    @FXML private TextArea detTreatmentArea;
+    @FXML private TextArea detInternalNotesArea;
+
     private final AdminService adminService = new AdminService();
     private ObservableList<User> allPatientsList = FXCollections.observableArrayList();
     private User selectedUser;
     private String oldEmail;
+    private final MedicalRecordService recordService = new MedicalRecordService();
 
     @Override
     public void setWindowManager(WindowManager wm) { }
@@ -63,9 +75,12 @@ public class AdminPatientsController implements WindowManaged {
         //row table click
         patientTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
+                clearMedicalRecordTab();
                 fillFormWithData(newSelection);
             }
         });
+
+        setupHistorySelectionListener();
     }
 
     @FXML
@@ -120,6 +135,34 @@ public class AdminPatientsController implements WindowManaged {
         //history data
         List<Appointment> history = adminService.getPatientHistory(user.getId());
         historyTable.setItems(FXCollections.observableArrayList(history));
+    }
+
+    private void setupHistorySelectionListener() {
+        historyTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal != null) {
+
+                doctorNameLbl.setText(newVal.getDoctorFullName());
+                detDateLbl.setText(newVal.getAppointmentDatetime());
+                detSymptomsArea.setText(newVal.getAppointmentDescription());
+
+                //medical records
+                MedicalRecord record = recordService.getDetailsForAppointment(newVal.getIdAppointment());
+
+                if (record != null) {
+                    detDiagnosisArea.setText(record.getDiagnosis());
+                    detTreatmentArea.setText(record.getTreatment());
+                    detInternalNotesArea.setText(record.getInternalNotes());
+                } else {
+                    //if there isnt record
+                    detDiagnosisArea.setText("No diagnosis recorded yet.");
+                    detTreatmentArea.clear();
+                    detInternalNotesArea.clear();
+                }
+
+                //go to tab
+                detailsTabPane.getSelectionModel().select(consultationDetailsTab);
+            }
+        });
     }
 
     @FXML
@@ -179,5 +222,14 @@ public class AdminPatientsController implements WindowManaged {
         editEmailField.clear();
         editPhoneField.clear();
         selectedUser = null;
+    }
+
+    private void clearMedicalRecordTab() {
+        doctorNameLbl.setText("-");
+        detDateLbl.setText("-");
+        detSymptomsArea.clear();
+        detDiagnosisArea.clear();
+        detTreatmentArea.clear();
+        detInternalNotesArea.clear();
     }
 }

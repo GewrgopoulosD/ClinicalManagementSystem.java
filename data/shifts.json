@@ -26,9 +26,7 @@
         "end": "17:00"
       },
       "Tuesday": {
-        "active": true,
-        "start": "09:00",
-        "end": "17:00"
+        "active": false
       },
       "Saturday": {
         "active": false

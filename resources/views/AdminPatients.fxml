@@ -93,6 +93,41 @@
                             </TableView>
                         </VBox>
                     </Tab>
+
+                    <Tab fx:id="consultationDetailsTab" text="Medical Record" styleClass="noFocus">
+                        <ScrollPane fitToWidth="true" styleClass="scrollPaneForAnyVisit">
+                            <VBox styleClass="vboxScrollPaneForAnyVisit">
+
+                                <HBox>
+                                    <Label text="Doctor:" styleClass="greyLabelMedical"/>
+                                    <Label fx:id="doctorNameLbl" text="-" styleClass="boldLabelMedical"/>
+                                </HBox>
+
+                                <Separator />
+
+                                <Label fx:id="detDateLbl" text="-" styleClass="boldLabelMedical"/>
+
+                                <GridPane styleClass="gridConsultation">
+                                    <columnConstraints>
+                                        <ColumnConstraints minWidth="120" prefWidth="150" />
+                                        <ColumnConstraints hgrow="ALWAYS" />
+                                    </columnConstraints>
+
+                                    <Label text="Reason for Visit:" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="boldLabelMedical"/>
+                                    <TextArea fx:id="detSymptomsArea" editable="false" wrapText="true" GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="gridsTxt"/>
+
+                                    <Label text="Diagnosis:" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="boldLabelMedical"/>
+                                    <TextArea fx:id="detDiagnosisArea" editable="false" wrapText="true" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="gridsTxt"/>
+
+                                    <Label text="Treatment Plan:" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="boldLabelMedical"/>
+                                    <TextArea fx:id="detTreatmentArea" editable="false" wrapText="true" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="gridsTxt"/>
+
+                                    <Label text="Internal Notes:" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="boldLabelMedical"/>
+                                    <TextArea fx:id="detInternalNotesArea" editable="false" wrapText="true" GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="gridsTxt"/>
+                                </GridPane>
+                            </VBox>
+                        </ScrollPane>
+                    </Tab>
                 </tabs>
             </TabPane>
         </items>
