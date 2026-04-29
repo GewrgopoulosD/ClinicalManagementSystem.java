@@ -1,6 +1,8 @@
 package controllers;
 
 import javafx.event.ActionEvent;
+import models.Specialization;
+import services.SpecializationService;
 import ui.WindowManaged;
 import ui.WindowManager;
 import javafx.beans.property.SimpleStringProperty;
@@ -20,17 +22,21 @@ public class AdminDoctorsListController implements WindowManaged {
     @FXML private TextField searchField;
     @FXML private CheckBox pendingOnlyCheckBox;
     @FXML private Label selectedDoctorLbl;
-    @FXML private ListView<String> currentSpecsList;
-    @FXML private ComboBox<String> specializationCombo;
+
+    @FXML private ListView<Specialization> currentSpecsList;
+    @FXML private ComboBox<Specialization> specializationCombo;
+
     @FXML private Button assignBtn;
     @FXML private Button refreshBtn;
     @FXML private MenuItem deleteSpecItem;
+    @FXML private Button AddNewSpec;
 
     private WindowManager windowManager;
     private final AdminService adminService = new AdminService();
     private ObservableList<Doctor> Data = FXCollections.observableArrayList();
     private FilteredList<Doctor> filteredData;
     private Doctor selectedDoctor;
+    private SpecializationService  specializationService = new SpecializationService();
 
     @Override
     public void setWindowManager(WindowManager wm) {
@@ -71,6 +77,30 @@ public class AdminDoctorsListController implements WindowManaged {
                 deleteSpecItem.setDisable(newVal == null);
             }
         });
+
+        //combo name
+        specializationCombo.setCellFactory(lv -> new ListCell<Specialization>() {
+            @Override protected void updateItem(Specialization item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? null : item.getName());
+            }
+        });
+        specializationCombo.setButtonCell(new ListCell<Specialization>() {
+            @Override protected void updateItem(Specialization item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? null : item.getName());
+            }
+        });
+
+        //listview name
+        currentSpecsList.setCellFactory(lv -> new ListCell<Specialization>() {
+            @Override protected void updateItem(Specialization item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? null : item.getName());
+            }
+        });
+
+        AddNewSpec.setOnAction(event -> handleAddNewSpecialization());
     }
 
     private void setupTable() {
@@ -125,7 +155,8 @@ public class AdminDoctorsListController implements WindowManaged {
 
     @FXML
     private void handleAssign() {
-        String spec = specializationCombo.getValue();
+
+        Specialization spec = specializationCombo.getValue();
 
 
         if (selectedDoctor == null) {//is any doctor selected
@@ -138,12 +169,15 @@ public class AdminDoctorsListController implements WindowManaged {
             return;
         }
 
-        if (currentSpecsList.getItems().contains(spec)) {//if the doctor has already this specialization
+        //if doc has already the spec
+        boolean alreadyHasIt = currentSpecsList.getItems().stream()
+                .anyMatch(s -> s.getIdSpecialization() == spec.getIdSpecialization());
+
+        if (alreadyHasIt) {
             alert.AlertView.showError("Duplicate Entry", "Assignment Conflict",
-                    "Dr. " + selectedDoctor.getLastname() + " is already assigned to: " + spec);
+                    "Dr. " + selectedDoctor.getLastname() + " is already assigned to: " + spec.getName());
             return;
         }
-
 
         boolean success = adminService.assignSpecialization(selectedDoctor.getId(), spec);//registerNewUser it
 
@@ -158,18 +192,18 @@ public class AdminDoctorsListController implements WindowManaged {
 
     @FXML
     private void handleRemoveContext(ActionEvent event) {
-        String selectedSpecName = currentSpecsList.getSelectionModel().getSelectedItem();
 
-        if (selectedSpecName == null || selectedDoctor == null) return;
+        Specialization selectedSpec = currentSpecsList.getSelectionModel().getSelectedItem();
 
+        if (selectedSpec == null || selectedDoctor == null) return;
         boolean confirmed = alert.AlertView.showConfirmation(
                 "Confirm Deletion",
-                "Remove Specialization: " + selectedSpecName,
+                "Remove Specialization: " + selectedSpec.getName(),
                 "Are you sure that you want to remove this?"
         );
 
         if (confirmed) {
-            boolean success = adminService.removeSpecialization(selectedDoctor.getId(), selectedSpecName);
+            boolean success = adminService.removeSpecialization(selectedDoctor.getId(), selectedSpec.getIdSpecialization());
 
             if (success) {
                 loadDoctors();
@@ -179,5 +213,32 @@ public class AdminDoctorsListController implements WindowManaged {
                 alert.AlertView.showError("Error", "Action Failed", "Could not remove specialization.");
             }
         }
+    }
+
+    private void handleAddNewSpecialization() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("New Specialization");
+        dialog.setHeaderText("Create a new medical specialization");
+        dialog.setContentText("Please enter the name:");
+
+        dialog.showAndWait().ifPresent(name -> {
+            if (name.trim().isEmpty()) {
+                alert.AlertView.showError("Error", "Empty Name", "Specialization name cannot be empty.");
+                return;
+            }
+
+            try {
+                if (specializationService.exists(name)) {
+                    alert.AlertView.showError("Error", "Duplicate", "This specialization already exists.");
+                    return;
+                }
+
+                specializationService.add(name);
+                loadDoctors();
+                alert.AlertView.showInfo("Success", "Specialization Created", "The new specialization has been added to the system.");
+            } catch (Exception e) {
+                alert.AlertView.showError("Error", "Save Failed", "Could not save the new specialization.");
+            }
+        });
     }
 }

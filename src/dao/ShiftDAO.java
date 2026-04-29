@@ -34,7 +34,7 @@ public class ShiftDAO {
 
     public WeeklySchedule getScheduleByDoctorId(int doctorId) {
         return getAllSchedules().stream()
-                .filter(s -> s.getDoctorId() == doctorId) // Διόρθωση εδώ
+                .filter(s -> s.getDoctorId() == doctorId)
                 .findFirst()
                 .orElse(null);
     }

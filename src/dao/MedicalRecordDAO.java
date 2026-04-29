@@ -64,4 +64,21 @@ public class MedicalRecordDAO {
     private void saveAll(List<MedicalRecord> records) throws IOException {
         JsonHandler.writeList(FILE_PATH, records);
     }
+
+    public synchronized void deleteRecordsByAppointmentIds(List<Integer> appointmentIds) {
+        try {
+            List<MedicalRecord> allRecords = getAllRecords();
+            int initialSize = allRecords.size();
+
+            List<MedicalRecord> filteredRecords = allRecords.stream()
+                    .filter(record -> !appointmentIds.contains(record.getAppointmentId()))
+                    .collect(Collectors.toList());
+
+            if (filteredRecords.size() < initialSize) {
+                saveAll(filteredRecords);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Database Error: Could not clean up medical records. " + e.getMessage());
+        }
+    }
 }

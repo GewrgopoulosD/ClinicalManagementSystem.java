@@ -4,10 +4,7 @@ import dao.AdminDAO;
 import dao.AppointmentDAO;
 import dao.SpecializationDAO;
 import dao.UserDAO;
-import models.Appointment;
-import models.Doctor;
-import models.Patient;
-import models.User;
+import models.*;
 
 import java.util.List;
 
@@ -15,6 +12,8 @@ public class AdminService {
 
     private final AdminDAO adminDAO = new AdminDAO();
     private final UserDAO  userDAO = new UserDAO();
+    private final  AppointmentDAO appointmentDAO = new AppointmentDAO();
+    private final MedicalRecordService medicalRecordService = new MedicalRecordService();
     private final SpecializationDAO specializationDAO = new SpecializationDAO();
 
 
@@ -38,20 +37,21 @@ public class AdminService {
         return adminDAO.getAllDoctors();
     }
 
-    public List<String> getAllSpecializations() {
-        return specializationDAO.getAllSpecializations();
+    public List<Specialization> getAllSpecializations() {
+        return specializationDAO.getAllSpecializationsObjects();
     }
 
-    public List<String> getDoctorSpecializations(int doctorId) {
-        return adminDAO.getDoctorSpecializations(doctorId);
+    public List<Specialization> getDoctorSpecializations(int doctorId) {
+        return adminDAO.getDoctorSpecializationsObjects(doctorId);
     }
 
-    public boolean assignSpecialization(int doctorId, String specName) {
-        return adminDAO.assignSpecialization(doctorId, specName);
+    public boolean assignSpecialization(int doctorId, Specialization spec) {
+        if (spec == null) return false;
+        return adminDAO.assignSpecialization(doctorId, spec);
     }
 
-    public boolean removeSpecialization(int doctorId, String specName) {
-        return adminDAO.removeSpecialization(doctorId, specName);
+    public boolean removeSpecialization(int doctorId, int specId) {
+        return adminDAO.removeSpecialization(doctorId, specId);
     }
 
     public List<Patient> getAllPatients() {
@@ -84,12 +84,29 @@ public class AdminService {
         return history;
     }
 
-    public boolean deletePatient(String email) {
-        try {
+    public boolean deletePatient(String email) throws Exception {
+            User user = userDAO.getUserByEmail(email);
+                if (user == null) {
+                    return false;
+                }
+            int patientsId = user.getId();
+
+
+            medicalRecordService.deleteMedicalRecords(patientsId); //medical records delete
+            appointmentDAO.deleteAppointmentsByPatientId(patientsId); //app delete
+
             userDAO.deleteUser(email);
+
             return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
+
+    //statistics
+    public java.util.Map<String, Long> getTop5DoctorsStats() {
+        return adminDAO.getTop5DoctorsByCompletedAppointments();
+    }
+
+    public java.util.Map<String, Long> getTop5PatientsStats() {
+        return adminDAO.getTop5PatientsByCompletedAppointments();
+    }
+
 }

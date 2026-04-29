@@ -5,7 +5,8 @@
 
 <VBox xmlns="http://javafx.com/javafx/8"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="controllers.PatientBookingController">
+      fx:controller="controllers.PatientBookingController"
+      stylesheets="@../css/PatientDashboardCss.css">
 
     <HBox styleClass="titleContainer">
         <Label text="Book New Appointment" styleClass="header"/>

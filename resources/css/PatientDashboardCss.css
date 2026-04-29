@@ -90,11 +90,13 @@
     -fx-font-size: 16px;
     -fx-text-fill: #7f8c8d;
     -fx-font-weight: normal;
+
 }
 
 .blackLbl{
     -fx-font-size: 15px;
     -fx-font-weight: Bold;
+    -fx-padding: 0 0 7 0;
 }
 
 .statDate{
@@ -385,4 +387,15 @@ Separator{
     -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-text-fill: #105262;
+}
+
+/*-----------------------------------piechart-------------------------------------------------------------------------*/
+.pieChartBox{
+    -fx-padding:45 15 15 15;
+}
+
+.chartTitle{
+    -fx-text-fill: #105262;
+    -fx-font-weight: bold;
+    -fx-font-size: 17px;
 }

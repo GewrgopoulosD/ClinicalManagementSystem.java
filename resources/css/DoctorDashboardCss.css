@@ -473,3 +473,41 @@
     -fx-text-fill: #4f90a4;
 }
 
+/*--------------------------------------------My calendar-------------------------------------------------------------*/
+.calendarSidebar {
+    -fx-min-width: 300px;
+}
+
+.calendarPickerInput {
+    -fx-background-radius: 10px;
+    -fx-border-color: #acdad8;
+    -fx-border-radius: 10px;
+    -fx-padding: 8px 15px;
+    -fx-pref-width: 260px;
+    -fx-background-color: white;
+}
+
+.calendarPickerInput:focused {
+    -fx-border-color: #4f90a4;
+}
+
+.dateDisplayLabel {
+    -fx-font-size: 18px;
+}
+
+.calendarContainer {
+    -fx-padding: 0 20px 20px 20px;
+}
+
+.mainBackground {
+    -fx-background-color: #f4f9f9;
+}
+
+.fullWidth {
+    -fx-pref-width: 240px;
+}
+
+.sectionSeparator {
+    -fx-background-color: #acdad8;
+}
+

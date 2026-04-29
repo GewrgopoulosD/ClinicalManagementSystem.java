@@ -21,6 +21,7 @@ public class AdminDashboardController implements WindowManaged {
     //left buttons
     @FXML private Button generalBtn;
     @FXML private Button doctorsBtn;
+    @FXML private Button doctorsCalendarBtn;
     @FXML private Button patientsBtn;
 
 
@@ -33,7 +34,7 @@ public class AdminDashboardController implements WindowManaged {
 
     @FXML
     public void initialize() {
-        welcomeLbl.setText("Welcome, MR. " + CurrentUser.getDisplayName());
+        welcomeLbl.setText("Welcome, " + CurrentUser.getDisplayName());
 
 
         generalBtn.setOnAction(e -> {
@@ -43,6 +44,10 @@ public class AdminDashboardController implements WindowManaged {
 
         doctorsBtn.setOnAction(e -> {
             windowManager.loadInnerView(mainBorderPane, "/views/AdminDoctorsList.fxml");
+        });
+
+        doctorsCalendarBtn.setOnAction(e -> {
+            windowManager.loadInnerView(mainBorderPane, "/views/AdminDoctorsCalendar.fxml");
         });
 
 

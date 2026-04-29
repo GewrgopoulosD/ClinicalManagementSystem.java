@@ -46,6 +46,8 @@ public class AdminPatientsController implements WindowManaged {
     @FXML private TextArea detTreatmentArea;
     @FXML private TextArea detInternalNotesArea;
 
+    @FXML private Button deleteBtn;
+
     private final AdminService adminService = new AdminService();
     private ObservableList<User> allPatientsList = FXCollections.observableArrayList();
     private User selectedUser;
@@ -77,6 +79,14 @@ public class AdminPatientsController implements WindowManaged {
             if (newSelection != null) {
                 clearMedicalRecordTab();
                 fillFormWithData(newSelection);
+            }
+        });
+
+
+        deleteBtn.disableProperty().bind(patientTable.getSelectionModel().selectedItemProperty().isNull());
+        deleteBtn.setOnAction(event -> {
+            if (selectedUser != null) {
+                handleDelete(selectedUser.getEmail());
             }
         });
 
@@ -193,25 +203,42 @@ public class AdminPatientsController implements WindowManaged {
     }
 
     @FXML
-    private void handleDelete() {
+    private void handleDelete(String patientEmail) {
         if (selectedUser == null){
             AlertView.showError("Error", "Please Select a User", "Please Select a User");
             return;
         }
 
-        boolean confirm = alert.AlertView.showConfirmation("Delete Patient",
-                "Are you sure?",
-                "You are about to delete " + selectedUser.getLastname() + ". This action cannot be undone.");
+        boolean confirmed = AlertView.showConfirmation(
+                "Confirm Deletion",
+                "Delete Patient Profile?",
+                "This will permanently erase the patient's account, all scheduled appointments, and their entire medical history."
+        );
 
-        if (confirm) {
-            if (adminService.deletePatient(selectedUser.getEmail())) {
+        if (!confirmed) return;
+
+        try {
+            boolean success = adminService.deletePatient(patientEmail);
+
+            if (success) {
                 allPatientsList.remove(selectedUser);
-                filterTable(searchField.getText());
+                totalPatientsLbl.setText(String.valueOf(allPatientsList.size()));
+
+//                filterTable(searchField.getText());
                 clearForm();
-                alert.AlertView.showInfo("Deleted", "Success", "The patient has been removed from the system.");
+                clearMedicalRecordTab();
+                historyTable.setItems(FXCollections.observableArrayList());
+
+                AlertView.showInfo("Success", "Patient Removed", "The patient has been removed from the system.");
             } else {
-                alert.AlertView.showError("Error", "Deletion Failed", "The patient could not be deleted.");
+                AlertView.showWarning("Not Found", "Invalid Email", "No patient found with the provided email address.");
             }
+        } catch (Exception e) {
+            AlertView.showError(
+                    "System Error",
+                    "Deletion Failed",
+                    "An error occurred while accessing the database: " + e.getMessage()
+            );
         }
     }
 

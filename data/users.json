@@ -3,6 +3,7 @@
     "idClinic": 1,
     "specializations": [
       {
+        "idSpecialization": 3,
         "name": "Παιδίατρος"
       }
     ],
@@ -28,6 +29,7 @@
     "idClinic": 1,
     "specializations": [
       {
+        "idSpecialization": 6,
         "name": "Οφθαλμίατρος"
       }
     ],
@@ -53,6 +55,7 @@
     "idClinic": 1,
     "specializations": [
       {
+        "idSpecialization": 5,
         "name": "Ορθοπεδικός"
       }
     ],
@@ -68,6 +71,7 @@
     "idClinic": 1,
     "specializations": [
       {
+        "idSpecialization": 11,
         "name": "Αναισθησιολόγος"
       }
     ],

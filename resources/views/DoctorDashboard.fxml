@@ -27,7 +27,9 @@
 
             <Button fx:id="AppointmentsBtn" text="Appointments" alignment="CENTER"/>
 
-            <Button fx:id="shiftsBtn" text="shifts" alignment="CENTER"/>
+            <Button fx:id="myCalendar" text="My Calendar" alignment="CENTER"/>
+
+            <Button fx:id="shiftsBtn" text="Shifts" alignment="CENTER"/>
 
             <Button fx:id="medicalRecordsBtn" text="Medical Records" alignment="CENTER"/>
 

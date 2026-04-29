@@ -58,7 +58,10 @@
         </VBox>
 
         <VBox styleClass="formGroup">
-            <Label text="Assign New Specialization" styleClass="boldLabel"/>
+            <HBox alignment="CENTER" spacing="10">
+                <Label text="Assign New Specialization" styleClass="boldLabel"/>
+                <Button fx:id="AddNewSpec" text="Add new" styleClass="addNewSpec"/>
+            </HBox>
             <ComboBox fx:id="specializationCombo" promptText="Select Specialization" maxWidth="Infinity"/>
             <Button fx:id="assignBtn" text="Assign" styleClass="primaryButton" maxWidth="Infinity"/>
         </VBox>

@@ -3,12 +3,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
 
+<?import javafx.scene.chart.PieChart?>
 <VBox xmlns="http://javafx.com/javafx/17"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controllers.PatientHomeController">
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controllers.PatientHomeController"
+      stylesheets="@../css/PatientDashboardCss.css">
 
     <VBox styleClass="titleContainer">
-
         <HBox styleClass="header">
             <Label fx:id="welcomeLabel" text="Welcome back!" styleClass="mainTitle"/>
         </HBox>
@@ -31,6 +32,22 @@
                 </HBox>
             </VBox>
 
+        </HBox>
+
+        <HBox spacing="20" VBox.vgrow="ALWAYS" styleClass="pieChartBox">
+
+            <VBox styleClass="chartCard" HBox.hgrow="ALWAYS" alignment="CENTER" spacing="10">
+                <Label text="Your Top Doctors" styleClass="chartTitle"/>
+                <PieChart fx:id="topDoctorsPieChart"
+
+                          animated="true"
+                          labelsVisible="true"
+                          legendVisible="true"
+                          prefHeight="300"/>
+
+                <Label fx:id="noDataLabel" text="No completed appointments found yet."
+                       visible="false" managed="false" styleClass="chartTitle"/>
+            </VBox>
         </HBox>
 
     </VBox>

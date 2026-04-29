@@ -95,13 +95,13 @@ public class PatientBookingController {
                     int available = allSlots.size();
 
                     if (available == 0) {
-                        setStyle("-fx-background-color: #ffcccc;"); //red: full
+                        setStyle("-fx-background-color: #ffcccc; -fx-text-fill: black"); //red: full
                         setTooltip(new Tooltip("Fully Booked"));
                     } else if (available <= 3) {
-                        setStyle("-fx-background-color: #ffd280;"); //orange: <=3
+                        setStyle("-fx-background-color: #ffd280; -fx-text-fill: black"); //orange: <=3
                         setTooltip(new Tooltip("Only " + available + " slots left!"));
                     } else {
-                        setStyle("-fx-background-color: #ccffcc;"); //green more than 3
+                        setStyle("-fx-background-color: #ccffcc; -fx-text-fill: black"); //green more than 3
                         setTooltip(new Tooltip(available + " slots available"));}
                 }
             }

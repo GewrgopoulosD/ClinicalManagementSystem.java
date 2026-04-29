@@ -2,7 +2,7 @@
   {
     "appointmentId": 3,
     "idCustomer": 11,
-    "diagnosis": "",
+    "diagnosis": "sth",
     "treatment": "sth",
     "internalNotes": "sth"
   },
@@ -12,5 +12,61 @@
     "diagnosis": "Κούραση",
     "treatment": "1 ζαναξ πρωι βραδυ ",
     "internalNotes": "να χασει κιλα"
+  },
+  {
+    "appointmentId": 7,
+    "idCustomer": 11,
+    "diagnosis": "tade\t",
+    "treatment": "test",
+    "internalNotes": "tade"
+  },
+  {
+    "appointmentId": 10,
+    "idCustomer": 11,
+    "diagnosis": "test",
+    "treatment": "test",
+    "internalNotes": "test"
+  },
+  {
+    "appointmentId": 13,
+    "idCustomer": 11,
+    "diagnosis": "test",
+    "treatment": "test",
+    "internalNotes": "test"
+  },
+  {
+    "appointmentId": 16,
+    "idCustomer": 11,
+    "diagnosis": "sth",
+    "treatment": "sth",
+    "internalNotes": "sth"
+  },
+  {
+    "appointmentId": 11,
+    "idCustomer": 9,
+    "diagnosis": "test",
+    "treatment": "test",
+    "internalNotes": "test"
+  },
+  {
+    "appointmentId": 14,
+    "idCustomer": 9,
+    "diagnosis": "test",
+    "treatment": "test",
+    "internalNotes": "test"
+  },
+  {
+    "appointmentId": 12,
+    "idCustomer": 8,
+    "diagnosis": "τεντονιτιδα",
+    "treatment": "σηκω και πατα το ",
+    "internalNotes": "καλος"
+  },
+  {
+    "appointmentId": 15,
+    "idCustomer": 8,
+    "diagnosis": "τεστ",
+    "treatment": "τεστ",
+    "internalNotes": "τεστ"
   }
 ]

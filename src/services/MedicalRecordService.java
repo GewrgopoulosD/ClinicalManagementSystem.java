@@ -58,4 +58,17 @@ public class MedicalRecordService {
             }
         }
     }
+
+    public void deleteMedicalRecords(int patientId) {
+        List<Appointment> patientApps = appointmentDAO.getAppointmentsByCustomer(patientId);
+
+        List<Integer> appIds = patientApps.stream()
+                .map(Appointment::getIdAppointment)
+                .collect(Collectors.toList());
+
+        // 3. Αν ο ασθενής έχει ραντεβού, στέλνουμε τα IDs στο DAO για καθαρισμό
+        if (!appIds.isEmpty()) {
+            medicalRecordDAO.deleteRecordsByAppointmentIds(appIds);
+        }
+    }
 }

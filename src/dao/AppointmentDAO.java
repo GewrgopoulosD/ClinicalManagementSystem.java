@@ -7,9 +7,7 @@ import models.User;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AppointmentDAO {
@@ -213,5 +211,68 @@ public class AppointmentDAO {
                 .filter(a -> a.getAppointmentDatetime() != null && a.getAppointmentDatetime().startsWith(today))
                 .sorted(Comparator.comparing(Appointment::getAppointmentDatetime))
                 .collect(Collectors.toList());
+    }
+
+    public synchronized void deleteAppointmentsByPatientId(int patientId) {
+        try {
+
+        List<Appointment> allApps = getAllAppointments();
+        int initialSize = allApps.size();
+
+        //make a new list with the appointments without patien's app
+        List<Appointment> filteredApps = allApps.stream()
+                .filter(app -> app.getIdCustomer() != patientId)
+                .collect(Collectors.toList());
+
+            if (filteredApps.size() < initialSize) {
+                saveAll(filteredApps);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Database Error: Could not delete appointments for patient " + patientId + ".");
+        }
+    }
+
+    //myCalendar
+    public List<Appointment> getAppointmentsByDoctorAndDate(int doctorId, String date) {
+        return getAllAppointments().stream()
+                .filter(a -> a.getIdEmployee() == doctorId)
+                .filter(a -> a.getAppointmentDatetime() != null && a.getAppointmentDatetime().startsWith(date))
+                .sorted(Comparator.comparing(Appointment::getAppointmentDatetime))
+                .collect(Collectors.toList());
+    }
+
+
+    public Map<String, Long> getTop3DoctorsForPatient(int patientId) {
+        List<Appointment> allApps = getAllAppointments();
+        UserDAO userDAO = new UserDAO();
+        Map<String, Long> counts = new HashMap<>();
+
+        for (Appointment app : allApps) {
+            if (app.getIdCustomer() == patientId && "Completed".equalsIgnoreCase(app.getAppointmentType())) {
+
+                String docName = app.getDoctorFullName();
+
+                if (docName == null || docName.isEmpty()) {
+                    User doctor = userDAO.findUserById(app.getIdEmployee());
+                    if (doctor != null) {
+                        docName = "Dr. " + doctor.getLastname();
+                    } else {
+                        docName = "Unknown Doctor";
+                    }
+                }
+
+                counts.put(docName, counts.getOrDefault(docName, 0L) + 1);
+            }
+        }
+
+        return counts.entrySet().stream()
+                .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+                .limit(3)
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new
+                ));
     }
 }

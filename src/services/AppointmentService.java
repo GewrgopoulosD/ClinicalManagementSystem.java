@@ -6,6 +6,7 @@ import models.Appointment;
 import models.Patient;
 import models.User;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -109,4 +110,25 @@ public class AppointmentService {
         appointmentDAO.updateStatus(appointmentId, newStatus);
     }
 
+    public void deleteAppointments(int patientId) {
+        appointmentDAO.deleteAppointmentsByPatientId(patientId);
+    }
+
+    //myCalendar
+    public List<Appointment> getAppointmentsByDate(int doctorId, String date) {
+        //daily app
+        List<Appointment> apps = appointmentDAO.getAppointmentsByDoctorAndDate(doctorId, date);
+
+        //+ patiens names
+        for (Appointment a : apps) {
+            String patientName = patientService.getPatientFullNameById(a.getIdCustomer());
+            a.setCustomerFullName(patientName);
+        }
+
+        return apps;
+    }
+
+    public Map<String, Long> getTop3DoctorsStats(int patientId) {
+        return appointmentDAO.getTop3DoctorsForPatient(patientId);
+    }
 }

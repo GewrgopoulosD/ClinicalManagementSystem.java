@@ -32,22 +32,14 @@ public class WindowManager {// a class to control my stage,scenes
                 controller.setWindowManager(this);
             }
 
-            Scene scene = new Scene(root, width, height); // Δημιουργούμε τη scene //vgale afto
-
 
             primaryStage.setTitle(title);
-//            primaryStage.setScene(new Scene(root, width, height)); vale afto
-            primaryStage.setScene(scene); //βγαλε αυτο
+            primaryStage.setScene(new Scene(root, width, height));
             primaryStage.setResizable(resizable);
             primaryStage.setX((Screen.getPrimary().getVisualBounds().getWidth() - width) / 2);//kentratisma
             primaryStage.setY((Screen.getPrimary().getVisualBounds().getHeight() - height) / 2);//kentrarisma
             primaryStage.show();
 
-            try { //βγαλε αυτο
-                enableLiveCSS(scene, fxmlPath);
-            } catch (Exception e) {
-                System.out.println("Live CSS could not be initialized: " + e.getMessage());
-            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -104,32 +96,4 @@ public class WindowManager {// a class to control my stage,scenes
         primaryStage.close();
     }
 
-    private void enableLiveCSS(Scene scene, String fxmlPath) {
-        scene.setOnKeyPressed(event -> {
-            if (event.getCode() == javafx.scene.input.KeyCode.F5) {
-                try {
-                    String cssName = fxmlPath.substring(fxmlPath.lastIndexOf("/") + 1).replace(".fxml", "Css.css");
-                    File cssFile = new File("resources/css/" + cssName).getAbsoluteFile();
-
-                    if (cssFile.exists()) {
-                        String content = Files.readString(cssFile.toPath());
-                        String base64Content = java.util.Base64.getEncoder().encodeToString(content.getBytes(java.nio.charset.StandardCharsets.UTF_8));
-
-                        // ΠΡΟΣΟΧΗ ΕΔΩ: Καθαρίζουμε ΟΛΑ τα stylesheets και από τη scene και από το root
-                        scene.getStylesheets().clear();
-                        scene.getRoot().getStylesheets().clear();
-
-                        String dataUri = "data:text/css;base64," + base64Content;
-                        scene.getStylesheets().add(dataUri);
-
-                        System.out.println("🚀 CSS Force Injected for: " + cssName);
-                    } else {
-                        System.out.println("❌ Not found: " + cssFile.getAbsolutePath());
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 }

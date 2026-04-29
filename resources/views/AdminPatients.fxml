@@ -73,7 +73,7 @@
 
                             <VBox spacing="10" alignment="BOTTOM_LEFT" VBox.vgrow="ALWAYS">
                                 <Label text="Account Actions" styleClass="patDangerLbl"/>
-                                <Button fx:id="deleteBtn" text="Delete Patient Account" onAction="#handleDelete" styleClass="patBtnDelete"/>
+                                <Button fx:id="deleteBtn" text="Delete Patient Account" styleClass="patBtnDelete"/>
                             </VBox>
                         </VBox>
                     </Tab>
@@ -99,7 +99,7 @@
                             <VBox styleClass="vboxScrollPaneForAnyVisit">
 
                                 <HBox>
-                                    <Label text="Doctor:" styleClass="greyLabelMedical"/>
+                                    <Label text="Doctor: " styleClass="greyLabelMedical"/>
                                     <Label fx:id="doctorNameLbl" text="-" styleClass="boldLabelMedical"/>
                                 </HBox>
 

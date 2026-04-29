@@ -1,6 +1,9 @@
 package controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import models.Appointment;
 import models.Patient;
@@ -10,6 +13,7 @@ import session.CurrentUser;
 import ui.WindowManaged;
 import ui.WindowManager;
 import java.util.List;
+import java.util.Map;
 
 public class PatientHomeController implements WindowManaged {
 
@@ -17,6 +21,8 @@ public class PatientHomeController implements WindowManaged {
     @FXML private Label nextDateLbl;
     @FXML private Label nextDoctorLbl;
     @FXML private Label totalVisitsLbl;
+
+    @FXML private PieChart topDoctorsPieChart;
 
     private final PatientService patientService = new PatientService();
     private final AppointmentService appointmentService = new AppointmentService();
@@ -32,6 +38,7 @@ public class PatientHomeController implements WindowManaged {
         if (CurrentUser.isLoggedIn() && CurrentUser.getUser() instanceof Patient patient) {
             welcomeLabel.setText("Welcome back, " + patient.getName() + "!");
             loadHomeStats(patient.getId());
+            loadTopDoctorsChart(patient.getId());
         }
     }
 
@@ -51,5 +58,25 @@ public class PatientHomeController implements WindowManaged {
             nextDateLbl.setText(next.getAppointmentDatetime());
             nextDoctorLbl.setText(patientService.getDoctorFullNameById(next.getIdEmployee()));
         }
+    }
+
+    private void loadTopDoctorsChart(int loggedInPatientId) {
+        Map<String, Long> stats = appointmentService.getTop3DoctorsStats(loggedInPatientId);
+
+        if (stats == null || stats.isEmpty()) {
+            topDoctorsPieChart.setVisible(false);
+            topDoctorsPieChart.setManaged(false);
+            return;
+        }
+
+        topDoctorsPieChart.setVisible(true);
+        topDoctorsPieChart.setManaged(true);
+
+        ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
+        stats.forEach((doctorName, count) -> {
+            pieData.add(new PieChart.Data(doctorName + " (" + count + ")", count));
+        });
+
+        topDoctorsPieChart.setData(pieData);
     }
 }

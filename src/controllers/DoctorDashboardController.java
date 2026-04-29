@@ -29,6 +29,7 @@ public class DoctorDashboardController implements WindowManaged {
 
     //left
     @FXML private Button shiftsBtn;
+    @FXML private Button myCalendar;
     @FXML private Button AppointmentsBtn;
     @FXML private Button medicalRecordsBtn;
 
@@ -57,7 +58,12 @@ public class DoctorDashboardController implements WindowManaged {
             windowManager.loadInnerView(mainBorderPane, "/views/DoctorShifts.fxml");
         });
 
+        myCalendar.setOnAction(e -> {
+            windowManager.loadInnerView(mainBorderPane, "/views/DoctorCalendar.fxml");
+        });
+
         AppointmentsBtn.setOnAction(e -> windowManager.loadInnerView(mainBorderPane, "/views/DoctorAppointments.fxml"));
+
 
         medicalRecordsBtn.setOnAction(e -> windowManager.loadInnerView(mainBorderPane, "/views/DoctorMedicalRecord.fxml"));
     }

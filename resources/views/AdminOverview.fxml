@@ -4,6 +4,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
 
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.BarChart?>
 <VBox styleClass="overviewContainer"
       stylesheets="@../css/AdminDashboardCss.css"
       fx:controller="controllers.AdminOverviewController"
@@ -37,6 +41,29 @@
                         <Label fx:id="pendingActionsLbl" styleClass="statValue"/>
                 </VBox>
 
+        </HBox>
+
+        <HBox spacing="20" VBox.vgrow="ALWAYS" styleClass="chartsContainer">
+                <padding>
+                        <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+
+                <VBox styleClass="chartCard" HBox.hgrow="ALWAYS" alignment="TOP_CENTER" spacing="10">
+                        <Label text="Top 5 Doctors" styleClass="statLbl" />
+                        <PieChart fx:id="topDoctorsPieChart"/>
+                </VBox>
+
+                <VBox styleClass="chartCard" HBox.hgrow="ALWAYS" alignment="TOP_CENTER" spacing="10">
+                        <Label text="Top 5 Patients" styleClass="statLbl"/>
+                        <BarChart fx:id="topPatientsBarChart" legendVisible="false">
+                                <xAxis>
+                                        <CategoryAxis label="Patient Name" side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                        <NumberAxis label="Completed Visits" side="LEFT" />
+                                </yAxis>
+                        </BarChart>
+                </VBox>
         </HBox>
 
 </VBox>

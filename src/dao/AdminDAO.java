@@ -1,12 +1,8 @@
 package dao;
 
-import models.Doctor;
-import models.Patient;
-import models.Specialization; // Μην ξεχάσεις το import
-import models.User;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import models.*;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AdminDAO {
@@ -44,7 +40,7 @@ public class AdminDAO {
                 .collect(Collectors.toList());
     }
 
-    public boolean assignSpecialization(int doctorId, String specName) {
+    public boolean assignSpecialization(int doctorId, Specialization specialization) {
         //from updatable method
         Map<String, User> userMap = userDAO.fetchAllUsersAsMap();
         boolean updated = false;
@@ -53,13 +49,11 @@ public class AdminDAO {
         for (User u : userMap.values()) {
             if (u instanceof Doctor d && d.getId() == doctorId) {
 
-                Specialization newSpec = new Specialization(specName);
-
                 boolean alreadyHasIt = d.getSpecializations().stream()
-                        .anyMatch(s -> s.getName().equalsIgnoreCase(specName));
+                        .anyMatch(s -> s.getIdSpecialization() == specialization.getIdSpecialization());
 
                 if (!alreadyHasIt) {
-                    d.getSpecializations().add(newSpec);
+                    d.getSpecializations().add(specialization);
                     updated = true;
                 }
                 break;
@@ -69,17 +63,16 @@ public class AdminDAO {
         if (updated) {
             userDAO.updateAllUsersData(userMap);
         }
-
         return updated;
     }
 
-    public boolean removeSpecialization(int doctorId, String specName) {
+    public boolean removeSpecialization(int doctorId, int specId) {
         Map<String, User> userMap = userDAO.fetchAllUsersAsMap();
         boolean updated = false;
 
         for (User u : userMap.values()) {
             if (u instanceof Doctor d && d.getId() == doctorId) {
-                updated = d.getSpecializations().removeIf(s -> s.getName().equalsIgnoreCase(specName));
+                updated = d.getSpecializations().removeIf(s ->s.getIdSpecialization() == specId);
                 break;
             }
         }
@@ -90,7 +83,7 @@ public class AdminDAO {
         return updated;
     }
 
-    public List<String> getDoctorSpecializations(int doctorId) {
+    public List<Specialization> getDoctorSpecializationsObjects(int doctorId) {
         Doctor doctor = getAllDoctors().stream()
                 .filter(d -> d.getId() == doctorId)
                 .findFirst()
@@ -100,8 +93,71 @@ public class AdminDAO {
             return new ArrayList<>();
         }
 
-        return doctor.getSpecializations().stream()
-                .map(Specialization::getName)
-                .collect(Collectors.toList());
+        return doctor.getSpecializations();
+    }
+
+
+    //statistics
+    public Map<String, Long> getTop5DoctorsByCompletedAppointments() {
+        List<Appointment> allApps = appointmentDAO.getAllAppointments();
+        Map<String, Long> counts = new HashMap<>();
+
+        for (Appointment app : allApps) {
+            //only completed apps
+            if ("Completed".equalsIgnoreCase(app.getAppointmentType())) {
+
+                String docName = app.getDoctorFullName();
+
+                //find name by ids
+                if (docName == null || docName.trim().isEmpty()) {
+                    User doctor = userDAO.findUserById(app.getIdEmployee());
+                    if (doctor != null) {
+                        docName = doctor.getName() + " " + doctor.getLastname();
+                    } else {
+                        docName = "Unknown Doctor (ID: " + app.getIdEmployee() + ")";
+                    }
+                }
+                counts.put(docName, counts.getOrDefault(docName, 0L) + 1);
+            }
+        }
+
+        return sortAndLimit(counts);
+    }
+
+    public Map<String, Long> getTop5PatientsByCompletedAppointments() {
+        List<Appointment> allApps = appointmentDAO.getAllAppointments();
+        Map<String, Long> counts = new HashMap<>();
+
+        for (Appointment app : allApps) {
+            if ("Completed".equalsIgnoreCase(app.getAppointmentType())) {
+
+                String patientName = app.getCustomerFullName();
+
+                if (patientName == null || patientName.trim().isEmpty()) {
+                    User patient = userDAO.findUserById(app.getIdCustomer());
+                    if (patient != null) {
+                        patientName = patient.getName() + " " + patient.getLastname();
+                    } else {
+                        patientName = "Unknown Patient (ID: " + app.getIdCustomer() + ")";
+                    }
+                }
+                counts.put(patientName, counts.getOrDefault(patientName, 0L) + 1);
+            }
+        }
+
+        return sortAndLimit(counts);
+    }
+
+    //sorting, limit 5 and order by desc
+    private Map<String, Long> sortAndLimit(Map<String, Long> unsortedMap) {
+        return unsortedMap.entrySet().stream()
+                .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+                .limit(5)
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new
+                ));
     }
 }

@@ -45,8 +45,10 @@ public class UserDAO {
                         List<Specialization> specObjects = new ArrayList<>();
 
                         for (Map<String, Object> specData : specDataList) {
+                            int sId = ((Double) specData.get("idSpecialization")).intValue();
                             String sName = (String) specData.get("name");
-                            specObjects.add(new Specialization(sName));
+
+                            specObjects.add(new Specialization(sId, sName));
                         }
                         d.setSpecializations(specObjects);
                     }
@@ -158,6 +160,10 @@ public class UserDAO {
         users.put(updatedUser.getEmail().toLowerCase(), updatedUser);
 
         updateAllUsersData(users);
+    }
+
+    public User getUserByEmail(String email) {
+        return fetchAllUsersAsMap().get(email.toLowerCase());
     }
 
     public void deleteUser(String email) {

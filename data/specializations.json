@@ -1,9 +1,54 @@
 [
-  {"idSpecialization": 1, "name": "Παθολόγος"}, {"idSpecialization": 2, "name": "Καρδιολόγος"},
-  {"idSpecialization": 3, "name": "Παιδίατρος"}, {"idSpecialization": 4, "name": "Δερματολόγος"},
-  {"idSpecialization": 5, "name": "Ορθοπεδικός"}, {"idSpecialization": 6, "name": "Οφθαλμίατρος"},
-  {"idSpecialization": 7, "name": "Ψυχίατρος"}, {"idSpecialization": 8, "name": "Γυναικολόγος"},
-  {"idSpecialization": 9, "name": "Νευρολόγος"}, {"idSpecialization": 10, "name": "Γενικός Ιατρός"},
-  {"idSpecialization": 11, "name": "Αναισθησιολόγος"}, {"idSpecialization": 12, "name": "Ψυχολόγος"},
-  {"idSpecialization": 13, "name": "Χειρούργος"}
+  {
+    "idSpecialization": 1,
+    "name": "Παθολόγος"
+  },
+  {
+    "idSpecialization": 2,
+    "name": "Καρδιολόγος"
+  },
+  {
+    "idSpecialization": 3,
+    "name": "Παιδίατρος"
+  },
+  {
+    "idSpecialization": 4,
+    "name": "Δερματολόγος"
+  },
+  {
+    "idSpecialization": 5,
+    "name": "Ορθοπεδικός"
+  },
+  {
+    "idSpecialization": 6,
+    "name": "Οφθαλμίατρος"
+  },
+  {
+    "idSpecialization": 7,
+    "name": "Ψυχίατρος"
+  },
+  {
+    "idSpecialization": 8,
+    "name": "Γυναικολόγος"
+  },
+  {
+    "idSpecialization": 9,
+    "name": "Νευρολόγος"
+  },
+  {
+    "idSpecialization": 10,
+    "name": "Γενικός Ιατρός"
+  },
+  {
+    "idSpecialization": 11,
+    "name": "Αναισθησιολόγος"
+  },
+  {
+    "idSpecialization": 12,
+    "name": "Ψυχολόγος"
+  },
+  {
+    "idSpecialization": 13,
+    "name": "Χειρούργος"
+  }
 ]

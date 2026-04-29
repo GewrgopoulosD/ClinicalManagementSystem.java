@@ -23,7 +23,70 @@
     "idClinic": 1,
     "idEmployee": 5,
     "appointmentDatetime": "2026-04-22 10:00",
-    "appointmentType": "Pending",
+    "appointmentType": "Cancelled",
     "appointmentDescription": "ο μπεμπης εχει διαροια "
+  },
+  {
+    "idAppointment": 10,
+    "idCustomer": 11,
+    "idClinic": 1,
+    "idEmployee": 5,
+    "appointmentDatetime": "2026-04-10 10:00",
+    "appointmentType": "Completed",
+    "appointmentDescription": "Τακτικός έλεγχος"
+  },
+  {
+    "idAppointment": 11,
+    "idCustomer": 9,
+    "idClinic": 1,
+    "idEmployee": 1,
+    "appointmentDatetime": "2026-04-11 11:30",
+    "appointmentType": "Completed",
+    "appointmentDescription": "Εξέταση οράσεως"
+  },
+  {
+    "idAppointment": 12,
+    "idCustomer": 8,
+    "idClinic": 1,
+    "idEmployee": 4,
+    "appointmentDatetime": "2026-04-12 09:00",
+    "appointmentType": "Completed",
+    "appointmentDescription": "Πόνος στο γόνατο"
+  },
+  {
+    "idAppointment": 13,
+    "idCustomer": 11,
+    "idClinic": 1,
+    "idEmployee": 2,
+    "appointmentDatetime": "2026-04-13 14:00",
+    "appointmentType": "Completed",
+    "appointmentDescription": "Προεγχειρητικός έλεγχος"
+  },
+  {
+    "idAppointment": 14,
+    "idCustomer": 9,
+    "idClinic": 1,
+    "idEmployee": 5,
+    "appointmentDatetime": "2026-04-14 17:00",
+    "appointmentType": "Completed",
+    "appointmentDescription": "Εμβολιασμός"
+  },
+  {
+    "idAppointment": 15,
+    "idCustomer": 8,
+    "idClinic": 1,
+    "idEmployee": 5,
+    "appointmentDatetime": "2026-04-15 12:00",
+    "appointmentType": "Completed",
+    "appointmentDescription": "Ήπιος πυρετός"
+  },
+  {
+    "idAppointment": 16,
+    "idCustomer": 11,
+    "idClinic": 1,
+    "idEmployee": 1,
+    "appointmentDatetime": "2026-04-16 10:00",
+    "appointmentType": "Pending",
+    "appointmentDescription": "Επανέλεγχος"
   }
 ]

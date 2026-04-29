@@ -6,7 +6,8 @@
 
 <VBox styleClass="mainContainer"
       xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="controllers.PatientProfileController">
+      fx:controller="controllers.PatientProfileController"
+      stylesheets="@../css/PatientDashboardCss.css">
 
     <VBox styleClass="titleContainer">
         <VBox styleClass="header">
