@@ -86,7 +86,7 @@
     "idClinic": 1,
     "idEmployee": 1,
     "appointmentDatetime": "2026-04-16 10:00",
-    "appointmentType": "Pending",
+    "appointmentType": "Completed",
     "appointmentDescription": "Επανέλεγχος"
   }
 ]

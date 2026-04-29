@@ -1,16 +1,14 @@
-όλοι οι κωδικοί είναι -> Test1!
-
 ---------- Xρήστες ----------
 Admin:
 mail:admin123@clinic.gr
 password:Admin123!
 
+όλοι οι κωδικοί για πελάτες και γιατρούς είναι -> Test1!
 
 Πελάτες:
 dim.georgopoulos1@gmail.com
 test@test.gr
 spasoxeris@test.com
-kakokefi@test.gr
 
 Γιατροί: 
 monofthalmos@test.gr
