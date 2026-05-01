@@ -50,5 +50,9 @@
   {
     "idSpecialization": 13,
     "name": "Χειρούργος"
+  },
+  {
+    "idSpecialization": 14,
+    "name": "Οδοντίατρος"
   }
 ]
