@@ -3,32 +3,6 @@
     "idClinic": 1,
     "specializations": [
       {
-        "idSpecialization": 3,
-        "name": "Παιδίατρος"
-      }
-    ],
-    "id": 5,
-    "name": "Νίκος",
-    "lastName": "Γύφτος",
-    "tel": "1002003001",
-    "email": "giftos@test.gr",
-    "password": "$2a$10$zRPHocJZ5sq14StNv/M/6.8dom24rpw8MuX4nnBozV7JbMGMaIDm6",
-    "idRole": 1
-  },
-  {
-    "amka": "12345678910",
-    "id": 8,
-    "name": "Νίκος",
-    "lastName": "Κορόμπος",
-    "tel": "6912345678",
-    "email": "test@test.gr",
-    "password": "$2a$10$jYVCSmu7yq.UmQNs/HK2s.MCMHDiN4oqOLA2gVM3L2fuMcB1z1F3C",
-    "idRole": 3
-  },
-  {
-    "idClinic": 1,
-    "specializations": [
-      {
         "idSpecialization": 6,
         "name": "Οφθαλμίατρος"
       }
@@ -37,7 +11,7 @@
     "name": "Παναγιώτης",
     "lastName": "Μονόφθαλμος",
     "tel": "1234567891",
-    "email": "monofthalmos@test.gr",
+    "email": "monofthalmos@clinic.gr",
     "password": "$2a$10$NMb0aohgsYqZUtSFw54IwOwUhus1SpFmJ327xAaqK4aZMGtzYna0S",
     "idRole": 1
   },
@@ -55,22 +29,6 @@
     "idClinic": 1,
     "specializations": [
       {
-        "idSpecialization": 5,
-        "name": "Ορθοπεδικός"
-      }
-    ],
-    "id": 4,
-    "name": "Μάριος",
-    "lastName": "Φτιαξοπόδης",
-    "tel": "4723948016",
-    "email": "ftiaxopodis@test.gr",
-    "password": "$2a$10$vi4jo5dNDNnGvPcSeCtCU.C44/18Ko2acGDrl7zr09SN.dBxkDZyK",
-    "idRole": 1
-  },
-  {
-    "idClinic": 1,
-    "specializations": [
-      {
         "idSpecialization": 11,
         "name": "Αναισθησιολόγος"
       }
@@ -79,8 +37,24 @@
     "name": "Στέλλα",
     "lastName": "Κοιμίσογλου",
     "tel": "7895123640",
-    "email": "koimisiglou@test.gr",
+    "email": "koimisiglou@clinic.gr",
     "password": "$2a$10$YowIPBMyF5PLMj.vVjnq6emWjaXCpYnIOWs3NvRuQ.qj1VLMHx6VW",
+    "idRole": 1
+  },
+  {
+    "idClinic": 1,
+    "specializations": [
+      {
+        "idSpecialization": 5,
+        "name": "Ορθοπεδικός"
+      }
+    ],
+    "id": 4,
+    "name": "Μάριος",
+    "lastName": "Φτιαξοπόδης",
+    "tel": "4723948016",
+    "email": "ftiaxopodis@clinic.gr",
+    "password": "$2a$10$vi4jo5dNDNnGvPcSeCtCU.C44/18Ko2acGDrl7zr09SN.dBxkDZyK",
     "idRole": 1
   },
   {
@@ -95,12 +69,17 @@
   },
   {
     "idClinic": 1,
-    "specializations": [],
+    "specializations": [
+      {
+        "idSpecialization": 13,
+        "name": "Χειρούργος"
+      }
+    ],
     "id": 3,
     "name": "Γιώργος",
     "lastName": "Μαχαίρας",
     "tel": "4562579340",
-    "email": "maxairas@test.gr",
+    "email": "maxairas@clinic.gr",
     "password": "$2a$10$FvSbRlXP17Tchq9GDwN.4.iq1RS5.rXNzpRpGpuT0mfsi1oMkKAz.",
     "idRole": 1
   },
@@ -113,5 +92,31 @@
     "email": "admin123@clinic.gr",
     "password": "$2a$10$hlOf0XmuT6M.U6.TIOiOqeqLAg/.MaBceja.nDZQyJnnlDeTl7g8G",
     "idRole": 2
+  },
+  {
+    "idClinic": 1,
+    "specializations": [
+      {
+        "idSpecialization": 3,
+        "name": "Παιδίατρος"
+      }
+    ],
+    "id": 5,
+    "name": "Νίκος",
+    "lastName": "Γύφτος",
+    "tel": "1002003001",
+    "email": "giftos@clinic.gr",
+    "password": "$2a$10$zRPHocJZ5sq14StNv/M/6.8dom24rpw8MuX4nnBozV7JbMGMaIDm6",
+    "idRole": 1
+  },
+  {
+    "amka": "12345678910",
+    "id": 8,
+    "name": "Νίκος",
+    "lastName": "Κορόμπος",
+    "tel": "6912345678",
+    "email": "korobos@test.gr",
+    "password": "$2a$10$jYVCSmu7yq.UmQNs/HK2s.MCMHDiN4oqOLA2gVM3L2fuMcB1z1F3C",
+    "idRole": 3
   }
 ]

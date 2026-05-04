@@ -1,5 +1,179 @@
 [
   {
+    "doctorId": 12,
+    "days": {
+      "Monday": {
+        "active": true,
+        "start": "09:00",
+        "end": "12:00"
+      },
+      "Thursday": {
+        "active": false
+      },
+      "Friday": {
+        "active": false
+      },
+      "Sunday": {
+        "active": false
+      },
+      "Wednesday": {
+        "active": false
+      },
+      "Tuesday": {
+        "active": true,
+        "start": "08:00",
+        "end": "16:00"
+      },
+      "Saturday": {
+        "active": false
+      }
+    }
+  },
+  {
+    "doctorId": 1,
+    "days": {
+      "Monday": {
+        "active": true,
+        "start": "09:00",
+        "end": "17:00"
+      },
+      "Thursday": {
+        "active": false
+      },
+      "Friday": {
+        "active": false
+      },
+      "Sunday": {
+        "active": true,
+        "start": "08:00",
+        "end": "12:00"
+      },
+      "Wednesday": {
+        "active": true,
+        "start": "09:00",
+        "end": "17:00"
+      },
+      "Tuesday": {
+        "active": true,
+        "start": "09:00",
+        "end": "17:00"
+      },
+      "Saturday": {
+        "active": true,
+        "start": "09:00",
+        "end": "17:00"
+      }
+    }
+  },
+  {
+    "doctorId": 2,
+    "days": {
+      "Monday": {
+        "active": true,
+        "start": "09:00",
+        "end": "17:00"
+      },
+      "Thursday": {
+        "active": true,
+        "start": "09:00",
+        "end": "17:00"
+      },
+      "Friday": {
+        "active": true,
+        "start": "09:00",
+        "end": "17:00"
+      },
+      "Sunday": {
+        "active": false
+      },
+      "Wednesday": {
+        "active": true,
+        "start": "09:00",
+        "end": "17:00"
+      },
+      "Tuesday": {
+        "active": true,
+        "start": "09:00",
+        "end": "17:00"
+      },
+      "Saturday": {
+        "active": false
+      }
+    }
+  },
+  {
+    "doctorId": 3,
+    "days": {
+      "Monday": {
+        "active": false
+      },
+      "Thursday": {
+        "active": true,
+        "start": "09:00",
+        "end": "17:00"
+      },
+      "Friday": {
+        "active": true,
+        "start": "09:00",
+        "end": "17:00"
+      },
+      "Sunday": {
+        "active": true,
+        "start": "09:00",
+        "end": "17:00"
+      },
+      "Wednesday": {
+        "active": true,
+        "start": "09:00",
+        "end": "17:00"
+      },
+      "Tuesday": {
+        "active": false
+      },
+      "Saturday": {
+        "active": true,
+        "start": "09:00",
+        "end": "17:00"
+      }
+    }
+  },
+  {
+    "doctorId": 4,
+    "days": {
+      "Monday": {
+        "active": true,
+        "start": "08:00",
+        "end": "17:00"
+      },
+      "Thursday": {
+        "active": true,
+        "start": "08:00",
+        "end": "17:00"
+      },
+      "Friday": {
+        "active": false
+      },
+      "Sunday": {
+        "active": true,
+        "start": "08:00",
+        "end": "12:00"
+      },
+      "Wednesday": {
+        "active": true,
+        "start": "08:00",
+        "end": "17:00"
+      },
+      "Tuesday": {
+        "active": false
+      },
+      "Saturday": {
+        "active": true,
+        "start": "08:00",
+        "end": "17:00"
+      }
+    }
+  },
+  {
     "doctorId": 5,
     "days": {
       "Monday": {
@@ -27,36 +201,6 @@
       },
       "Tuesday": {
         "active": false
-      },
-      "Saturday": {
-        "active": false
-      }
-    }
-  },
-  {
-    "doctorId": 12,
-    "days": {
-      "Monday": {
-        "active": true,
-        "start": "09:00",
-        "end": "12:00"
-      },
-      "Thursday": {
-        "active": false
-      },
-      "Friday": {
-        "active": false
-      },
-      "Sunday": {
-        "active": false
-      },
-      "Wednesday": {
-        "active": false
-      },
-      "Tuesday": {
-        "active": true,
-        "start": "08:00",
-        "end": "16:00"
       },
       "Saturday": {
         "active": false
